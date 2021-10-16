@@ -13,11 +13,15 @@ namespace ReactApplication.DAL
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            var AdminUser = new Bruker
+            //Oppretter admin user for logg inn med alle brukertillatelser.
+            var adminUser = new Bruker
             {
                 BrukerNavn = "admin",
                 BrukerPassord = "admin",
             };
+
+            context.add(adminUser);
+            context.saveChanges();
         }
     }
 }
