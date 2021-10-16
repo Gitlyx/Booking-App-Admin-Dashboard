@@ -24,10 +24,10 @@ export class NavMenu extends Component {
   render () {
     return (
         <nav className={"navbar navbar-expand-md navbar-dark justify-content-center p-0"}>
-        <a className={"navbar-brand"} href="index.html">
+        <Link className={"navbar-brand"} to="/">
             <img src={logo} alt="ship logo" width="40px"
                  style={{marginLeft: '20px'}}/>
-        </a>
+        </Link>
         <button className={"navbar-toggler"} type="button"
                 data-toggle="collapse"
                 data-target="#navbarSupportedContent"
@@ -49,15 +49,14 @@ export class NavMenu extends Component {
             </ul>
             <ul className={"navbar-nav col-lg-4 justify-content-end"}>
                 <li className={"nav-item"}>
-                    <Link className={"nav-link"} to="#">Sign in</Link>
+                    <Link className={"nav-link"} to="/login">Sign in</Link>
                 </li>
                 <li className={"nav-item"}>
-                    <Link className={"nav-link"} to="#">Manage trips</Link>
+                    <Link className={"nav-link"} to="/managetrip">Manage trip</Link>
                 </li>
             </ul>
         </div>
     </nav>
-
     );
   }
 }

@@ -3,6 +3,11 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 
+// Note : Does not use brackets {}, since Login.js
+//        since it is a default export.
+import  Login  from './components/Login';
+import ManageTrip from './components/ManageTrip'
+
 import './custom.css'
 
 export default class App extends Component {
@@ -12,6 +17,8 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
+        <Route path='/login' component={Login} />
+        <Route path='/managetrip' component={ManageTrip} />
       </Layout>
     );
   }

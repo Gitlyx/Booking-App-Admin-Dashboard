@@ -11,7 +11,7 @@
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-  color: #ff6600;
+  background-color: #ff6600;
 }
 
 .navbar a {
