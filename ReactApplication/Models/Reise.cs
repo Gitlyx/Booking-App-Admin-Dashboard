@@ -8,19 +8,19 @@ namespace WebApp_Oblig2.Model
 {
     public class Reise
     {
-        public int reiseId { get; set; }
-        public DateTime reiseDato { get; set; }
-        public DateTime reiseTid { get; set; }
+        public int ReiseId { get; set; }
+        public DateTime ReiseDato { get; set; }
+        public DateTime ReiseTid { get; set; }
 
-        public int ruteId { get; set; }
-        public string ruteFra { get; set; }
-        public string ruteTil { get; set; }
-        public bool dagsreise { get; set; }
+        public int RuteId { get; set; }
+        public string RuteFra { get; set; }
+        public string RuteTil { get; set; }
+        public bool Dagsreise { get; set; }
 
-        public int prisId { get; set; }
-        public int prisBarn { get; set; }
-        public int prisVoksen { get; set; }
-        public int prisLugarStandard { get; set; }
-        public int prisLugarPremium { get; set; }
+        public int PrisId { get; set; }
+        public int PrisBarn { get; set; }
+        public int PrisVoksen { get; set; }
+        public int PrisLugarStandard { get; set; }
+        public int PrisLugarPremium { get; set; }
     }
 }

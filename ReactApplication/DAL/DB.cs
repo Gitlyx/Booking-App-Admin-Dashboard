@@ -17,32 +17,32 @@ namespace WebApp_Oblig2.DAL
     public class BilletPris
     {
         [Key]
-        public int prisId { get; set; }
+        public int PrisId { get; set; }
 
-        public int prisBarn { get; set; }
-        public int prisVoksen { get; set; }
-        public int prisLugarStandard { get; set; }
-        public int prisLugarPremium { get; set; }
+        public int PrisBarn { get; set; }
+        public int PrisVoksen { get; set; }
+        public int PrisLugarStandard { get; set; }
+        public int PrisLugarPremium { get; set; }
     }
 
     public class Reise
     {
         [Key]
-        public int reiseId { get; set; }
+        public int ReiseId { get; set; }
 
-        public DateTime reiseDato { get; set; }
-        public DateTime reiseTid { get; set; }
-        virtual public BilletPris priser { get; set; }
-        virtual public Rute ruter { get; set; }
+        public DateTime ReiseDato { get; set; }
+        public DateTime ReiseTid { get; set; }
+        virtual public BilletPris Priser { get; set; }
+        virtual public Rute Ruter { get; set; }
     }
 
     public class Bruker
     {
         [Key]
-        public int brukerId { get; set; }
+        public int BrukerId { get; set; }
 
-        public string brukerNavn { get; set; }
-        public string brukerPassord { get; set; }
+        public string BrukerPassord { get; set; }
+        public string BrukerNavn { get; set; }
     }
 
     public class DB : DbContext

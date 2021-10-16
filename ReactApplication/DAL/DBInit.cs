@@ -8,18 +8,16 @@ namespace ReactApplication.DAL
     {
         public static void Initialize(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<DB>();
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var context = serviceScope.ServiceProvider.GetService<DB>();
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
-                var adminUser = new Bruker
-                {
-                    brukerNavn = "admin",
-                    brukerPassord = "admin",
-                };
-            }
+            var AdminUser = new Bruker
+            {
+                BrukerNavn = "admin",
+                BrukerPassord = "admin",
+            };
         }
     }
 }
