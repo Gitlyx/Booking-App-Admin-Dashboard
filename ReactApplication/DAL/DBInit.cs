@@ -16,7 +16,8 @@ namespace ReactApplication.DAL
 
                 var adminUser = new Bruker
                 {
-                    brukerNavn = "admin"
+                    brukerNavn = "admin",
+                    brukerPassord = "admin",
                 };
             }
         }
