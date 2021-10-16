@@ -20,8 +20,8 @@ namespace ReactApplication.DAL
                 BrukerPassord = "admin",
             };
 
-            context.add(adminUser);
-            context.saveChanges();
+            context.Add(adminUser);
+            context.SaveChanges();
         }
     }
 }

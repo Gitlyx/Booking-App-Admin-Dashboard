@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReactApplication.DAL;
 using WebApp_Oblig2.DAL;
 
 namespace ReactApplication
@@ -38,6 +39,7 @@ namespace ReactApplication
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                DBInit.Initialize(app);
             }
             else
             {
@@ -49,7 +51,6 @@ namespace ReactApplication
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
