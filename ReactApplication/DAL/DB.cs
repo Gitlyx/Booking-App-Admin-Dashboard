@@ -19,8 +19,8 @@ namespace WebApp_Oblig2.DAL
 
         [Key]
         public int ReiseId { get; set; }
-        public virtual Rute Ruter { get; set; }
-        public DateTime ReiseDato { get; set; }
+        public virtual Rute RuteId { get; set; }
+        public DateTime ReiseDatoTid { get; set; }
         public int PrisBarn { get; set; }
         public int PrisVoksen { get; set; }
         public int PrisLugarStandard { get; set; }

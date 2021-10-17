@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using ReactApplication.DAL;
 using WebApp_Oblig2.DAL;
+
 
 namespace ReactApplication
 {
@@ -25,6 +27,7 @@ namespace ReactApplication
         {
             services.AddControllers();
             services.AddDbContext<DB>(options => options.UseSqlite("Data source = Database.db"));
+            services.AddScoped<IReiseRepository, ReiseRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -34,12 +37,13 @@ namespace ReactApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 DBInit.Initialize(app);
+                loggerFactory.AddFile("Logs/ReiseLog.txt");
             }
             else
             {
