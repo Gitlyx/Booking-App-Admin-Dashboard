@@ -96,6 +96,12 @@ namespace ReactApplication.DAL
             }
         }
 
+        // Oppdater en rute
+        public async Task<Boolean> oppdaterRute(Rute rute)
+        {
+
+        }
+
         // Opprett ny reise
         // Sjekker om reise eksisterer ved bruk av avreisedato
         public async Task<Boolean> NyReise(Reise reise)
