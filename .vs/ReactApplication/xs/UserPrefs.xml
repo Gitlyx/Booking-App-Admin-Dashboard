@@ -1,24 +1,26 @@
 ﻿<Properties StartupConfiguration="{A9634DA1-1700-4ECF-835B-DD23636ED6A9}|Default">
   <MonoDevelop.Ide.ItemProperties.ReactApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/DAL/ReiseRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/Controllers/ReiseController.cs">
     <Files>
-      <File FileName="ReactApplication/DAL/DB.cs" Line="40" Column="64" />
-      <File FileName="ReactApplication/DAL/ReiseRepository.cs" Line="102" Column="1" />
-      <File FileName="ReactApplication/Startup.cs" Line="41" Column="10" />
-      <File FileName="ReactApplication/Controllers/ReiseController.cs" Line="102" Column="36" />
-      <File FileName="ReactApplication/DAL/IReiseRepository.cs" Line="15" Column="43" NotebookId="1" />
-      <File FileName="ReactApplication/Models/Reise.cs" Line="16" Column="44" NotebookId="1" />
+      <File FileName="ReactApplication/DAL/ReiseRepository.cs" />
+      <File FileName="ReactApplication/Startup.cs" />
+      <File FileName="ReactApplication/Controllers/ReiseController.cs" />
+      <File FileName="ReactApplication/DAL/IReiseRepository.cs" NotebookId="1" />
+      <File FileName="ReactApplication/Models/Reise.cs" NotebookId="1" />
+      <File FileName="ReactApplication/DAL/DB.cs" NotebookId="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ReactApplication" expanded="True">
             <Node name="ReactApplication" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="ClientApp" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ReiseController.cs" selected="True" />
+              </Node>
               <Node name="DAL" expanded="True" />
               <Node name="Logs" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Database.db" selected="True" />
             </Node>
           </Node>
         </State>

@@ -54,6 +54,9 @@ export class NavMenu extends Component {
                 <li className={"nav-item"}>
                     <Link className={"nav-link"} to="/managetrip">Manage trip</Link>
                 </li>
+                <li className={"nav-item"}>
+                    <Link className={"nav-link"} to="/route">Add Route</Link>
+                </li>
             </ul>
         </div>
     </nav>

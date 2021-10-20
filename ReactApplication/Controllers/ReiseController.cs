@@ -6,6 +6,7 @@ using ReactApplication.DAL;
 using WebApp_Oblig2.DAL;
 using ReiseDB = WebApp_Oblig2.DAL.Reise;
 using Reise = WebApp_Oblig2.Model.Reise;
+using System.Collections.Generic;
 
 namespace ReactApplication.Controllers
 {
@@ -70,6 +71,21 @@ namespace ReactApplication.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<ActionResult> oppdaterRute(Rute rute)
+        {
+            Boolean vellykket = await _db.oppdaterRute(rute);
+            if (!vellykket)
+            {
+                _log.LogInformation("Reisen ble ikke endret!");
+                return BadRequest("Reisen ble ikke endret");
+            }
+            else
+            {
+                return Ok(vellykket);
+            }
+        }
+
         // Opprett ny reise
         [HttpPost]
         public async Task<ActionResult> Reise(Reise reise)
@@ -102,5 +118,55 @@ namespace ReactApplication.Controllers
                 return Ok(enReise);
             }
         }
+
+        // Slett en eksisterende reise
+        [HttpDelete]
+        public async Task<ActionResult> Reise(int reiseId)
+        {
+            Boolean vellykket = await _db.SlettReise(reiseId);
+            if (!vellykket)
+            {
+                _log.LogInformation("Reisen eksisterer ikke!");
+                return BadRequest("Reisen eksister ikke");
+            }
+            else
+            {
+                return Ok(vellykket);
+            }
+        }
+
+        // Oppdater en eksisterende reise
+        [HttpPut]
+        public async Task<ActionResult> OppdaterReise(Reise reise)
+        {
+            Boolean vellykket = await _db.OppdaterReise(reise);
+
+            if (!vellykket)
+            {
+                _log.LogInformation("Reisen ble ikke oppdatert!");
+                return BadRequest("Reisen ble ikke oppdatert");
+            }
+            else
+            {
+                return Ok(vellykket);
+            }
+        }
+
+        // Hent alle eksisterende reiser
+        [HttpGet]
+        public async Task<ActionResult> Reiser()
+        {
+            List<Reise> reiser = await _db.AlleReiser();
+            if (reiser == null)
+            {
+                _log.LogInformation("Ingen reiser funnet!");
+                return BadRequest("Ingen reiser funnet");
+            }
+            else
+            {
+                return Ok(reiser);
+            }
+        }
+
     }
 }
