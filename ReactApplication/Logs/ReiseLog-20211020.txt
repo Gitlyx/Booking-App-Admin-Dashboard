@@ -1,0 +1,7 @@
+2021-10-20T09:52:42.0310933+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-20T09:52:42.0374227+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-20T09:52:42.0402036+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-20T09:52:42.0418892+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-20T09:52:42.0435393+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-20T11:04:44.6282818+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)

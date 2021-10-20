@@ -5,7 +5,7 @@ import { Home } from './components/Home';
 
 // Note : Does not use brackets {}, since Login.js
 //        since it is a default export.
-import  Login  from './components/Login';
+import  {Login }  from './components/Login';
 import {Trip} from './components/Trip';
 import { TripRoute } from './components/TripRoute';
 

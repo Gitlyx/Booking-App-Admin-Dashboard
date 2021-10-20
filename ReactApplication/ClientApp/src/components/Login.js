@@ -1,20 +1,30 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import axios from "axios";
+
 
 export const Login = () => {
   // ----- State -----
   const [brukernavn, setBrukernavn] = useState("");
   const [passord, setPassord] = useState("");
+  const [brukernavnError, setBrukernavnError] = useState("");
+  const [passordError, setPassordError] = useState("");
 
   // ----- Functions -----
-  console.log("Brukernavn:" + brukernavn)
-  console.log("Passord:" + passord)
+  const loggInn = () => {
+    const bruker ={
+      Brukernavn: brukernavn,
+      Passord: passord,
+    }
 
-  const changeHandler = (e) => {
-    setBrukernavn(e.target.value);
-    setPassord(e.target.value);
+    const url = "Bruker/LoggInn";
+    
+    axios.post(url, bruker, () => {
+      console.log("Success!")
+    });
   }
 
+
+  // ----- Render -----
   return (
     <>
      <div className={"row justify-content-center "}>
@@ -24,25 +34,28 @@ export const Login = () => {
           </h2>
           <form>
             <div className={"form-group"}>
-              <label>brukernavn</label>
+              <label>Brukernavn</label>
               <input
                 type="text"
                 className={"form-control"}
-                onChange={(e)=>changeHandler(e)}
+                onChange={(e)=>setBrukernavn(e.target.value)}
               />
+              <small style={{color: "red"}} id={setBrukernavnError}></small>
             </div>
             <div className={"form-group"}>
-              <label htmlFor={"passord"}>passord</label>
+              <label htmlFor={"passord"}>Passord</label>
               <input
                 type="text"
                 name="passord"
                 className={"form-control"}
-                onChange={(e)=>changeHandler(e)}
+                onChange={(e)=>setPassord(e.target.value)}
               />
             </div>
-            <button type="submit" className={"btn btn-secondary"}>
+            <div className="form-group">
+            <button type="submit" className={"btn btn-secondary mt-2"}>
               Login
             </button>
+            </div>
           </form>
         </div>
       </div>
