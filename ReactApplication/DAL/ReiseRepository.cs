@@ -41,7 +41,7 @@ namespace ReactApplication.DAL
                     };
 
                     await _db.Ruter.AddAsync(nyRute);
-                    _db.SaveChanges();
+                    await _db.SaveChangesAsync();
                     return true;
                 }
                 return false;
@@ -63,7 +63,7 @@ namespace ReactApplication.DAL
                 if (eksisterer != null)
                 {
                     _db.Ruter.Remove(eksisterer);
-                    _db.SaveChanges();
+                    await _db.SaveChangesAsync();
                     return true;
                 }
 
@@ -96,37 +96,85 @@ namespace ReactApplication.DAL
             }
         }
 
+        // Oppdater en rute
+        public async Task<Boolean> oppdaterRute(Rute rute)
+        {
+            try
+            {
+                Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
+                    r.ruteId == rute.ruteId);
+
+                if (funnetRute != null)
+                {
+                    funnetRute.dagsreise = rute.dagsreise;
+                    funnetRute.ruteFra = rute.ruteFra;
+                    funnetRute.ruteTil = rute.ruteTil;
+
+                    await _db.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         // Opprett ny reise
         // Sjekker om reise eksisterer ved bruk av avreisedato
         public async Task<Boolean> NyReise(Reise reise)
         {
             try
             {
-                List<ReiseDB> reiser =
-                    await _db.Reiser.ToListAsync();
-
                 ReiseDB funnetReise =
                     await _db.Reiser.FirstOrDefaultAsync(
-                        r => r.ReiseDatoTid == reise.ReiseDatoTid);
+                        r => r.ReiseDatoTid == reise.ReiseDatoTid &&
+                        r.RuteId.ruteFra == reise.RuteFra &&
+                        r.RuteId.ruteTil == reise.RuteTil);
 
                 Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
                 r.ruteFra == reise.RuteFra && r.ruteTil == reise.RuteTil);
 
                 if (funnetReise == null)
                 {
-                    ReiseDB nyReise =
-                        new ReiseDB
-                        {
-                            ReiseDatoTid = reise.ReiseDatoTid,
-                            RuteId = funnetRute,
-                            PrisBarn = reise.PrisBarn,
-                            PrisVoksen = reise.PrisVoksen,
-                            PrisLugarStandard = reise.PrisLugarStandard,
-                            PrisLugarPremium = reise.PrisLugarPremium,
-                        };
+                    ReiseDB nyReise = new ReiseDB
+                    {
+                        ReiseDatoTid = reise.ReiseDatoTid,
+                        RuteId = funnetRute,
+                        PrisBarn = reise.PrisBarn,
+                        PrisVoksen = reise.PrisVoksen,
+                        PrisLugarStandard = reise.PrisLugarStandard,
+                        PrisLugarPremium = reise.PrisLugarPremium,
+                    };
 
-                    reiser.Add(nyReise);
-                    _db.SaveChanges();
+                    await _db.Reiser.AddAsync(nyReise);
+                    await _db.SaveChangesAsync();
+                    return true;
+
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Slett en eksisterende reise
+        public async Task<Boolean> SlettReise(int reiseId)
+        {
+            try
+            {
+                ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
+                r.ReiseId == reiseId);
+
+                if (funnetReise != null)
+                {
+                    _db.Remove(funnetReise);
+                    await _db.SaveChangesAsync();
                     return true;
                 }
 
@@ -163,6 +211,71 @@ namespace ReactApplication.DAL
                     return tempReise;
                 }
                 return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        // Oppdater eksisterende reise
+        public async Task<Boolean> OppdaterReise(Reise reise)
+        {
+            try
+            {
+                ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
+                r.ReiseId == reise.ReiseId);
+
+                if (funnetReise != null)
+                {
+                    funnetReise.ReiseDatoTid = reise.ReiseDatoTid;
+                    funnetReise.PrisBarn = reise.PrisBarn;
+                    funnetReise.PrisVoksen = reise.PrisVoksen;
+                    funnetReise.PrisLugarStandard = reise.PrisLugarStandard;
+                    funnetReise.PrisLugarPremium = reise.PrisLugarPremium;
+
+                    await _db.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Hent alle eksisterende reiser
+        public async Task<List<Reise>> AlleReiser()
+        {
+            try
+            {
+                List<ReiseDB> reiserDB = await _db.Reiser.ToListAsync();
+                List<Reise> reiser = new List<Reise>();
+
+                foreach (var reise in reiserDB)
+                {
+                    Reise reiseObjekt = new Reise
+                    {
+                        ReiseId = reise.ReiseId,
+                        ReiseDatoTid = reise.ReiseDatoTid,
+                        RuteFra = reise.RuteId.ruteFra,
+                        RuteTil = reise.RuteId.ruteTil,
+                        PrisBarn = reise.PrisBarn,
+                        PrisVoksen = reise.PrisVoksen,
+                        PrisLugarStandard = reise.PrisLugarStandard,
+                        PrisLugarPremium = reise.PrisLugarPremium
+                    };
+
+                    reiser.Add(reiseObjekt);
+                }
+
+                if (reiser != null)
+                {
+                    return reiser;
+                }
+                else { return null; }
             }
             catch
             {
