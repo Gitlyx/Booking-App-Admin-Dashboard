@@ -39,7 +39,7 @@ export class NavMenu extends Component {
             <div className={"icon"}></div>
         </button>
         <div className={"collapse navbar-collapse"}>
-            <ul className={"navbar-nav col-lg-8"}>
+            <ul className={"navbar-nav col-lg-5"}>
                 <li className={"nav-item"}>
                     <Link className={"nav-link"} to="#">From Norway</Link>
                 </li>
@@ -47,7 +47,7 @@ export class NavMenu extends Component {
                     <Link className={"nav-link"} to="#">To Norway</Link>
                 </li>
             </ul>
-            <ul className={"navbar-nav col-lg-4 justify-content-end"}>
+            <ul className={"navbar-nav col-lg-7 justify-content-end"}>
                 <li className={"nav-item"}>
                     <Link className={"nav-link"} to="/login">Sign in</Link>
                 </li>

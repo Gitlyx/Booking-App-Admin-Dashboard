@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.ItemProperties.ReactApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/Controllers/ReiseController.cs">
     <Files>
-      <File FileName="ReactApplication/DAL/ReiseRepository.cs" />
+      <File FileName="ReactApplication/DAL/ReiseRepository.cs" Line="1" Column="1" />
       <File FileName="ReactApplication/Startup.cs" />
-      <File FileName="ReactApplication/Controllers/ReiseController.cs" />
-      <File FileName="ReactApplication/DAL/IReiseRepository.cs" NotebookId="1" />
+      <File FileName="ReactApplication/Controllers/ReiseController.cs" Line="1" Column="1" />
+      <File FileName="ReactApplication/DAL/IReiseRepository.cs" Line="1" Column="1" NotebookId="1" />
       <File FileName="ReactApplication/Models/Reise.cs" NotebookId="1" />
       <File FileName="ReactApplication/DAL/DB.cs" NotebookId="1" />
     </Files>
@@ -14,7 +14,11 @@
         <State name="__root__">
           <Node name="ReactApplication" expanded="True">
             <Node name="ReactApplication" expanded="True">
-              <Node name="ClientApp" expanded="True" />
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="components" expanded="True" />
+                </Node>
+              </Node>
               <Node name="Controllers" expanded="True">
                 <Node name="ReiseController.cs" selected="True" />
               </Node>
