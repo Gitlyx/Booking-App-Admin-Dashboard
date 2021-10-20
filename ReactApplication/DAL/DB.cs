@@ -8,17 +8,17 @@ namespace WebApp_Oblig2.DAL
     {
         [Key]
         public int ruteId { get; set; }
+
         public string ruteFra { get; set; }
         public string ruteTil { get; set; }
         public bool dagsreise { get; set; }
     }
 
-
     public class Reise
     {
-
         [Key]
         public int ReiseId { get; set; }
+
         public virtual Rute RuteId { get; set; }
         public DateTime ReiseDatoTid { get; set; }
         public int PrisBarn { get; set; }
@@ -27,12 +27,14 @@ namespace WebApp_Oblig2.DAL
         public int PrisLugarPremium { get; set; }
     }
 
-    public class Bruker
+    public class Brukere
     {
         [Key]
         public int BrukerId { get; set; }
-        public string BrukerPassord { get; set; }
-        public string BrukerNavn { get; set; }
+
+        public string Brukernavn { get; set; }
+        public byte[] Passord { get; set; }
+        public byte[] Salt { get; set; }
     }
 
     public class DB : DbContext
@@ -42,7 +44,7 @@ namespace WebApp_Oblig2.DAL
             Database.EnsureCreated();
         }
 
-        public DbSet<Bruker> Bruker { get; set; }
+        public DbSet<Brukere> Brukere { get; set; }
         public DbSet<Reise> Reiser { get; set; }
         public DbSet<Rute> Ruter { get; set; }
 

@@ -1,42 +1,53 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
+export const Login = () => {
+  // ----- State -----
+  const [brukernavn, setBrukernavn] = useState("");
+  const [passord, setPassord] = useState("");
 
-    this.state = {
-      username: "",
-      password: "",
-    };
+  // ----- Functions -----
+  console.log("Brukernavn:" + brukernavn)
+  console.log("Passord:" + passord)
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const changeHandler = (e) => {
+    setBrukernavn(e.target.value);
+    setPassord(e.target.value);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    console.log(this.stats.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form>
-        <div className="container">
-          <div className="row">
-            <div className="col-6">
-              <input type="text" />
+  return (
+    <>
+     <div className={"row justify-content-center "}>
+        <div className={"col-lg-6 col-md-8 col-sm-12 p-5 border"}>
+          <h2 className={"mb-4"}>
+            <i className={"bi bi-person-fill"}> </i>Login
+          </h2>
+          <form>
+            <div className={"form-group"}>
+              <label>brukernavn</label>
+              <input
+                type="text"
+                className={"form-control"}
+                onChange={(e)=>changeHandler(e)}
+              />
             </div>
-            <div className="col-6">
-              <input type="text" placeholder />
+            <div className={"form-group"}>
+              <label htmlFor={"passord"}>passord</label>
+              <input
+                type="text"
+                name="passord"
+                className={"form-control"}
+                onChange={(e)=>changeHandler(e)}
+              />
             </div>
-
-          </div>
+            <button type="submit" className={"btn btn-secondary"}>
+              Login
+            </button>
+          </form>
         </div>
-      </form>
-    );
-  }
-}
+      </div>
+    
+    
+    </>
+  );
+};

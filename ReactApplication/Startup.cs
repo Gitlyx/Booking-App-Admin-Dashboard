@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using ReactApplication.DAL;
 using WebApp_Oblig2.DAL;
 
-
 namespace ReactApplication
 {
     public class Startup
