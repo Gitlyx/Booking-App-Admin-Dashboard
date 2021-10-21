@@ -10,8 +10,21 @@ export const Login = () => {
 
   // ----- Functions -----
 
+  const valider = (e) => {
+    let text = e.target.value;
+
+    if (text === "") {
+      setErrorLogin("Mangler brukernavn/passord");
+    console.log(false);
+      return false;
+    }
+    console.log(true);
+    return true;
+  }
+
   const handleSubmit = (e) => {
-    axios
+    if (valider(true)) {
+          axios
       .post("https://localhost:5001/bruker/bruker", {
         brukernavn: brukernavn,
         passord: passord,
@@ -25,7 +38,8 @@ export const Login = () => {
           setErrorLogin(<p style={{ color: "red" }}>{resp.response.data}</p>);
         }
       });
-    e.preventDefault();
+    }
+
   };
 
   // ----- Render -----
@@ -45,6 +59,7 @@ export const Login = () => {
                 className={"form-control"}
                 onChange={(e) => {
                   setBrukernavn(e.target.value);
+                  valider(e.target.value);
                 }}
               />
             </div>
@@ -56,6 +71,7 @@ export const Login = () => {
                 className={"form-control"}
                 onChange={(e) => {
                   setPassord(e.target.value);
+                  valider(e.target.value);
                 }}
               />
             </div>
