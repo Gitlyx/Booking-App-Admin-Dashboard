@@ -1,36 +1,34 @@
 import React, { useState } from "react";
-import validering from "./validering";
 import axios from "axios";
 
 export const Login = () => {
   // ----- State -----
 
-  const [values, setValues] = useState({
-    brukernavn: "",
-    passord: "",
-  });
-
-  const [errors, setErrors] = useState({});
+  const [brukernavn, setBrukernavn] = useState("");
+  const [passord, setPassord] = useState("");
+  const [errorLogin, setErrorLogin] = useState("");
 
   // ----- Functions -----
-  // https://www.youtube.com/watch?v=WvRwiE9IkFg
-
-  const handleChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-    console.log(e.target.name);
-    console.log(e.target.value);
-  };
 
   const handleSubmit = (e) => {
+    axios
+      .post("https://localhost:5001/bruker/bruker", {
+        brukernavn: brukernavn,
+        passord: passord,
+      })
+      .then(() => {
+        setErrorLogin(<p style={{ color: "green" }}>Logginn vellykket!</p>);
+        console.log("Success");
+      })
+      .catch((resp) => {
+        if (resp.response) {
+          setErrorLogin(<p style={{ color: "red" }}>{resp.response.data}</p>);
+        }
+      });
     e.preventDefault();
-    setErrors(validering(values));
   };
 
   // ----- Render -----
-
   return (
     <>
       <div className={"row justify-content-center "}>
@@ -45,14 +43,10 @@ export const Login = () => {
                 type="text"
                 name="brukernavn"
                 className={"form-control"}
-                onChange={handleChange}
-                value={values.brukernavn}
+                onChange={(e) => {
+                  setBrukernavn(e.target.value);
+                }}
               />
-              {errors.brukernavn && (
-                <small style={{ color: "red" }}>
-                  {errors.brukernavn}
-                </small>
-              )}
             </div>
             <div className={"form-group"}>
               <label htmlFor={"errorBrukernavn"}>Passord</label>
@@ -60,15 +54,12 @@ export const Login = () => {
                 type="text"
                 name="passord"
                 className={"form-control"}
-                onChange={handleChange}
-                value={values.passord}
+                onChange={(e) => {
+                  setPassord(e.target.value);
+                }}
               />
-              {errors.passord && (
-                <small style={{ color: "red" }}>
-                  {errors.passord}
-                </small>
-              )}
             </div>
+            <div className="py-2">{errorLogin}</div>
             <button className={"btn btn-secondary mt-3"} onClick={handleSubmit}>
               Login
             </button>

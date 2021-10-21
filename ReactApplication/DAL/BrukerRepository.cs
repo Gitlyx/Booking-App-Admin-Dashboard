@@ -13,16 +13,34 @@ namespace ReactApplication.DAL
     public class BrukerRepository : IBrukerRepository
     {
         private DB _db;
-
         private ILogger<BrukerRepository> _log;
-
         public BrukerRepository(DB db, ILogger<BrukerRepository> log)
         {
             _db = db;
             _log = log;
         }
 
-        //Hashing metode tatt fra Molasdul: Sikkerhet.
+        public async Task<Boolean> LoggInn(Bruker bruker)
+        {
+            try
+            {
+                Brukere funnetBruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
+                byte[] hash = LagHash(bruker.Passord, funnetBruker.Salt);
+                bool ok = hash.SequenceEqual(funnetBruker.Passord);
+                if (ok)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+        }
+
+        //Hashing metode tatt fra Modul: Sikkerhet.
         public static byte[] LagHash(string passord, byte[] salt)
         {
             return KeyDerivation.Pbkdf2(
@@ -42,24 +60,5 @@ namespace ReactApplication.DAL
             return salt;
         }
 
-        public async Task<bool> LoggInn(Bruker bruker)
-        {
-            try
-            {
-                Brukere funnetBruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
-                byte[] hash = LagHash(bruker.Passord, funnetBruker.Salt);
-                bool ok = hash.SequenceEqual(funnetBruker.Passord);
-                if (ok)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception e)
-            {
-                _log.LogInformation(e.Message);
-                return false;
-            }
-        }
     }
 }

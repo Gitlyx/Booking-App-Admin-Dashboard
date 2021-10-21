@@ -27,6 +27,7 @@ namespace ReactApplication
             services.AddControllers();
             services.AddDbContext<DB>(options => options.UseSqlite("Data source = Database.db"));
             services.AddScoped<IReiseRepository, ReiseRepository>();
+            services.AddScoped<IBrukerRepository, BrukerRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
