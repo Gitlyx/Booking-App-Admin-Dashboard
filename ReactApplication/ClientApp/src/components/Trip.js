@@ -7,7 +7,12 @@ export const Trip = () => {
   const [printRute, setPrintRute] = useState({rute:[]})
 
   // ----- Function -----
-
+useEffect(()=>{
+  axios.get('https://localhost:5001/reise/rute')
+  .then((resp)=>{
+    console.log(resp.response.data)
+  })
+})
   
   return (
     <>
