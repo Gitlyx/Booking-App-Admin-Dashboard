@@ -7,39 +7,39 @@ export const Login = () => {
   const [brukernavn, setBrukernavn] = useState("");
   const [passord, setPassord] = useState("");
   const [errorLogin, setErrorLogin] = useState("");
+  const [ok, setOk] = useState(false);
 
   // ----- Functions -----
 
   const valider = (e) => {
+    setErrorLogin("");
     let text = e.target.value;
-
-    if (text === "") {
+    if (!text.match(/^(?!\s*$).+/)) {
       setErrorLogin("Mangler brukernavn/passord");
-    console.log(false);
-      return false;
+      setOk(false);
+    } else {
+      setOk(true);
     }
-    console.log(true);
-    return true;
-  }
+  };
 
   const handleSubmit = (e) => {
-    if (valider(true)) {
-          axios
-      .post("https://localhost:5001/bruker/bruker", {
-        brukernavn: brukernavn,
-        passord: passord,
-      })
-      .then(() => {
-        setErrorLogin(<p style={{ color: "green" }}>Logginn vellykket!</p>);
-        console.log("Success");
-      })
-      .catch((resp) => {
-        if (resp.response) {
-          setErrorLogin(<p style={{ color: "red" }}>{resp.response.data}</p>);
-        }
-      });
+    e.preventDefault();
+    if (ok === true) {
+      axios
+        .post("https://localhost:5001/bruker/bruker", {
+          brukernavn: brukernavn,
+          passord: passord,
+        })
+        .then(() => {
+          setErrorLogin(<p style={{ color: "green" }}>Logginn vellykket!</p>);
+          console.log("Success");
+        })
+        .catch((resp) => {
+          if (resp.response) {
+            setErrorLogin(<p style={{ color: "red" }}>{resp.response.data}</p>);
+          }
+        });
     }
-
   };
 
   // ----- Render -----
@@ -59,7 +59,7 @@ export const Login = () => {
                 className={"form-control"}
                 onChange={(e) => {
                   setBrukernavn(e.target.value);
-                  valider(e.target.value);
+                  valider(e);
                 }}
               />
             </div>
@@ -71,12 +71,15 @@ export const Login = () => {
                 className={"form-control"}
                 onChange={(e) => {
                   setPassord(e.target.value);
-                  valider(e.target.value);
+                  valider(e);
                 }}
               />
             </div>
             <div className="py-2">{errorLogin}</div>
-            <button className={"btn btn-secondary mt-3"} onClick={handleSubmit}>
+            <button
+              className={"btn btn-secondary mt-3"}
+              onClick={(e) => handleSubmit(e)}
+            >
               Login
             </button>
           </form>
