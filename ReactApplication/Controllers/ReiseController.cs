@@ -11,6 +11,7 @@ using System.Collections.Generic;
 namespace ReactApplication.Controllers
 {
     [Route("[controller]/[action]")]
+    [ApiController]
     public class ReiseController : ControllerBase
     {
         private readonly IReiseRepository _db;
@@ -24,9 +25,9 @@ namespace ReactApplication.Controllers
 
         // Opprett ny rute
         [HttpPost]
-        public async Task<ActionResult> Rute(Rute r)
+        public async Task<ActionResult> Rute(Reise reise)
         {
-            Boolean vellykket = await _db.NyRute(r);
+            Boolean vellykket = await _db.NyRute(reise);
 
             if (!vellykket)
             {
@@ -72,9 +73,9 @@ namespace ReactApplication.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> oppdaterRute(Rute rute)
+        public async Task<ActionResult> oppdaterRute(Reise reise)
         {
-            Boolean vellykket = await _db.oppdaterRute(rute);
+            Boolean vellykket = await _db.oppdaterRute(reise);
             if (!vellykket)
             {
                 _log.LogInformation("Reisen ble ikke endret!");

@@ -1,12 +1,11 @@
-import React, { Children, Component } from 'react'
-import './CTAButton.css';
+import React, { Children, useState } from "react";
+import "./CTAButton.css";
 
-export default class CTAButton extends Component {
-    render() {
-        return (
-            <button className={"mt-4 btn call-to-action"}>
-                {this.props.children}
-            </button>
-        )
-    }
-}
+export const CTAButton = (props) => {
+
+  return (
+    <button type={"button"} onClick={props.click} className={"mt-4 btn call-to-action"}>
+      {props.children}
+    </button>
+  );
+};

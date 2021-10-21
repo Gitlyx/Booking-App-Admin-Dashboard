@@ -11,12 +11,12 @@ namespace WebApp_Oblig2.Model
         public int ReiseId { get; set; }
         public DateTime ReiseDatoTid { get; set; }
 
-        public string RuteFra { get; set; }
-        public string RuteTil { get; set; }
-        public bool Dagsreise { get; set; }
-        public int PrisBarn { get; set; }
-        public int PrisVoksen { get; set; }
-        public int PrisLugarStandard { get; set; }
-        public int PrisLugarPremium { get; set; }
+        public string ruteFra { get; set; }
+        public string ruteTil { get; set; }
+        public bool dagsreise { get; set; }
+        public int prisBarn { get; set; }
+        public int prisVoksen { get; set; }
+        public int prisLugarStandard { get; set; }
+        public int prisLugarPremium { get; set; }
     }
 }

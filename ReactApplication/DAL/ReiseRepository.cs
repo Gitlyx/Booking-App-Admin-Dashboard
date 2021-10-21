@@ -24,20 +24,20 @@ namespace ReactApplication.DAL
 
         // Opprett ny rute
         // TODO: Skill mellom catch-false og try-false
-        public async Task<Boolean> NyRute(Rute rute)
+        public async Task<Boolean> NyRute(Reise reise)
         {
             try
             {
                 Rute eksisterer = await _db.Ruter.FirstOrDefaultAsync(r =>
-                r.ruteFra == rute.ruteFra && rute.ruteTil == rute.ruteTil);
+                r.ruteFra == reise.ruteFra && r.ruteTil == reise.ruteTil);
 
                 if (eksisterer == null)
                 {
                     Rute nyRute = new Rute
                     {
-                        ruteFra = rute.ruteFra,
-                        ruteTil = rute.ruteTil,
-                        dagsreise = rute.dagsreise,
+                        ruteFra = reise.ruteFra,
+                        ruteTil = reise.ruteTil,
+                        dagsreise = reise.dagsreise,
                     };
 
                     await _db.Ruter.AddAsync(nyRute);
@@ -97,18 +97,18 @@ namespace ReactApplication.DAL
         }
 
         // Oppdater en rute
-        public async Task<Boolean> oppdaterRute(Rute rute)
+        public async Task<Boolean> oppdaterRute(Reise reise)
         {
             try
             {
                 Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
-                    r.ruteId == rute.ruteId);
+                    r.ruteId == reise.ReiseId);
 
                 if (funnetRute != null)
                 {
-                    funnetRute.dagsreise = rute.dagsreise;
-                    funnetRute.ruteFra = rute.ruteFra;
-                    funnetRute.ruteTil = rute.ruteTil;
+                    funnetRute.dagsreise = reise.dagsreise;
+                    funnetRute.ruteFra = reise.ruteFra;
+                    funnetRute.ruteTil = reise.ruteTil;
 
                     await _db.SaveChangesAsync();
                     return true;
@@ -131,11 +131,11 @@ namespace ReactApplication.DAL
                 ReiseDB funnetReise =
                     await _db.Reiser.FirstOrDefaultAsync(
                         r => r.ReiseDatoTid == reise.ReiseDatoTid &&
-                        r.RuteId.ruteFra == reise.RuteFra &&
-                        r.RuteId.ruteTil == reise.RuteTil);
+                        r.RuteId.ruteFra == reise.ruteFra &&
+                        r.RuteId.ruteTil == reise.ruteTil);
 
                 Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
-                r.ruteFra == reise.RuteFra && r.ruteTil == reise.RuteTil);
+                r.ruteFra == reise.ruteFra && r.ruteTil == reise.ruteTil);
 
                 if (funnetReise == null)
                 {
@@ -143,10 +143,10 @@ namespace ReactApplication.DAL
                     {
                         ReiseDatoTid = reise.ReiseDatoTid,
                         RuteId = funnetRute,
-                        PrisBarn = reise.PrisBarn,
-                        PrisVoksen = reise.PrisVoksen,
-                        PrisLugarStandard = reise.PrisLugarStandard,
-                        PrisLugarPremium = reise.PrisLugarPremium,
+                        PrisBarn = reise.prisBarn,
+                        PrisVoksen = reise.prisVoksen,
+                        PrisLugarStandard = reise.prisLugarStandard,
+                        PrisLugarPremium = reise.prisLugarPremium,
                     };
 
                     await _db.Reiser.AddAsync(nyReise);
@@ -199,13 +199,13 @@ namespace ReactApplication.DAL
                     Reise tempReise = new Reise
                     {
                         ReiseDatoTid = funnetReise.ReiseDatoTid,
-                        RuteFra = funnetReise.RuteId.ruteFra,
-                        RuteTil = funnetReise.RuteId.ruteTil,
-                        Dagsreise = funnetReise.RuteId.dagsreise,
-                        PrisBarn = funnetReise.PrisBarn,
-                        PrisVoksen = funnetReise.PrisVoksen,
-                        PrisLugarStandard = funnetReise.PrisLugarStandard,
-                        PrisLugarPremium = funnetReise.PrisLugarPremium
+                        ruteFra = funnetReise.RuteId.ruteFra,
+                        ruteTil = funnetReise.RuteId.ruteTil,
+                        dagsreise = funnetReise.RuteId.dagsreise,
+                        prisBarn = funnetReise.PrisBarn,
+                        prisVoksen = funnetReise.PrisVoksen,
+                        prisLugarStandard = funnetReise.PrisLugarStandard,
+                        prisLugarPremium = funnetReise.PrisLugarPremium
                     };
 
                     return tempReise;
@@ -229,10 +229,10 @@ namespace ReactApplication.DAL
                 if (funnetReise != null)
                 {
                     funnetReise.ReiseDatoTid = reise.ReiseDatoTid;
-                    funnetReise.PrisBarn = reise.PrisBarn;
-                    funnetReise.PrisVoksen = reise.PrisVoksen;
-                    funnetReise.PrisLugarStandard = reise.PrisLugarStandard;
-                    funnetReise.PrisLugarPremium = reise.PrisLugarPremium;
+                    funnetReise.PrisBarn = reise.prisBarn;
+                    funnetReise.PrisVoksen = reise.prisVoksen;
+                    funnetReise.PrisLugarStandard = reise.prisLugarStandard;
+                    funnetReise.PrisLugarPremium = reise.prisLugarPremium;
 
                     await _db.SaveChangesAsync();
                     return true;
@@ -260,12 +260,12 @@ namespace ReactApplication.DAL
                     {
                         ReiseId = reise.ReiseId,
                         ReiseDatoTid = reise.ReiseDatoTid,
-                        RuteFra = reise.RuteId.ruteFra,
-                        RuteTil = reise.RuteId.ruteTil,
-                        PrisBarn = reise.PrisBarn,
-                        PrisVoksen = reise.PrisVoksen,
-                        PrisLugarStandard = reise.PrisLugarStandard,
-                        PrisLugarPremium = reise.PrisLugarPremium
+                        ruteFra = reise.RuteId.ruteFra,
+                        ruteTil = reise.RuteId.ruteTil,
+                        prisBarn = reise.PrisBarn,
+                        prisVoksen = reise.PrisVoksen,
+                        prisLugarStandard = reise.PrisLugarStandard,
+                        prisLugarPremium = reise.PrisLugarPremium
                     };
 
                     reiser.Add(reiseObjekt);

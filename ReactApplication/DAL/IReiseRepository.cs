@@ -10,10 +10,10 @@ namespace ReactApplication.DAL
 {
     public interface IReiseRepository
     {
-        Task<Boolean> NyRute(Rute r);
+        Task<Boolean> NyRute(Reise reise);
         Task<Boolean> SlettRute(int ruteId);
         Task<Rute> EnRute(int ruteId);
-        Task<Boolean> oppdaterRute(Rute rute);
+        Task<Boolean> oppdaterRute(Reise reise);
         Task<Boolean> NyReise(Reise reise);
         Task<Reise> EnReise(int reiseId);
         Task<Boolean> OppdaterReise(Reise reise);

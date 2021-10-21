@@ -8,7 +8,6 @@ namespace WebApp_Oblig2.DAL
     {
         [Key]
         public int ruteId { get; set; }
-
         public string ruteFra { get; set; }
         public string ruteTil { get; set; }
         public bool dagsreise { get; set; }
