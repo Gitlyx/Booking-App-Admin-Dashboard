@@ -13,6 +13,7 @@ namespace ReactApplication.DAL
         Task<Boolean> NyRute(Reise reise);
         Task<Boolean> SlettRute(int ruteId);
         Task<Rute> EnRute(int ruteId);
+        Task<List<Rute>> AlleRuter();
         Task<Boolean> oppdaterRute(Reise reise);
         Task<Boolean> NyReise(Reise reise);
         Task<Reise> EnReise(int reiseId);

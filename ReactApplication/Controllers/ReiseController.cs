@@ -72,6 +72,24 @@ namespace ReactApplication.Controllers
             }
         }
 
+        // Hent alle ruter
+        [HttpGet]
+        public async Task<ActionResult> Rute()
+        {
+            List<Rute> funnet = await _db.AlleRuter();
+
+            if (funnet == null)
+            {
+                _log.LogInformation("Ingen ruter funnet!");
+                return BadRequest("Ingen ruter funnet");
+            }
+            else
+            {
+                return Ok(funnet);
+            }
+        }
+
+        // Oppdater en eksisterende rute
         [HttpPut]
         public async Task<ActionResult> oppdaterRute(Reise reise)
         {

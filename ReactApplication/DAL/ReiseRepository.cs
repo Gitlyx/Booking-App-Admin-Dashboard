@@ -96,6 +96,34 @@ namespace ReactApplication.DAL
             }
         }
 
+        // Hent alle ruter
+        public async Task<List<Rute>> AlleRuter()
+        {
+            try
+            {
+                List<Rute> ruter = await _db.Ruter.ToListAsync();
+                List<Rute> returnRuter = new List<Rute>();
+
+                foreach (var rute in ruter)
+                {
+                    Rute temp_rute = new Rute
+                    {
+                        ruteFra = rute.ruteFra,
+                        ruteTil = rute.ruteTil,
+                        dagsreise = rute.dagsreise
+                    };
+
+                    returnRuter.Add(temp_rute);
+                }
+
+                return returnRuter;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         // Oppdater en rute
         public async Task<Boolean> oppdaterRute(Reise reise)
         {

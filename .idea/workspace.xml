@@ -2,16 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ed353fc-791a-48f2-bf24-f68ff6ba0def" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Trip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/TripRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ReactApplication/xs/UserPrefs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ReactApplication/xs/UserPrefs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ReactApplication/xs/project-cache/ReactApplication-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ReactApplication/xs/project-cache/ReactApplication-Debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/Controllers/ReiseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Controllers/ReiseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/DAL/IReiseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/DAL/IReiseRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/validering.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/SECURITY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/UPGRADE_GUIDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/dist/axios.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/adapters/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/adapters/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/adapters/xhr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/axios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/cancel/Cancel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/cancel/CancelToken.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/cancel/isCancel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/Axios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/InterceptorManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/buildFullPath.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/createError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/dispatchRequest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/enhanceError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/mergeConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/settle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/core/transformData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/defaults.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/env/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/env/data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/bind.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/buildURL.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/combineURLs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/cookies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/deprecatedMethod.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/isAbsoluteURL.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/isAxiosError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/isURLSameOrigin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/normalizeHeaderName.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/parseHeaders.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/spread.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/helpers/validator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/lib/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/axios/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/debug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/https.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/follow-redirects/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReactApplication/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211018.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211018.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211020.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211020.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +101,7 @@
       <updated>1634397169023</updated>
       <workItem from="1634397172050" duration="25000" />
       <workItem from="1634715961214" duration="79000" />
+      <workItem from="1634838080306" duration="8000" />
     </task>
     <servers />
   </component>

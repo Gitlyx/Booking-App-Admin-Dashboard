@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import validering from "./validering";
+
 import axios from "axios";
 
 export const Login = () => {
@@ -26,7 +26,7 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validering(values));
+  
   };
 
   // ----- Render -----

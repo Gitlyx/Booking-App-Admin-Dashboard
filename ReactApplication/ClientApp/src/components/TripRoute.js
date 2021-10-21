@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import { CTAButton } from "../parts/CTAButton";
 import { CancelButton } from "../parts/CancelButton";
+import { useHistory } from "react-router-dom";
 
 export const TripRoute = () => {
+  const history = useHistory();
+
   // ----- State -----
   const [avreisested, setAvreisested] = useState("");
   const [destinasjon, setDestinasjon] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
 
   // Validering
-  const [isOk, setIsOk] = useState(true);
+  const [isOk, setIsOk] = useState(false);
 
   // Feilmeldinger
   const [axiosFeilmelding, setAxiosFeilmelding] = useState("");
@@ -33,17 +36,19 @@ export const TripRoute = () => {
 
     const url = "https://localhost:5001/reise/rute?";
 
-    if(isOk === true){
-    axios
-      .post(url, nyReise)
-      .then(() => {
-        console.log("HelloWorl");
-      })
-      .catch((resp) => {
-        if (resp.response) {
-          setAxiosFeilmelding(resp.response.data);
-        }
-      });
+    if (isOk === true) {
+      axios
+        .post(url, nyReise)
+        .then(() => {
+          history.goBack();
+        })
+        .catch((resp) => {
+          if (resp.response) {
+            setAxiosFeilmelding(resp.response.data);
+          }
+        });
+    } else {
+      setAxiosFeilmelding("Feltene kan IKKE være tom")
     }
   };
 
@@ -51,26 +56,26 @@ export const TripRoute = () => {
   const inputvaliderFra = (e) => {
     let inndata = e.target.value;
     let innname = e.target.name;
-    let melding = "Kan ikke være tomt!"
+    let melding = "Kan ikke være tomt!";
     let ok = isOk;
     if (inndata !== "undefined") {
       if (!inndata.match(/^(?!\s*$).+/)) {
         ok = false;
-        console.log(innname)
-        if(innname === 'avreisested'){
-          setAvreisestedFeilmelding(melding)
+        console.log(innname);
+        if (innname === "avreisested") {
+          setAvreisestedFeilmelding(melding);
         }
-        if(innname === 'destinasjon'){
-          setDestinasjonFeilmelding(melding)
+        if (innname === "destinasjon") {
+          setDestinasjonFeilmelding(melding);
         }
-      } else{
+      } else {
         ok = true;
-        console.log(innname)
-        if(innname === 'avreisested'){
-          setAvreisestedFeilmelding('')
+        console.log(innname);
+        if (innname === "avreisested") {
+          setAvreisestedFeilmelding("");
         }
-        if(innname === 'destinasjon'){
-          setDestinasjonFeilmelding('')
+        if (innname === "destinasjon") {
+          setDestinasjonFeilmelding("");
         }
       }
 
@@ -101,7 +106,9 @@ export const TripRoute = () => {
                 />
               </div>
               <div className={"col-auto"}>
-              <small className={"text-danger"} class="form-text">{avreisestedFeilmelding}</small>
+                <small className={"text-danger"} class="form-text">
+                  {avreisestedFeilmelding}
+                </small>
               </div>
             </div>
 
@@ -121,7 +128,9 @@ export const TripRoute = () => {
                 />
               </div>
               <div class="col-auto">
-                <small className={"text-danger"} class="form-text">{destinasjonFeilmelding}</small>
+                <small className={"text-danger"} class="form-text">
+                  {destinasjonFeilmelding}
+                </small>
               </div>
             </div>
 
