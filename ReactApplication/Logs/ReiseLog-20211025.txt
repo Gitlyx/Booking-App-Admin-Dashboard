@@ -101,3 +101,13 @@ System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an in
 2021-10-25T17:46:04.2915020+02:00  [ERR] Error from chokidar (C:\node_modules): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
  (d53d78e5)
 >>>>>>> 1f5c1beb87ebfc0e49c15700402834d269550c08
+2021-10-25T18:12:04.9304730+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T18:12:04.9426480+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T18:12:04.9507270+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T18:12:04.9540810+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T18:12:04.9555180+02:00  [INF] Content root path: "/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication" (b5d60022)
+2021-10-25T18:19:42.7856280+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T18:19:42.7972570+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T18:19:42.8019700+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T18:19:42.8036110+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T18:19:42.8046590+02:00  [INF] Content root path: "/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication" (b5d60022)

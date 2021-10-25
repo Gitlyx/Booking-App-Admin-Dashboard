@@ -5,16 +5,12 @@ import { Home } from "./components/Home";
 
 // Note : Does not use brackets {}, since Login.js
 //        since it is a default export.
-import { Trip } from "./components/Trip";
-<<<<<<< HEAD
-import { TripRoute } from "./components/Rute";
-
-=======
-import { TripRoute } from "./components/TripRoute";
+import { Rute } from "./components/Rute";
+import { TripReise } from "./components/TripReise";
 import { LoginForm } from "./components/Login";
->>>>>>> 1f5c1beb87ebfc0e49c15700402834d269550c08
 import "./custom.css";
 import { Reise } from "./components/Reise";
+import { Trip } from "./components/Trip";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -25,7 +21,7 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={LoginForm} />
         <Route path="/managetrip" component={Trip} />
-        <Route path="/newroute" component={TripRoute} />
+        <Route path="/newroute" component={Rute} />
         <Route path="/nyReise" component={Reise} />
       </Layout>
     );

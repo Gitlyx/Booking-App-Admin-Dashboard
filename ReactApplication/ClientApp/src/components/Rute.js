@@ -4,7 +4,7 @@ import { CTAButton } from "../parts/CTAButton";
 import { CancelButton } from "../parts/CancelButton";
 import { useHistory } from "react-router-dom";
 
-export const TripRoute = () => {
+export const Rute = () => {
   const history = useHistory();
 
   // ----- State -----
