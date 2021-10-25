@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2021-10-25T12:14:49.8421280+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
 2021-10-25T12:14:49.8544050+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
 2021-10-25T12:14:49.8597840+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
@@ -41,3 +42,62 @@ System.Net.WebSockets.WebSocketException (0x80004005): The WebSocket is in an in
 2021-10-25T17:27:37.6956680+02:00 0HMCNMS7S1C3T:00000039 [INF] Reisen eksisterer ikke! (f4409061)
 2021-10-25T17:27:37.9273950+02:00 0HMCNMS7S1C3T:0000003C [INF] Reisen eksisterer ikke! (f4409061)
 2021-10-25T17:50:49.2094090+02:00 0HMCNMS7S1C4L:000014B0 [INF] Ruten eksisterer allerede (0905d908)
+=======
+2021-10-25T11:21:57.3187902+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T11:21:57.3269848+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T11:21:57.3299567+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T11:21:57.3320355+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T11:21:57.3344441+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-25T11:22:25.6667671+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T11:25:53.6203910+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T11:25:53.6258330+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T11:25:53.6281478+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T11:25:53.6299622+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T11:25:53.6319493+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-25T14:26:57.7185766+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T14:26:57.7245442+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T14:26:57.7269332+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T14:26:57.7289537+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T14:26:57.7308510+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-25T14:45:21.0072825+02:00 0HMCNMAUD0CAP:00000301 [INF] Object reference not set to an instance of an object. (f59a5554)
+2021-10-25T14:45:21.0118043+02:00 0HMCNMAUD0CAP:00000301 [INF] Brukeren eksisterer ikke (924f49ef)
+2021-10-25T15:14:03.5788446+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T15:14:03.5861954+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T15:14:03.5896157+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T15:14:03.5920634+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T15:14:03.5942862+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-25T15:43:15.7594986+02:00  [ERR] C:\Users\charl\AppData\Local\Programs\Microsoft VS Code\Code.exe: bad option: -g
+ (250a8939)
+2021-10-25T16:32:19.4326520+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:32:29.5082246+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:33:55.9863154+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-25T16:33:55.9913726+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-25T16:33:55.9936555+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-25T16:33:55.9968362+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-25T16:33:55.9989026+02:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-10-25T16:34:06.9901711+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:35:06.7801368+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:35:58.2524185+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:36:08.1633944+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T16:38:45.9687268+02:00 0HMCNOHSSEER5:00000043 [INF] Object reference not set to an instance of an object. (f59a5554)
+2021-10-25T16:38:45.9721513+02:00 0HMCNOHSSEER5:00000043 [INF] Brukeren eksisterer ikke (924f49ef)
+2021-10-25T17:30:02.3538429+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T17:41:29.5538889+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T17:42:39.0510624+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T17:43:12.1649199+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T17:43:57.6727679+02:00  [ERR] Error from chokidar (C:\): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d05872ea)
+2021-10-25T17:46:04.2915020+02:00  [ERR] Error from chokidar (C:\node_modules): Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'
+ (d53d78e5)
+>>>>>>> 1f5c1beb87ebfc0e49c15700402834d269550c08
