@@ -1,10 +1,12 @@
 ﻿<Properties StartupConfiguration="{A9634DA1-1700-4ECF-835B-DD23636ED6A9}|Default">
   <MonoDevelop.Ide.ItemProperties.ReactApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/DAL/IReiseRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/DAL/ReiseRepository.cs">
     <Files>
-      <File FileName="ReactApplication/DAL/DB.cs" Line="8" Column="6" NotebookId="1" />
-      <File FileName="ReactApplication/Models/Reise.cs" NotebookId="1" />
-      <File FileName="ReactApplication/DAL/IReiseRepository.cs" Line="16" Column="14" NotebookId="1" />
+      <File FileName="ReactApplication/DAL/DB.cs" Line="8" Column="6" />
+      <File FileName="ReactApplication/Models/Reise.cs" />
+      <File FileName="ReactApplication/DAL/IReiseRepository.cs" />
+      <File FileName="ReactApplication/DAL/ReiseRepository.cs" Line="164" Column="60" />
+      <File FileName="ReactApplication/Controllers/ReiseController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +15,7 @@
             <Node name="ReactApplication" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="DAL" expanded="True">
-                <Node name="IReiseRepository.cs" selected="True" />
+                <Node name="ReiseRepository.cs" selected="True" />
               </Node>
               <Node name="Logs" expanded="True" />
               <Node name="Models" expanded="True" />
@@ -27,9 +29,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication/DAL/IReiseRepository.cs" relfile="ReactApplication/DAL/IReiseRepository.cs" line="17" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

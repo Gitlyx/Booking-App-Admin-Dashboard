@@ -1,6 +1,6 @@
 import React, { Children, useState } from "react";
 import { Link } from "react-router-dom";
-import "./CTAButton.css";
+import "./CTA.css";
 
 export const CancelButton = (props) => {
 

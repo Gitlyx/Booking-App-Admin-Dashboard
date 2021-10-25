@@ -11,6 +11,7 @@ using System.Collections.Generic;
 namespace ReactApplication.Controllers
 {
     [Route("[controller]/[action]")]
+    [ApiController]
     public class ReiseController : ControllerBase
     {
         private readonly IReiseRepository _db;
@@ -24,9 +25,9 @@ namespace ReactApplication.Controllers
 
         // Opprett ny rute
         [HttpPost]
-        public async Task<ActionResult> Rute(Rute r)
+        public async Task<ActionResult> Rute(Reise reise)
         {
-            Boolean vellykket = await _db.NyRute(r);
+            Boolean vellykket = await _db.NyRute(reise);
 
             if (!vellykket)
             {
@@ -71,10 +72,28 @@ namespace ReactApplication.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult> oppdaterRute(Rute rute)
+        // Hent alle ruter
+        [HttpGet]
+        public async Task<ActionResult> Rute()
         {
-            Boolean vellykket = await _db.oppdaterRute(rute);
+            List<Rute> funnet = await _db.AlleRuter();
+
+            if (funnet == null)
+            {
+                _log.LogInformation("Ingen ruter funnet!");
+                return BadRequest("Ingen ruter funnet");
+            }
+            else
+            {
+                return Ok(funnet);
+            }
+        }
+
+        // Oppdater en eksisterende rute
+        [HttpPut]
+        public async Task<ActionResult> oppdaterRute(Reise reise)
+        {
+            Boolean vellykket = await _db.oppdaterRute(reise);
             if (!vellykket)
             {
                 _log.LogInformation("Reisen ble ikke endret!");
@@ -105,9 +124,9 @@ namespace ReactApplication.Controllers
 
         // Hent en eksistrende reise
         [HttpGet]
-        public async Task<ActionResult> EnReise(int reiseId)
+        public async Task<ActionResult> EnReise(int id)
         {
-            Reise enReise = await _db.EnReise(reiseId);
+            Reise enReise = await _db.EnReise(id);
             if (enReise == null)
             {
                 _log.LogInformation("Reisen eksisterer ikke eller ikke funnet");
@@ -154,9 +173,9 @@ namespace ReactApplication.Controllers
 
         // Hent alle eksisterende reiser
         [HttpGet]
-        public async Task<ActionResult> Reiser()
+        public async Task<ActionResult> Reiser(int id)
         {
-            List<Reise> reiser = await _db.AlleReiser();
+            List<Reise> reiser = await _db.AlleReiser(id);
             if (reiser == null)
             {
                 _log.LogInformation("Ingen reiser funnet!");

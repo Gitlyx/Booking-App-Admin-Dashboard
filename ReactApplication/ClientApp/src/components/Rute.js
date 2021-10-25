@@ -48,7 +48,7 @@ export const TripRoute = () => {
           }
         });
     } else {
-      setAxiosFeilmelding("Feltene kan IKKE være tom")
+      setAxiosFeilmelding("Feltene kan IKKE være tom");
     }
   };
 
@@ -58,27 +58,25 @@ export const TripRoute = () => {
     let innname = e.target.name;
     let melding = "Kan ikke være tomt!";
     let ok = isOk;
-    if (inndata !== "undefined") {
-      if (!inndata.match(/^(?!\s*$).+/)) {
-        ok = false;
-        console.log(innname);
-        if (innname === "avreisested") {
-          setAvreisestedFeilmelding(melding);
-        }
-        if (innname === "destinasjon") {
-          setDestinasjonFeilmelding(melding);
-        }
-      } else {
-        ok = true;
-        console.log(innname);
-        if (innname === "avreisested") {
-          setAvreisestedFeilmelding("");
-        }
-        if (innname === "destinasjon") {
-          setDestinasjonFeilmelding("");
-        }
-      }
 
+    if (!inndata.match(/^(?!\s*$).+/)) {
+      ok = false;
+      console.log(innname);
+      if (innname === "avreisested") {
+        setAvreisestedFeilmelding(melding);
+      }
+      if (innname === "destinasjon") {
+        setDestinasjonFeilmelding(melding);
+      }
+    } else {
+      ok = true;
+      console.log(innname);
+      if (innname === "avreisested") {
+        setAvreisestedFeilmelding("");
+      }
+      if (innname === "destinasjon") {
+        setDestinasjonFeilmelding("");
+      }
       setIsOk(ok);
     }
   };
@@ -87,9 +85,9 @@ export const TripRoute = () => {
   return (
     <>
       <div className={"row"}>
-        <div className={"row card py-4 col-lg-7"}>
+        <div className={"row card py-4 col-lg-12"}>
           <h3 className={"text-uppercase"}>Registrer nye reiserute</h3>
-          <form className={"col-lg-12 my-4"}>
+          <form className={"col-lg-12 my-1"}>
             <div className={"row g-3 align-items-center"}>
               <div className={"col-auto"}>
                 <label class="col-form-label">Avreisested :</label>
@@ -112,7 +110,7 @@ export const TripRoute = () => {
               </div>
             </div>
 
-            <div class="row g-3 my-4 align-items-center">
+            <div class="row g-3 my-1 align-items-center">
               <div class="col-auto">
                 <label class="col-form-label">Destinasjon :</label>
               </div>
@@ -134,7 +132,7 @@ export const TripRoute = () => {
               </div>
             </div>
 
-            <div class="form-check form-switch">
+            <div class="form-check form-switch mt-3">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -143,8 +141,8 @@ export const TripRoute = () => {
               <label class="form-check-label">
                 {dagsreise === false && (
                   <small>
-                    <span className={"text-decoration-underline"}>IKKE</span>{" "}
-                    dagsreise
+                    <span className={"text-decoration-underline"}>IKKE</span>
+                     <small> dagsreise</small>
                   </small>
                 )}
                 {dagsreise === true && <small>Dagsreise</small>}

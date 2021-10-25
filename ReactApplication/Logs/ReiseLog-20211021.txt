@@ -201,3 +201,8 @@ System.IO.IOException: Failed to bind to address https://127.0.0.1:5001: address
 2021-10-21T21:39:58.9619140+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2021-10-21T21:39:58.9629660+02:00  [INF] Hosting environment: "Development" (c3307c92)
 2021-10-21T21:39:58.9641100+02:00  [INF] Content root path: "/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication" (b5d60022)
+2021-10-21T21:49:29.8671800+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-21T21:49:29.8761980+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-21T21:49:29.8784770+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-21T21:49:29.8792160+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-21T21:49:29.8799990+02:00  [INF] Content root path: "/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication" (b5d60022)

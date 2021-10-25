@@ -7,9 +7,10 @@ import { Home } from "./components/Home";
 //        since it is a default export.
 import { Login } from "./components/Login";
 import { Trip } from "./components/Trip";
-import { TripRoute } from "./components/TripRoute";
+import { TripRoute } from "./components/Rute";
 
 import "./custom.css";
+import { Reise } from "./components/Reise";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -21,6 +22,7 @@ export default class App extends Component {
         <Route path="/login" component={Login} />
         <Route path="/managetrip" component={Trip} />
         <Route path="/newroute" component={TripRoute} />
+        <Route path="/nyReise" component={Reise} />
       </Layout>
     );
   }
