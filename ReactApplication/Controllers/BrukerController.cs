@@ -31,7 +31,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Brukeren eksisterer ikke");
-                return BadRequest("Brukeren eksisterer ikke");
+                return BadRequest(new {message = "Brukeren eksisterer ikke", ok = false});
             }
             else
             {
