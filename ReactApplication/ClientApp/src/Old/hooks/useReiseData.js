@@ -15,7 +15,7 @@ export const useReiseData = (id) => {
         setIsLoading(false);
       });
     } 
-  });
+  }, [id]);
 
   return {
     isLoading: isLoading,

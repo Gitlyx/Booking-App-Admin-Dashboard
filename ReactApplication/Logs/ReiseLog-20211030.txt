@@ -1,0 +1,5 @@
+2021-10-30T13:30:02.5230130+02:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-10-30T13:30:02.5348850+02:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-10-30T13:30:02.5405210+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-10-30T13:30:02.5425400+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-10-30T13:30:02.5428520+02:00  [INF] Content root path: "/Users/minh/Desktop/ITPE3200 - Webapplikasjoner/Untitled/Ackerman-Sailing/ReactApplication" (b5d60022)

@@ -52,7 +52,7 @@ export const Rute = () => {
     }
   };
 
-  // // Inputvalidering
+  // Inputvalidering
   const inputvaliderFra = (e) => {
     let inndata = e.target.value;
     let innname = e.target.name;
@@ -85,7 +85,7 @@ export const Rute = () => {
   return (
     <>
       <div className={"row"}>
-        <div className={"row card py-4 col-lg-12"}>
+        <div className={"row card py-4 col-lg-6 px-2"}>
           <h3 className={"text-uppercase"}>Registrer nye reiserute</h3>
           <form className={"col-lg-12 my-1"}>
             <div className={"row g-3 align-items-center"}>

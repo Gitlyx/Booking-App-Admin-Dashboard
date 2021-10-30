@@ -18,7 +18,7 @@ export const TripReise = (props) => {
     return (
       <>
       {reise.ruteFra}
-        <table className={"overflow-auto "}>
+        <table className={"overflow-auto table"}>
           <thead>
             <tr>
               <th>Avreisedato</th>
