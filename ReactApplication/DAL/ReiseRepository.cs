@@ -168,6 +168,7 @@ namespace ReactApplication.DAL
 
                 if (funnetReise == null)
                 {
+
                     ReiseDB nyReise = new ReiseDB
                     {
                         ReiseDatoTid = reise.reiseDatoTid,
@@ -296,7 +297,8 @@ namespace ReactApplication.DAL
                             prisBarn = reise.PrisBarn,
                             prisVoksen = reise.PrisVoksen,
                             prisLugarStandard = reise.PrisLugarStandard,
-                            prisLugarPremium = reise.PrisLugarPremium
+                            prisLugarPremium = reise.PrisLugarPremium,
+                            dagsreise = reise.RuteId.dagsreise
                         };
 
                         reiser.Add(reiseObjekt);

@@ -1,16 +1,22 @@
 ﻿<Properties StartupConfiguration="{A9634DA1-1700-4ECF-835B-DD23636ED6A9}|Default">
   <MonoDevelop.Ide.ItemProperties.ReactApplication PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/ClientApp/package.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ReactApplication/Models/Reise.cs">
     <Files>
       <File FileName="ReactApplication/ClientApp/package.json" Line="20" Column="15" />
+      <File FileName="ReactApplication/Controllers/ReiseController.cs" Line="102" Column="14" />
+      <File FileName="ReactApplication/DAL/ReiseRepository.cs" Line="300" Column="63" />
+      <File FileName="ReactApplication/Models/Reise.cs" Line="13" Column="12" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ReactApplication" expanded="True">
             <Node name="ReactApplication" expanded="True">
-              <Node name="ClientApp" expanded="True">
-                <Node name="package.json" selected="True" />
+              <Node name="ClientApp" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="DAL" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Reise.cs" selected="True" />
               </Node>
             </Node>
           </Node>

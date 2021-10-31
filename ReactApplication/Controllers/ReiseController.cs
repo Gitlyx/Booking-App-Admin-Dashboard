@@ -32,7 +32,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Ruten eksisterer allerede");
-                return BadRequest("Ruten eksisterer allerede");
+                return BadRequest(new { response = "Ruten Eksisterer", ok = false });
             }
             else
             {
@@ -48,7 +48,8 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Ruten eksisterer ikke");
-                return BadRequest("Ruten eksisterer ikke");
+                return BadRequest(new { message = "bad request", ok = false });
+
             }
             else
             {
@@ -97,7 +98,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Reisen ble ikke endret!");
-                return BadRequest("Reisen ble ikke endret");
+                return BadRequest(new { message = "Reisen ble ikke endret", ok = false });
             }
             else
             {
@@ -114,7 +115,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Reisen ble ikke opprett");
-                return BadRequest("Reisen ble ikke opprettet");
+                return BadRequest(new { message = "Reisen ble ikke opprettet", ok = false });
             }
             else
             {
