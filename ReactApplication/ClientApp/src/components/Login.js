@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-export const Login = () => {
+export const Login = (props) => {
   // ---- Ref ----
   const history = useHistory();
 
@@ -11,14 +11,14 @@ export const Login = () => {
   const [passord, setPassord] = useState("");
   const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [success, setSuccess] = useState("");
+  const [variant, setVariant] = useState("");
 
   // ----- Functions -----
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (brukernavn && passord) {
-      fetch("https://localhost:5001/bruker/bruker", {
+      fetch("https://localhost:5001/bruker/logginn", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -31,20 +31,22 @@ export const Login = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.ok === false) {
-            setErrorMessage("Bruker ikke funnet.");
+            setErrorMessage(data.message);
+            setVariant("danger");
           } else {
-            setSuccess(<i className="bi bi-check"></i>);
-            setIsErrorShown(false);
-            history.push("/");
+            setErrorMessage("Du er nå logget inn!");
+            setVariant("success");
+            props.setIsLoggedIn(true);
+            props.setUser(brukernavn);
+            history.push("/Home");
           }
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => console.error("Feil i innlogging: ", error));
     } else {
       setErrorMessage("Mangler brukernavn eller passord.");
-      setIsErrorShown(true);
+      setVariant("warning");
     }
+    setIsErrorShown(true);
   };
 
   return (
@@ -54,7 +56,7 @@ export const Login = () => {
           <Col md="8" className="border rounded m-2 p-4">
             <Form>
               <div className="py-2">
-                <h2 className="">Brukertilgang</h2>
+                <h2 className="">Login admin</h2>
                 <h6 className="text-muted">
                   Logg inn for å få tilgang til alle funksjoner.
                 </h6>
@@ -85,7 +87,7 @@ export const Login = () => {
 
               {isErrorShown && (
                 <Alert
-                  variant="warning"
+                  variant={variant}
                   onClose={() => setIsErrorShown(false)}
                   dismissible
                 >
@@ -94,10 +96,11 @@ export const Login = () => {
               )}
               <Button
                 size="lg"
-                className={"btn btn-primary mt-3"}
+                variant="outline-primary"
+                className={"mt-3"}
                 onClick={(e) => handleSubmit(e)}
               >
-                Login {success}
+                Login
               </Button>
             </Form>
           </Col>

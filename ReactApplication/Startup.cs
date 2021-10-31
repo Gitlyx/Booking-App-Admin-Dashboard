@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,8 +29,15 @@ namespace ReactApplication
             services.AddDbContext<DB>(options => options.UseSqlite("Data source = Database.db"));
             services.AddScoped<IReiseRepository, ReiseRepository>();
             services.AddScoped<IBrukerRepository, BrukerRepository>();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(900);
+                options.Cookie.IsEssential = true;
+            });
 
             // In production, the React files will be served from this directory
+            services.AddDistributedMemoryCache();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
@@ -52,10 +60,12 @@ namespace ReactApplication
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
