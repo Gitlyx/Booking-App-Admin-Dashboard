@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ReactApplication.DAL;
 using ReactApplication.Models;
@@ -14,8 +15,8 @@ namespace ReactApplication.Controllers
     public class BrukerController : ControllerBase
     {
         private readonly IBrukerRepository _db;
-
         private readonly ILogger<BrukerController> _log;
+        private const string _loggetInn = "LoggeInn";
 
         public BrukerController(IBrukerRepository db, ILogger<BrukerController> log)
         {
@@ -24,19 +25,28 @@ namespace ReactApplication.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Bruker(Bruker bruker)
+        public async Task<ActionResult> LoggInn(Bruker bruker)
         {
-            Boolean vellykket = await _db.LoggInn(bruker);
+            if (ModelState.IsValid)
+            {
 
-            if (!vellykket)
-            {
-                _log.LogInformation("Brukeren eksisterer ikke");
-                return BadRequest("Brukeren eksisterer ikke");
-            }
-            else
-            {
+                Boolean vellykket = await _db.LoggInn(bruker);
+                if (!vellykket)
+                {
+                    _log.LogInformation("Brukeren eksisterer ikke");
+                    return BadRequest(new { message = ("Innlogging feilet for: " + bruker.Brukernavn), ok = false });
+                }
+                HttpContext.Session.SetString(_loggetInn, "LoggeInn");
                 return Ok(vellykket);
             }
+
+            _log.LogInformation("Feil i database.");
+            return BadRequest(new { message = "Feil i database." });
+        }
+        
+        public void LoggUt()
+        {
+            HttpContext.Session.SetString(_loggetInn, "");
         }
     }
 }

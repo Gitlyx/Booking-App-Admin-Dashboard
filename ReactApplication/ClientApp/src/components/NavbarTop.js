@@ -1,20 +1,38 @@
-import React, { setState, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/ship.svg";
+import { useHistory } from "react-router-dom";
 
 import { Navbar, Nav, Form, Container, Button } from "react-bootstrap";
 
-export const NavbarTop = () => {
-  // ----- State -----
-  const [loggedIn, setLoggedIn] = useState(true);
+export const NavbarTop = (props) => {
+  // ---- Ref ----
+
+  const history = useHistory();
+
+  // ----- Functions -----
+  const loggut = () => {
+    fetch("https://localhost:5001/bruker/loggut")
+      .then((resp) => {
+        if (resp) {
+          props.setIsLoggedIn(false);
+          props.setUser("");
+        } else {
+          console.log("Loggut Feilet.");
+          history.push("/Home");
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="md">
         <Container fluid>
           <Link className={"navbar-brand"} to="/">
             <img
               src={logo}
+              f
               alt="ship logo"
               width="40px"
               style={{ marginLeft: "20px" }}
@@ -31,14 +49,21 @@ export const NavbarTop = () => {
               <Nav.Link href="/managetrip">Administrer Reiser</Nav.Link>
               <Nav.Link href="/newroute">Ny rute</Nav.Link>
             </Nav>
+            <Form className="d-flex pr-3">
+              {props.isLoggedIn && (
+                <Button variant="light" disabled>
+                  Logget inn: {props.user}
+                </Button>
+              )}
+            </Form>
             <Form className="d-flex">
-              {loggedIn ? (
-                <Button href="/login" variant="outline-primary">
-                  Logg Inn
+              {props.isLoggedIn ? (
+                <Button className="btn" variant="danger" onClick={loggut}>
+                  Logg Ut
                 </Button>
               ) : (
-                <Button href="/login" variant="outline-primary">
-                  Logg ut
+                <Button href="/login" variant="primary">
+                  Logg Inn
                 </Button>
               )}
             </Form>

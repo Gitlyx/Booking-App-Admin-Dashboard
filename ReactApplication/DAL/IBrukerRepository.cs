@@ -9,5 +9,6 @@ namespace ReactApplication.DAL
     public interface IBrukerRepository
     {
         Task<Boolean> LoggInn(Bruker bruker);
+
     }
 }
