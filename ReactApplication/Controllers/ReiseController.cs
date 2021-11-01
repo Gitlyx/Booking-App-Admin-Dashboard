@@ -7,6 +7,8 @@ using WebApp_Oblig2.DAL;
 using ReiseDB = WebApp_Oblig2.DAL.Reise;
 using Reise = WebApp_Oblig2.Model.Reise;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using ReactApplication.Models;
 
 namespace ReactApplication.Controllers
 {
@@ -15,13 +17,21 @@ namespace ReactApplication.Controllers
     public class ReiseController : ControllerBase
     {
         private readonly IReiseRepository _db;
-        private readonly ILogger<ReiseController> _log;
+        private readonly IBrukerRepository _dbBruker;
 
-        public ReiseController(IReiseRepository db, ILogger<ReiseController> log)
+        private readonly ILogger<ReiseController> _log;
+        private const string _loggetInn = "LoggeInn";
+
+
+        public ReiseController(IReiseRepository db, IBrukerRepository dbBruker, ILogger<ReiseController> log)
         {
+
+            _dbBruker = dbBruker;
             _db = db;
             _log = log;
         }
+
+
 
         // Opprett ny rute
         [HttpPost]
@@ -185,6 +195,44 @@ namespace ReactApplication.Controllers
             else
             {
                 return Ok(reiser);
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> LoggInn(Bruker bruker)
+        {
+
+            Boolean vellykket = await _dbBruker.LoggInn(bruker);
+            if (!vellykket)
+            {
+                HttpContext.Session.SetString(_loggetInn, "");
+                _log.LogInformation("Brukeren eksisterer ikke");
+                return BadRequest(new { message = ("Innlogging feilet for: " + bruker.Brukernavn), ok = false });
+            }
+            else
+            {
+                HttpContext.Session.SetString(_loggetInn, "LoggeInn");
+                return Ok(vellykket);
+            }
+        }
+
+
+        public void LoggUt()
+        {
+            HttpContext.Session.SetString(_loggetInn, "");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Session()
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return Ok(true);
             }
         }
 

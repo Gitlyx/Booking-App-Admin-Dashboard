@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../images/ship.svg";
-import { useHistory } from "react-router-dom";
 
 import { Navbar, Nav, Form, Container, Button } from "react-bootstrap";
 
@@ -12,13 +11,11 @@ export const NavbarTop = (props) => {
   // ----- state -----
   const [session, setSession] = useState(false);
 
-  // function
-
   const checkSession = () => {
-    fetch("https://localhost:5001/bruker/session")
-    .then((resp) => resp.json())
-    .then((resp) => setSession(resp));
-  }
+    fetch("https://localhost:5001/reise/session")
+      .then((resp) => resp.json())
+      .then((resp) => setSession(resp));
+  };
 
   // ----- Session status -----
   useEffect(() => {
@@ -27,10 +24,11 @@ export const NavbarTop = (props) => {
 
   // ----- Logg ut -----
   const loggut = () => {
-    fetch("https://localhost:5001/bruker/loggut")
+    fetch("https://localhost:5001/reise/loggut")
       .then((resp) => {
         if (resp) {
-          checkSession()
+          checkSession();
+          history.push("/");
         } else {
           console.log("Loggut Feilet.");
         }
@@ -75,9 +73,9 @@ export const NavbarTop = (props) => {
                   Logg Ut
                 </Button>
               ) : (
-                <Button href="/login" variant="primary">
+                <Link to="/login" className="btn btn-success">
                   Logg Inn
-                </Button>
+                </Link>
               )}
             </Form>
           </Navbar.Collapse>

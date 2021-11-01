@@ -17,7 +17,7 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (brukernavn && passord) {
-      fetch("https://localhost:5001/bruker/logginn", {
+      fetch("https://localhost:5001/reise/logginn", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
