@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Toast from "react-bootstrap/Toast";
 import { Route } from "./Route";
 
 export const Home = () => {
+  // ----- State -----
+  const [exist, setExist] = useState();
+
+  const checkExist = (id) => {
+    const url = "https://localhost:5001/reise/reiser?id=" + id;
+    
+  }
+
   return (
     <>
       <div>
@@ -14,7 +23,11 @@ export const Home = () => {
             </Link>
           </h1>
         </div>
-        <table className={"table"}>
+        <table
+          className={
+            "table table-striped table-bordered table-sm text-center align-middle"
+          }
+        >
           <thead>
             <tr>
               <th>Fra</th>

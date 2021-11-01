@@ -31,14 +31,20 @@ export const GetAllRoutes = () => {
 
 // API DELETE
 export const DeleteRoute = (id) => {
-  const url = "https://localhost:5001/reise/rute?ruteId=" + id;
+  const [data, setData] =useState()
+;  const url = "https://localhost:5001/reise/rute?ruteId=" + id;
   fetch(url, {
     method: "DELETE",
   })
     .then((response) => response.json())
+    .then((resp) => {
+      setData(resp)
+    })
     .catch((error) => {
       console.error("Error:", error);
     });
+
+    return data;
 };
 
 

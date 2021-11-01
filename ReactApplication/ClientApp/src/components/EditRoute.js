@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import { GetOneRoute } from "../Hooks/useRouteData";
-import { useHistory } from "react-router-dom";
 
 export const EditRoute = (params) => {
   const history = useHistory();
@@ -12,7 +10,7 @@ export const EditRoute = (params) => {
   const url = "https://localhost:5001/reise/enrute?ruteId=" + id;
 
   // ----- States ------
-  const [ReiseId, setReiseId] = useState(-1)
+  const [ReiseId, setReiseId] = useState(-1);
   const [ruteFra, setRuteFra] = useState("");
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
@@ -24,7 +22,7 @@ export const EditRoute = (params) => {
       const response = await fetch(url);
       const resp = await response.json();
       console.log("API result :", resp);
-      setReiseId(resp.ruteId)
+      setReiseId(resp.ruteId);
       setRuteFra(resp.ruteFra);
       setRuteTil(resp.ruteTil);
       setDagsreise(resp.dagsreise);
@@ -33,38 +31,36 @@ export const EditRoute = (params) => {
     fetchRoute();
   }, [url]);
 
-// ----- Function / PUT ------
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const updatedRoute = {
-    ReiseId,
-    ruteFra,
-    ruteTil,
-    dagsreise,
-  }
+  // ----- Function / PUT ------
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedRoute = {
+      ReiseId,
+      ruteFra,
+      ruteTil,
+      dagsreise,
+    };
 
- console.log(updatedRoute)
-  fetch("https://localhost:5001/reise/oppdaterrute", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedRoute),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.ok === false) {
-          console.log(data.message)
-      } else {
-        history.push("/");
-      }
+    console.log(updatedRoute);
+    fetch("https://localhost:5001/reise/oppdaterrute", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedRoute),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok === false) {
+          console.log(data.message);
+        } else {
+          history.push("/");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   if (!isLoading) {
     return (
@@ -103,7 +99,9 @@ const handleSubmit = (e) => {
                 {dagsreise === false && <small>IKKE dagsreise</small>}
               </label>
             </div>
-            <button type={"button"} onClick={handleSubmit}>Lagre endringer</button>
+            <button type={"button"} onClick={handleSubmit}>
+              Lagre endringer
+            </button>
           </Form>
         </div>
       </>

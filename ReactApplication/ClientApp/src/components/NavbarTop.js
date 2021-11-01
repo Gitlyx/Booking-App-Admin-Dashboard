@@ -75,9 +75,9 @@ export const NavbarTop = (props) => {
                   Logg Ut
                 </Button>
               ) : (
-                <Button href="/login" variant="primary">
+                <Link to="/login" className={"btn btn-primary"}>
                   Logg Inn
-                </Button>
+                </Link>
               )}
             </Form>
           </Navbar.Collapse>
