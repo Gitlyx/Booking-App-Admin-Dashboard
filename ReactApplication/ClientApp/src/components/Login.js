@@ -51,7 +51,7 @@ export const Login = (props) => {
       <Container className=" align-content-center">
         <Row className="justify-content-center">
           <Col md="8" className="border rounded m-2 p-4">
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <div className="py-2">
                 <h2 className="">Login admin</h2>
                 <h6 className="text-muted">
@@ -92,10 +92,10 @@ export const Login = (props) => {
                 </Alert>
               )}
               <Button
+                type="submit"
                 size="lg"
                 variant="outline-primary"
                 className={"mt-3"}
-                onClick={(e) => handleSubmit(e)}
               >
                 Login
               </Button>
