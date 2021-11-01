@@ -17,7 +17,7 @@ export const Route = (params) => {
         <tr key={rute.ruteId}>
           <td>{rute.ruteFra}</td>
           <td>{rute.ruteTil}</td>
-          <td>{rute.dagsreise.toString()}</td>
+          <td>{rute.dagsreise? "Ja" : "Nei"}</td>
           <td>
             <Link
               className={"btn btn-success"}

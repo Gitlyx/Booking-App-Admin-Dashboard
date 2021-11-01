@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/ship.svg";
 import { useHistory } from "react-router-dom";
@@ -7,19 +7,32 @@ import { Navbar, Nav, Form, Container, Button } from "react-bootstrap";
 
 export const NavbarTop = (props) => {
   // ---- Ref ----
-
   const history = useHistory();
 
-  // ----- Functions -----
+  // ----- state -----
+  const [session, setSession] = useState(false);
+
+  // function
+
+  const checkSession = () => {
+    fetch("https://localhost:5001/bruker/session")
+    .then((resp) => resp.json())
+    .then((resp) => setSession(resp));
+  }
+
+  // ----- Session status -----
+  useEffect(() => {
+    checkSession();
+  });
+
+  // ----- Logg ut -----
   const loggut = () => {
     fetch("https://localhost:5001/bruker/loggut")
       .then((resp) => {
         if (resp) {
-          props.setIsLoggedIn(false);
-          props.setUser("");
+          checkSession()
         } else {
           console.log("Loggut Feilet.");
-          history.push("/Home");
         }
       })
       .catch((error) => console.log(error));
@@ -57,7 +70,7 @@ export const NavbarTop = (props) => {
               )}
             </Form>
             <Form className="d-flex">
-              {props.isLoggedIn ? (
+              {session ? (
                 <Button className="btn" variant="danger" onClick={loggut}>
                   Logg Ut
                 </Button>

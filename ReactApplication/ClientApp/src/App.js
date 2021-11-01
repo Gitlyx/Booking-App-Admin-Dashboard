@@ -6,6 +6,7 @@ import { NewRoute } from "./components/NewRoute";
 import { EditRoute } from "./components/EditRoute";
 import { Trip } from "./components/Trip";
 import { NewTrip } from "./components/NewTrip";
+import {Login} from "./components/Login"
 
 
 export default class App extends Component {
@@ -19,6 +20,7 @@ export default class App extends Component {
         <Route path="/editroute" component={EditRoute}/>
         <Route path="/trip" component={Trip}/>
         <Route path="/newtrip" component={NewTrip}/>
+        <Route path="/login" component={Login}/>
       </Layout>
     );
   }

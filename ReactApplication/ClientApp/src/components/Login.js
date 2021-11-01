@@ -12,7 +12,6 @@ export const Login = (props) => {
   const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [variant, setVariant] = useState("");
-
   // ----- Functions -----
 
   const handleSubmit = (e) => {
@@ -36,9 +35,7 @@ export const Login = (props) => {
           } else {
             setErrorMessage("Du er nå logget inn!");
             setVariant("success");
-            props.setIsLoggedIn(true);
-            props.setUser(brukernavn);
-            history.push("/Home");
+            history.goBack();
           }
         })
         .catch((error) => console.error("Feil i innlogging: ", error));

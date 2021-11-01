@@ -17,9 +17,11 @@ export const NewTrip = (params) => {
   const [ReiseDatoTid, setAvreiseDatoTid] = useState();
   const [prisBarn, setPrisBarn] = useState(0);
   const [prisVoksen, setPrisVoksen] = useState(0);
-  const [prisStandardLugar, setPrisStandardLugar] = useState(0);
-  const [prisPremiumLugar, setPrisPremiumLugar] = useState(0);
+  const [prisLugarStandard, setprisLugarStandard] = useState(0);
+  const [prisLugarPremium, setprisLugarPremium] = useState(0);
   const [feilmelding, setFeilmelding] = useState("");
+
+  console.log()
 
   // GET request
   useEffect(() => {
@@ -40,8 +42,8 @@ export const NewTrip = (params) => {
     if (
       prisBarn < 0 ||
       prisVoksen < 0 ||
-      prisPremiumLugar < 0 ||
-      prisStandardLugar < 0
+      prisLugarPremium < 0 ||
+      prisLugarStandard < 0
     ) {
       setFeilmelding("Prisen kan ikke være negativ!");
     } else {
@@ -50,8 +52,8 @@ export const NewTrip = (params) => {
         ruteTil,
         prisBarn,
         prisVoksen,
-        prisStandardLugar,
-        prisPremiumLugar,
+        prisLugarStandard,
+        prisLugarPremium,
         ReiseDatoTid,
       };
 
@@ -125,9 +127,9 @@ export const NewTrip = (params) => {
                 <Form.Label>Standard Lugar</Form.Label>
                 <Form.Control
                   type="number"
-                  value={prisStandardLugar}
+                  value={prisLugarStandard}
                   onChange={(e) => {
-                    setPrisStandardLugar(e.target.value);
+                    setprisLugarStandard(e.target.value);
                   }}
                 />
               </Form.Group>
@@ -136,8 +138,8 @@ export const NewTrip = (params) => {
                 <Form.Label>Premium Lugar</Form.Label>
                 <Form.Control
                   type="number"
-                  value={prisPremiumLugar}
-                  onChange={(e) => setPrisPremiumLugar(e.target.value)}
+                  value={prisLugarPremium}
+                  onChange={(e) => setprisLugarPremium(e.target.value)}
                 />
               </Form.Group>
             </Row>

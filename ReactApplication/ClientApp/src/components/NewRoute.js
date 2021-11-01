@@ -11,7 +11,7 @@ const history = useHistory();
   const [dagsreise, setDagsreise] = useState(false);
   const [feilmelding, setFeilmelding] = useState("");
   
-// ----- Function / POST ------
+// ----- Function ------
   const handleSubmit = () => {
     const route = { ruteFra, ruteTil, dagsreise};
 

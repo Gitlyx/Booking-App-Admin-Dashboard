@@ -27,26 +27,38 @@ namespace ReactApplication.Controllers
         [HttpPost]
         public async Task<ActionResult> LoggInn(Bruker bruker)
         {
-            if (ModelState.IsValid)
-            {
 
-                Boolean vellykket = await _db.LoggInn(bruker);
-                if (!vellykket)
-                {
-                    _log.LogInformation("Brukeren eksisterer ikke");
-                    return BadRequest(new { message = ("Innlogging feilet for: " + bruker.Brukernavn), ok = false });
-                }
+            Boolean vellykket = await _db.LoggInn(bruker);
+            if (!vellykket)
+            {
+                HttpContext.Session.SetString(_loggetInn, "");
+                _log.LogInformation("Brukeren eksisterer ikke");
+                return BadRequest(new { message = ("Innlogging feilet for: " + bruker.Brukernavn), ok = false });
+            }
+            else
+            {
                 HttpContext.Session.SetString(_loggetInn, "LoggeInn");
                 return Ok(vellykket);
             }
-
-            _log.LogInformation("Feil i database.");
-            return BadRequest(new { message = "Feil i database." });
         }
-        
+
+
         public void LoggUt()
         {
             HttpContext.Session.SetString(_loggetInn, "");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Session()
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return Ok(true);
+            }
         }
     }
 }
