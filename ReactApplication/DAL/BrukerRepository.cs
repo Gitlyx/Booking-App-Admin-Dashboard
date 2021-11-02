@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ReactApplication.Models;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ using WebApp_Oblig2.DAL;
 
 namespace ReactApplication.DAL
 {
+    [ExcludeFromCodeCoverage]
+
     public class BrukerRepository : IBrukerRepository
     {
         private DB _db;

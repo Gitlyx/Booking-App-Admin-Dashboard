@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApp_Oblig2.DAL
 {
+
     public class Rute
     {
         [Key]
@@ -13,7 +15,7 @@ namespace WebApp_Oblig2.DAL
         public string ruteTil { get; set; }
         public bool dagsreise { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class Reise
     {
         [Key]
@@ -26,7 +28,7 @@ namespace WebApp_Oblig2.DAL
         public int PrisLugarStandard { get; set; }
         public int PrisLugarPremium { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class Brukere
     {
         [Key]
@@ -36,7 +38,7 @@ namespace WebApp_Oblig2.DAL
         public byte[] Passord { get; set; }
         public byte[] Salt { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class DB : DbContext
     {
         public DB(DbContextOptions<DB> options) : base(options)

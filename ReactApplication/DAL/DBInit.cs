@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp_Oblig2.DAL;
 
 namespace ReactApplication.DAL
 {
+    [ExcludeFromCodeCoverage]
     public class DBInit
     {
         public static void Initialize(IApplicationBuilder app)

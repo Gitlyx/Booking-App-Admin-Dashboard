@@ -7,9 +7,11 @@ using WebApp_Oblig2.DAL;
 using WebApp_Oblig2.Model;
 using ReiseDB = WebApp_Oblig2.DAL.Reise;
 using Reise = WebApp_Oblig2.Model.Reise;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ReactApplication.DAL
 {
+    [ExcludeFromCodeCoverage]
     public class ReiseRepository : IReiseRepository
     {
         // Oppretter objekt av typen DB
@@ -131,7 +133,7 @@ namespace ReactApplication.DAL
             try
             {
                 Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
-                    r.ruteId == reise.ReiseId);
+                    r.ruteId == reise.id);
 
                 if (funnetRute != null)
                 {
@@ -254,7 +256,7 @@ namespace ReactApplication.DAL
             try
             {
                 ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
-                r.ReiseId == reise.ReiseId);
+                r.ReiseId == reise.id);
 
                 if (funnetReise != null)
                 {
@@ -290,7 +292,7 @@ namespace ReactApplication.DAL
                     {
                         Reise reiseObjekt = new Reise
                         {
-                            ReiseId = reise.ReiseId,
+                            id = reise.ReiseId,
                             reiseDatoTid = reise.ReiseDatoTid,
                             ruteFra = reise.RuteId.ruteFra,
                             ruteTil = reise.RuteId.ruteTil,
