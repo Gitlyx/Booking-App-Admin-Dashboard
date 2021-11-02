@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
+import { useLocation, useHistory, Link } from "react-router-dom";
+import { Form, Container, Alert, Col } from "react-bootstrap";
 
 export const EditRoute = (params) => {
   const history = useHistory();
@@ -15,6 +15,8 @@ export const EditRoute = (params) => {
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isErrorShown, setIsErrorShown] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Hent en rute (API)
   useEffect(() => {
@@ -34,76 +36,96 @@ export const EditRoute = (params) => {
   // ----- Function / PUT ------
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedRoute = {
-      ReiseId,
-      ruteFra,
-      ruteTil,
-      dagsreise,
-    };
+    if (ruteFra && ruteTil) {
+      const updatedRoute = {
+        ReiseId,
+        ruteFra,
+        ruteTil,
+        dagsreise,
+      };
 
-    console.log(updatedRoute);
-    fetch("https://localhost:5001/reise/oppdaterrute", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedRoute),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.ok === false) {
-          console.log(data.message);
-        } else {
-          history.push("/");
-        }
+      console.log(updatedRoute);
+      fetch("https://localhost:5001/reise/oppdaterrute", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRoute),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok === false) {
+            console.log(data.message);
+          } else {
+            history.push("/");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      setErrorMessage("Mangler avreise eller destinasjon.");
+      setIsErrorShown(true);
+    }
   };
 
   if (!isLoading) {
     return (
       <>
-        <div>
-          <Form className={"col-lg-3"}>
-            <Form.Group className={"mb-3"}>
-              <Form.Label>Avreisested</Form.Label>
-              <Form.Control
-                type={"text"}
-                placeholder={"Ruten reiser fra"}
-                value={ruteFra}
-                onChange={(e) => setRuteFra(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className={"mb-3"}>
-              <Form.Label>Destinasjon</Form.Label>
-              <Form.Control
-                type={"text"}
-                placeholder={"Ruten reiser til"}
-                value={ruteTil}
-                onChange={(e) => setRuteTil(e.target.value)}
-              />
-            </Form.Group>
-
-            <div className={"form-check form-switch mb-3"}>
-              <input
-                className={"form-check-input"}
-                type="checkbox"
-                defaultChecked={dagsreise}
-                onChange={(e) => setDagsreise(!dagsreise)}
-              />
-              <label className={"form-check-label"}>
-                {dagsreise === true && <small>Dagsreise</small>}
-                {dagsreise === false && <small>IKKE dagsreise</small>}
-              </label>
-            </div>
-            <button type={"button"} onClick={handleSubmit}>
-              Lagre endringer
-            </button>
-          </Form>
-        </div>
+        <Container className="single-component">
+          <Col md="6" className="border rounded m-2 p-4">
+            <Form>
+              <div className="py-2">
+                <h2 className="">Endre rute</h2>
+              </div>
+              <Form.Group className={"mb-3"}>
+                <Form.Label>Avreisested</Form.Label>
+                <Form.Control
+                  type={"text"}
+                  placeholder={"Ruten reiser fra"}
+                  value={ruteFra}
+                  onChange={(e) => setRuteFra(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className={"mb-3"}>
+                <Form.Label>Destinasjon</Form.Label>
+                <Form.Control
+                  type={"text"}
+                  placeholder={"Ruten reiser til"}
+                  value={ruteTil}
+                  onChange={(e) => setRuteTil(e.target.value)}
+                />
+              </Form.Group>
+              <div className={"form-check form-switch mb-3"}>
+                <input
+                  className={"form-check-input"}
+                  type="checkbox"
+                  defaultChecked={dagsreise}
+                  onChange={(e) => setDagsreise(!dagsreise)}
+                />
+                <label className={"form-check-label"}>
+                  {dagsreise === true && <small>Dagsreise</small>}
+                  {dagsreise === false && <small>IKKE dagsreise</small>}
+                </label>
+              </div>
+              {isErrorShown && (
+                <Alert
+                  variant="warning"
+                  onClose={() => setIsErrorShown(false)}
+                  dismissible
+                >
+                  {errorMessage}
+                </Alert>
+              )}
+              <button className="btn btn-cta" onClick={handleSubmit}>
+                Lagre
+              </button>{" "}
+              <Link className="btn btn-outline-cta" to="/">
+                Tilbake
+              </Link>
+            </Form>
+          </Col>
+        </Container>
       </>
     );
   } else {
