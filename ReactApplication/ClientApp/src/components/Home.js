@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Toast from "react-bootstrap/Toast";
+import { Container, Breadcrumb } from "react-bootstrap";
 import { Route } from "./Route";
+import { Hero } from "./Hero";
 
 export const Home = () => {
   const [session, setSession] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const checkSession = () => {
     fetch("https://localhost:5001/reise/session")
       .then((resp) => resp.json())
-      .then((resp) => setSession(resp));
+      .then((resp) => {
+        setSession(resp);
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -18,34 +23,36 @@ export const Home = () => {
 
   return (
     <>
-      {session ? (
-        <div>
+      {session && !isLoading ? (
+        <Container>
           <div className={"flex d-flex"}>
-            <h1>
-              Ruter
-              <Link className={"align-self-center mx-3"} to={"/newRoute"}>
-                <i className={"bi bi-plus-circle"}></i>
-              </Link>
-            </h1>
+            <h1 style={{ color: "#FF6600" }}>Reiser</h1>
           </div>
-          <table className={"table"}>
+          <Breadcrumb>
+            <Breadcrumb.Item active>Reiser</Breadcrumb.Item>
+          </Breadcrumb>
+
+          <table className={"table content-table text-justify"}>
             <thead>
               <tr>
-                <th>Fra</th>
-                <th>Til</th>
-                <th>Dagsreise</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th style={{ width: "25%" }}>Avreise</th>
+                <th style={{ width: "25%" }}>Destinasjon</th>
+                <th style={{ width: "20%" }}>Dagsreise</th>
+                <th className="justify-content" style={{ width: "30%" }}>
+                  Håndter
+                </th>
               </tr>
             </thead>
             <tbody>
               <Route />
             </tbody>
           </table>
-        </div>
+          <Link className={"btn btn-cta align-self-center"} to={"/newRoute"}>
+            <i className={"bi bi-plus"}> Ny rute</i>
+          </Link>
+        </Container>
       ) : (
-        <h2>Du må logge inn.</h2>
+        <Hero />
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Form, Row, Col } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Form, Container, Alert, Col, Row } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 import "./NewTrip.css";
 
 export const NewTrip = (params) => {
@@ -15,13 +15,13 @@ export const NewTrip = (params) => {
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
   const [ReiseDatoTid, setAvreiseDatoTid] = useState();
-  const [prisBarn, setPrisBarn] = useState(0);
-  const [prisVoksen, setPrisVoksen] = useState(0);
-  const [prisLugarStandard, setprisLugarStandard] = useState(0);
-  const [prisLugarPremium, setprisLugarPremium] = useState(0);
+  const [prisBarn, setPrisBarn] = useState(499);
+  const [prisVoksen, setPrisVoksen] = useState(990);
+  const [prisLugarStandard, setprisLugarStandard] = useState(1290);
+  const [prisLugarPremium, setprisLugarPremium] = useState(2290);
   const [feilmelding, setFeilmelding] = useState("");
 
-  console.log()
+  console.log();
 
   // GET request
   useEffect(() => {
@@ -82,74 +82,74 @@ export const NewTrip = (params) => {
   console.log();
   return (
     <>
-      <div>
-        <h1 className={"mb-3"}>
-          Ny reise for {ruteFra} - {ruteTil}
-        </h1>
-        <Form className={"col-lg-3 mb-3"}>
-          <Row className="mb-3">
-            <Form.Group>
-              <Form.Label>Avreisedato</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                onChange={(e) => {
-                  setAvreiseDatoTid(e.target.value);
-                }}
-              />
+      <Container className="single-component">
+        <Col md="6" className="border rounded m-2 p-4">
+          <Form>
+            <div className="py-2">
+              <h2 className="">Ny Reise</h2>
+            </div>
+            <Form.Label>Avreisedato</Form.Label>
+            <Form.Control
+              type="datetime-local"
+              onChange={(e) => {
+                setAvreiseDatoTid(e.target.value);
+              }}
+            />
+            <Form.Group className={"my-3"}>
+              <Row>
+                <Col md="6">
+                  <Form.Label>Voksenbillett</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={prisVoksen}
+                    onChange={(e) => setPrisVoksen(e.target.value)}
+                  />
+                </Col>
+                <Col md="6">
+                  <Form.Label>Barnebillett</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={prisBarn}
+                    onChange={(e) => {
+                      setPrisBarn(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
             </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group as={Col}>
-              <Form.Label>Barnebillett</Form.Label>
-              <Form.Control
-                type="number"
-                value={prisBarn}
-                onChange={(e) => {
-                  setPrisBarn(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group as={Col}>
-              <Form.Label>Voksenbillett</Form.Label>
-              <Form.Control
-                type="number"
-                value={prisVoksen}
-                onChange={(e) => setPrisVoksen(e.target.value)}
-              />
-            </Form.Group>
-          </Row>
-
-          {dagsreise === false && (
-            <Row className="mb-3">
-              <Form.Group as={Col}>
-                <Form.Label>Standard Lugar</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={prisLugarStandard}
-                  onChange={(e) => {
-                    setprisLugarStandard(e.target.value);
-                  }}
-                />
+            {dagsreise === false && (
+              <Form.Group className={"mb-3"}>
+                <Row>
+                  <Col md="6">
+                    <Form.Label>Standard Lugar</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={prisLugarStandard}
+                      onChange={(e) => {
+                        setprisLugarStandard(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Col md="6">
+                    <Form.Label>Premium Lugar</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={prisLugarPremium}
+                      onChange={(e) => setprisLugarPremium(e.target.value)}
+                    />
+                  </Col>
+                </Row>
               </Form.Group>
-
-              <Form.Group as={Col}>
-                <Form.Label>Premium Lugar</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={prisLugarPremium}
-                  onChange={(e) => setprisLugarPremium(e.target.value)}
-                />
-              </Form.Group>
-            </Row>
-          )}
-          <button type={"button"} onClick={handleSubmit}>
-            Fullfør
-          </button>
-        </Form>
-        {<small className={"text-danger"}>{feilmelding}</small>}
-      </div>
+            )}
+            <button className="btn btn-cta" onClick={handleSubmit}>
+              Lagre
+            </button>{" "}
+            <Link className="btn btn-outline-cta" to="/">
+              Tilbake
+            </Link>
+          </Form>
+        </Col>
+      </Container>
     </>
   );
 };

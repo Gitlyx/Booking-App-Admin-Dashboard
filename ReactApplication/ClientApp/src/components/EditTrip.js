@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col } from "react-bootstrap";
-import { useLocation, useHistory } from "react-router-dom";
+import { Form, Row, Col, Alert, Container } from "react-bootstrap";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import { GetOneTrip } from "../Hooks/useTripData";
 
 export const EditTrip = (params) => {
@@ -19,7 +19,8 @@ export const EditTrip = (params) => {
   const [prisVoksen, setPrisVoksen] = useState(0);
   const [prisLugarStandard, setprisLugarStandard] = useState(0);
   const [prisLugarPremium, setprisLugarPremium] = useState(0);
-  const [feilmelding, setFeilmelding] = useState("");
+  const [isErrorShown, setIsErrorShown] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // ------ GET REQUEST ------
   const url = "https://localhost:5001/reise/enreise?id=" + id;
@@ -35,6 +36,7 @@ export const EditTrip = (params) => {
       setPrisVoksen(trip.prisVoksen);
       setprisLugarStandard(trip.prisLugarStandard);
       setprisLugarPremium(trip.prisLugarPremium);
+      setDagsreise(trip.dagsreise);
     }
     fetchTrip();
   }, [url]);
@@ -52,8 +54,6 @@ export const EditTrip = (params) => {
       prisLugarStandard,
       prisLugarPremium,
     };
-
-    
 
     fetch("https://localhost:5001/reise/oppdaterreise", {
       method: "PUT",
@@ -77,12 +77,12 @@ export const EditTrip = (params) => {
 
   return (
     <>
-      <div>
-        <h1 className={"mb-3"}>
-          Ny reise for {ruteFra} - {ruteTil}
-        </h1>
-        <Form className={"col-lg-3 mb-3"}>
-          <Row className="mb-3">
+      <Container className="single-component">
+        <Col md="6" className="border rounded m-2 p-4">
+          <Form>
+            <div className="py-2">
+              <h2 className="">Endre reise</h2>
+            </div>
             <Form.Group>
               <Form.Label>Avreisedato</Form.Label>
               <Form.Control
@@ -93,59 +93,70 @@ export const EditTrip = (params) => {
                 }}
               />
             </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group as={Col}>
-              <Form.Label>Barnebillett</Form.Label>
-              <Form.Control
-                type="number"
-                value={prisBarn}
-                onChange={(e) => {
-                  setPrisBarn(e.target.value);
-                }}
-              />
+            <Form.Group className={"my-3"}>
+              <Row>
+                <Col md="6">
+                  <Form.Label>Barnebillett</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={prisBarn}
+                    onChange={(e) => {
+                      setPrisBarn(e.target.value);
+                    }}
+                  />
+                </Col>
+                <Col md="6">
+                  <Form.Label>Voksenbillett</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={prisVoksen}
+                    onChange={(e) => setPrisVoksen(e.target.value)}
+                  />
+                </Col>
+              </Row>
             </Form.Group>
-
-            <Form.Group as={Col}>
-              <Form.Label>Voksenbillett</Form.Label>
-              <Form.Control
-                type="number"
-                value={prisVoksen}
-                onChange={(e) => setPrisVoksen(e.target.value)}
-              />
-            </Form.Group>
-          </Row>
-
-          {dagsreise === false && (
-            <Row className="mb-3">
-              <Form.Group as={Col}>
-                <Form.Label>Standard Lugar</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={prisLugarStandard}
-                  onChange={(e) => {
-                    setprisLugarStandard(e.target.value);
-                  }}
-                />
+            {dagsreise === false && (
+              <Form.Group className={"mb-3"}>
+                <Row>
+                  <Col md="6">
+                    <Form.Label>Standard Lugar</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={prisLugarStandard}
+                      onChange={(e) => {
+                        setprisLugarStandard(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Col md="6">
+                    <Form.Label>Premium Lugar</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={prisLugarPremium}
+                      onChange={(e) => setprisLugarPremium(e.target.value)}
+                    />
+                  </Col>
+                </Row>
               </Form.Group>
-
-              <Form.Group as={Col}>
-                <Form.Label>Premium Lugar</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={prisLugarPremium}
-                  onChange={(e) => setprisLugarPremium(e.target.value)}
-                />
-              </Form.Group>
-            </Row>
-          )}
-          <button type={"button"} onClick={handleSubmit}>
-            Fullfør
-          </button>
-        </Form>
-        {<small className={"text-danger"}>{feilmelding}</small>}
-      </div>
+            )}
+            <button className="btn btn-cta " onClick={handleSubmit}>
+              Lagre
+            </button>{" "}
+            <Link className="btn btn-outline-cta" to="/">
+              Tilbake
+            </Link>
+          </Form>
+        </Col>
+        {isErrorShown && (
+          <Alert
+            variant="warning"
+            onClose={() => setIsErrorShown(false)}
+            dismissible
+          >
+            {errorMessage}
+          </Alert>
+        )}
+      </Container>
     </>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { DeleteRoute, GetAllRoutes } from "../Hooks/useRouteData";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { GetAllRoutes } from "../Hooks/useRouteData";
 import Toast from "react-bootstrap/Toast";
+import { Container, Alert } from "react-bootstrap";
 
 export const Route = (params) => {
   const routeData = GetAllRoutes();
@@ -10,8 +10,7 @@ export const Route = (params) => {
 
   // ----- State -----
   const [data, setData] = useState();
-  const [error, setError] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
 
   // ----- DELETE Request ------
   const Delete = (id) => {
@@ -22,10 +21,14 @@ export const Route = (params) => {
       .then((response) => response.json())
       .then((resp) => {
         if (resp.ok === false) {
-          setError(!error);
-          setTimeout(() => {setError(false)}, 5*1000);
+          setErrorMessage(
+            "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
+          );
+          setTimeout(() => {
+            setErrorMessage(false);
+          }, 5 * 2000);
         } else {
-          history.go(0)
+          history.go(0);
         }
       })
       .catch((error) => {
@@ -37,23 +40,18 @@ export const Route = (params) => {
 
   return (
     <>
-      {error && (
-        <div className={"d-flex flex-row-reverse"}>
-          <Toast animation className={"mb-3 position-absolute top-0 end-0 bg-white"}>
-            <Toast.Header className={"bg-white"}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Feilmelding</strong>
-            </Toast.Header>
-            <Toast.Body className={"bg-dark text-white"}>
-              Det eksisterer reiser knyttet til ruten. Slett alle reiser
-              tilhørende ruten, dersom du ønsker å slette ruten.
-            </Toast.Body>
-          </Toast>
-        </div>
+      {errorMessage && (
+        <Alert
+          animation
+          variant="warning"
+          className="pop-up"
+          dismissible
+          onClose={() => setErrorMessage("")}
+        >
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          {"  "}
+          {errorMessage}
+        </Alert>
       )}
       {routeData.data.map((rute) => (
         <tr key={rute.ruteId}>
@@ -62,25 +60,8 @@ export const Route = (params) => {
           <td>{rute.dagsreise ? "Ja" : "Nei"}</td>
           <td>
             <Link
-              className={"btn btn-success"}
-              to={{ pathname: "/editroute", state: { ruteId: rute.ruteId } }}
-            >
-              Rediger
-            </Link>
-          </td>
-          <td>
-            <button
-              className={"btn btn-danger"}
-              onClick={() => {
-                Delete(rute.ruteId);
-              }}
-            >
-              Slett reise
-            </button>
-          </td>
-          <td>
-            <Link
-              className={"btn btn-dark"}
+              className={"btn btn-warning mx-1"}
+              style={{ width: "70px" }}
               to={{
                 pathname: "/trip",
                 state: {
@@ -90,8 +71,24 @@ export const Route = (params) => {
                 },
               }}
             >
-              Se Reiser
+              Mer
             </Link>
+            <Link
+              className={"btn btn-primary mx-1"}
+              style={{ width: "70px" }}
+              to={{ pathname: "/editroute", state: { ruteId: rute.ruteId } }}
+            >
+              Endre
+            </Link>
+            <button
+              className={"btn btn-danger mx-1"}
+              style={{ width: "70px" }}
+              onClick={() => {
+                Delete(rute.ruteId);
+              }}
+            >
+              Slett
+            </button>
           </td>
         </tr>
       ))}

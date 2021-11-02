@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { DeleteTrip } from "../Hooks/useTripData";
-import { useHistory } from "react-router";
+import { Alert, Breadcrumb, Container } from "react-bootstrap";
 
 export const Trip = (params) => {
   const history = useHistory();
@@ -32,7 +32,7 @@ export const Trip = (params) => {
       }
     }
     fetchRoute();
-  }, [url]);
+  }, []);
 
   const reload = () => {
     history.go(0);
@@ -41,114 +41,140 @@ export const Trip = (params) => {
   if (data.length > 0) {
     return (
       <>
-        <h1>
-          Reiser for {ruteFra} - {ruteTil}{" "}
+        {" "}
+        <Container>
+          <h1 style={{ color: "#FF6600" }}>
+            Reiser for {ruteFra} - {ruteTil}
+          </h1>
+          <Breadcrumb>
+            <Breadcrumb.Item disabled>Reiser</Breadcrumb.Item>
+            <Breadcrumb.Item active>
+              Mer .. {ruteFra} - {ruteTil}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <table className={"table content-table text-justify"}>
+            <thead>
+              {dagsreise === false && (
+                <tr>
+                  <th style={{ width: "20%" }}>Avreisedato</th>
+                  <th style={{ width: "15%" }}>Barnebillett</th>
+                  <th style={{ width: "15%" }}>Voksenbillett</th>
+                  <th style={{ width: "15%" }}>Standardlugar</th>
+                  <th style={{ width: "15%" }}>Premiumlugar</th>
+                  <th style={{ width: "40%" }}></th>
+                </tr>
+              )}
+
+              {dagsreise === true && (
+                <tr>
+                  <th style={{ width: "20%" }}>Avreisedato</th>
+                  <th style={{ width: "20%" }}>Barnebillett</th>
+                  <th style={{ width: "20%" }}>Voksenbillett</th>
+                  <th style={{ width: "20%" }}></th>
+                  <th style={{ width: "20%" }}></th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {dagsreise === false &&
+                data.map((reise, index) => (
+                  <tr key={index}>
+                    <td>{reise.reiseDatoTid}</td>
+                    <td>Kr.{reise.prisBarn},-</td>
+                    <td>Kr.{reise.prisVoksen},-</td>
+                    <td>Kr.{reise.prisLugarStandard},-</td>
+                    <td>Kr.{reise.prisLugarPremium},-</td>
+                    <td>
+                      <Link
+                        className={"btn btn-primary mx-1"}
+                        style={{ width: "70px" }}
+                        to={{
+                          pathname: "/edittrip",
+                          state: {
+                            reiseId: reise.reiseId,
+                          },
+                        }}
+                      >
+                        Endre
+                      </Link>
+                      <button
+                        className={"btn btn-danger mx-1"}
+                        style={{ width: "70px" }}
+                        onClick={() => {
+                          DeleteTrip(reise.reiseId);
+                          reload();
+                          console.log(reise.reiseId);
+                        }}
+                      >
+                        Slett
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+
+              {dagsreise === true &&
+                data.map((reise, index) => (
+                  <tr key={index}>
+                    <td>{reise.reiseDatoTid}</td>
+                    <td>Kr.{reise.prisBarn},-</td>
+                    <td>Kr.{reise.prisVoksen},-</td>
+                    <td></td>
+                    <td>
+                      <Link
+                        className={"btn btn-primary mx-1"}
+                        style={{ width: "70px" }}
+                        to={{
+                          pathname: "/edittrip",
+                          state: {
+                            reiseId: reise.reiseId,
+                          },
+                        }}
+                      >
+                        Endre
+                      </Link>
+                      <button
+                        className={"btn btn-danger mx-1"}
+                        style={{ width: "70px" }}
+                        onClick={() => {
+                          DeleteTrip(reise.reiseId);
+                          reload();
+                          console.log(reise.reiseId);
+                        }}
+                      >
+                        Slett
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
           <Link
-            className={"align-self-center mx-3"}
+            className={"btn btn-cta align-self-center"}
             to={{ pathname: "/newtrip", state: { ruteId: id } }}
           >
-            <i className={"bi bi-plus-circle"}></i>
+            <i className={"bi bi-plus"}> Ny reise</i>
+          </Link>{" "}
+          <Link className="btn btn-outline-cta" to="/">
+            Tilbake
           </Link>
-        </h1>
-        <table
-          className={
-            "table table-striped table-bordered table-sm text-center align-middle"
-          }
-        >
-          <thead>
-            {dagsreise === false && (
-              <tr>
-                <th>Avreisedato</th>
-                <th>Barnebillett</th>
-                <th>Voksenbillett</th>
-                <th>Pris standard lugar</th>
-                <th>Pris premium lugar</th>
-                <th></th>
-                <th></th>
-              </tr>
-            )}
-
-            {dagsreise === true && (
-              <tr>
-                <th>Avreisedato</th>
-                <th>Barnebillett</th>
-                <th>Voksenbillett</th>
-                <th></th>
-                <th></th>
-              </tr>
-            )}
-          </thead>
-          <tbody>
-            {dagsreise === false &&
-              data.map((reise, index) => (
-                <tr key={index}>
-                  <td>{reise.reiseDatoTid}</td>
-                  <td>Kr.{reise.prisBarn},-</td>
-                  <td>Kr.{reise.prisVoksen},-</td>
-                  <td>Kr.{reise.prisLugarStandard},-</td>
-                  <td>Kr.{reise.prisLugarPremium},-</td>
-                  <td>
-                    <Link
-                      className={"btn btn-success"}
-                      to={{
-                        pathname: "/edittrip",
-                        state: {
-                          reiseId: reise.reiseId
-                        }
-                      }}
-                    >
-                      Rediger
-                    </Link>
-                  </td>
-                  <td>
-                    <button
-                      className={"btn btn-danger"}
-                      onClick={() => {
-                        DeleteTrip(reise.reiseId);
-                        reload();
-                        console.log(reise.reiseId);
-                      }}
-                    >
-                      Slett
-                    </button>
-                  </td>
-                </tr>
-              ))}
-
-            {dagsreise === true &&
-              data.map((reise, index) => (
-                <tr key={index}>
-                  <td>{reise.reiseDatoTid}</td>
-                  <td>Kr.{reise.prisBarn},-</td>
-                  <td>Kr.{reise.prisVoksen},-</td>
-                  <td>
-                    <button>Rediger</button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        DeleteTrip(reise.reiseId);
-                        reload();
-                        console.log(reise.reiseId);
-                      }}
-                    >
-                      Slett
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        </Container>
       </>
     );
   } else {
     return (
       <>
-        <h1 className={"text-danger text-center"}>
-          Ingen reiser opprettet for {location.state.fra} - {location.state.til}
-          <br />
+        <Alert variant="warning" className="p-5">
+          <h3 className={"text-danger "}>Ingen reiser registert</h3>
+          <hr />
+          <h4>
+            {" "}
+            Det er ingen reiser registert mellom {location.state.fra} og{" "}
+            {location.state.til}. Hvis reisen ble nylig opprettet må det
+            opprettes nye reiser.
+          </h4>
           <br />
           <Link
+            className="btn btn-cta"
             to={{
               pathname: "/newtrip",
               state: {
@@ -157,8 +183,11 @@ export const Trip = (params) => {
             }}
           >
             Opprett ny reise
+          </Link>{" "}
+          <Link className="btn btn-outline-cta" to="/">
+            Tilbake
           </Link>
-        </h1>
+        </Alert>
       </>
     );
   }

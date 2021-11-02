@@ -38,18 +38,17 @@ export const NavbarTop = (props) => {
 
   return (
     <>
-      <Navbar bg="light" expand="md">
+      <Navbar bg="" expand="md">
         <Container fluid>
           <Link className={"navbar-brand"} to="/">
             <img
               src={logo}
-              f
               alt="ship logo"
               width="40px"
               style={{ marginLeft: "20px" }}
             />
           </Link>
-          <Navbar.Brand href="#">Ackerman Sailing</Navbar.Brand>
+          <Navbar.Brand href="/">Ackerman Sailing</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -57,8 +56,7 @@ export const NavbarTop = (props) => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/managetrip">Administrer Reiser</Nav.Link>
-              <Nav.Link href="/newroute">Ny rute</Nav.Link>
+              <Nav.Link href="/">Administrer Reiser</Nav.Link>
             </Nav>
             <Form className="d-flex pr-3">
               {props.isLoggedIn && (
@@ -69,11 +67,11 @@ export const NavbarTop = (props) => {
             </Form>
             <Form className="d-flex">
               {session ? (
-                <Button className="btn" variant="danger" onClick={loggut}>
+                <Link cto="/" className="btn btn-cta" onClick={loggut}>
                   Logg Ut
-                </Button>
+                </Link>
               ) : (
-                <Link to="/login" className="btn btn-success">
+                <Link to="/login" className="btn btn-cta">
                   Logg Inn
                 </Link>
               )}
