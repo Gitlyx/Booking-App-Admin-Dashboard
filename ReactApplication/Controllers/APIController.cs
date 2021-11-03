@@ -203,7 +203,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Reisen eksisterer ikke!");
-                return BadRequest("Reisen eksister ikke");
+                return BadRequest(false);
             }
             else
             {
@@ -226,7 +226,7 @@ namespace ReactApplication.Controllers
                 if (!vellykket)
                 {
                     _log.LogInformation("Reisen ble ikke oppdatert!");
-                    return BadRequest("Reisen ble ikke oppdatert");
+                    return BadRequest(false);
                 }
                 else
                 {
@@ -249,7 +249,7 @@ namespace ReactApplication.Controllers
             if (reiser == null)
             {
                 _log.LogInformation("Ingen reiser funnet!");
-                return BadRequest("Ingen reiser funnet");
+                return BadRequest(false);
             }
             else
             {
