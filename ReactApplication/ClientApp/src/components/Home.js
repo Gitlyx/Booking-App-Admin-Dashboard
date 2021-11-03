@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Breadcrumb } from "react-bootstrap";
-import { Route } from "./Route";
 import { Hero } from "./Hero";
+import {
+  deleteRoute,
+  fetchAll,
+} from "../Hooks/useRouteData";
 
 export const Home = () => {
   const [session, setSession] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [routeData, setRouteData] = useState([]);
 
   const checkSession = () => {
     fetch("https://localhost:5001/api/session")
@@ -17,9 +21,16 @@ export const Home = () => {
       });
   };
 
+  const getRouteData = () => {
+    fetchAll("https://localhost:5001/api/alleruter").then((r) =>
+      setRouteData(r)
+    );
+  };
+
   useEffect(() => {
     checkSession();
-  });
+    getRouteData();
+  }, []);
 
   return (
     <>
@@ -44,7 +55,52 @@ export const Home = () => {
               </tr>
             </thead>
             <tbody>
-              <Route />
+              {routeData.map((r) => (
+                <tr key={r.id}>
+                  <td>{r.ruteFra}</td>
+                  <td>{r.ruteTil}</td>
+                  <td>
+                    {r.dagsreise === true ? <>Dagsreise</> : <>Flerdagsreise</>}
+                  </td>
+                  <td>
+                    <Link
+                      className={"btn btn-warning mx-1"}
+                      style={{ width: "70px" }}
+                      to={{
+                        pathname: "/trip",
+                        state: {
+                          ruteId: r.id,
+                          fra: r.ruteFra,
+                          til: r.ruteTil,
+                        },
+                      }}
+                    >
+                      Mer
+                    </Link>
+                    <Link
+                      className={"btn btn-primary mx-1"}
+                      style={{ width: "70px" }}
+                      to={{
+                        pathname: "/editroute",
+                        state: { ruteId: r.id },
+                      }}
+                    >
+                      Endre
+                    </Link>
+                    <button
+                      className={"btn btn-danger mx-1"}
+                      style={{ width: "70px" }}
+                      onClick={() => {
+                        deleteRoute(r.id);
+                        getRouteData();
+                        console.log(routeData);
+                      }}
+                    >
+                      Slett
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <Link className={"btn btn-cta align-self-center"} to={"/newRoute"}>

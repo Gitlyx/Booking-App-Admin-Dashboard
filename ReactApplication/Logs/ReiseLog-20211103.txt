@@ -3084,3 +3084,9 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updatin
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
    at ReactApplication.DAL.ReiseRepository.SlettRute(Int32 ruteId) in C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication\DAL\ReiseRepository.cs:line 67
 2021-11-03T15:49:00.9320932+01:00 0HMCUQT6E4CHU:000001A1 [INF] Ruten eksisterer ikke (eca656df)
+2021-11-03T16:27:25.4732260+01:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-11-03T16:27:25.4838010+01:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-11-03T16:27:25.4874650+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-11-03T16:27:25.4895070+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-11-03T16:27:25.4904130+01:00  [INF] Content root path: "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication" (b5d60022)
+2021-11-03T17:03:55.0264780+01:00 0HMCURPO666KL:000000C1 [INF] Ruten eksisterer ikke (eca656df)
