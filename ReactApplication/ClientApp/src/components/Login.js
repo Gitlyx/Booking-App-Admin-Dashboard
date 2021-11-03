@@ -51,10 +51,10 @@ export const Login = (props) => {
 
   return (
     <>
-      <Container className="single-component fade-this">
-        {isLoading ? (
-          <Loading />
-        ) : (
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Container className="single-component fade-this">
           <Col lg="5" className="border rounded m-2 p-4">
             <Form onSubmit={handleSubmit}>
               <div className="py-2">
@@ -106,8 +106,8 @@ export const Login = (props) => {
               </Button>
             </Form>
           </Col>
-        )}
-      </Container>
+        </Container>
+      )}
     </>
   );
 };

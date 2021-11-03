@@ -25,11 +25,11 @@ export const Route = (params) => {
             "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
           );
         } else {
-          setIsLoading(true)
+          setIsLoading(true);
           history.go(0);
           setTimeout(() => {
-            setIsLoading(false)
-          }, 500);
+            setIsLoading(false);
+          }, 1000);
         }
       })
       .catch((error) => {

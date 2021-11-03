@@ -69,9 +69,11 @@ export const EditRoute = (params) => {
     }
   };
 
-  if (!isLoading) {
-    return (
-      <>
+  return (
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
         <Container className="single-component fade-this">
           <Col md="6" className="border rounded m-2 p-4">
             <Form>
@@ -127,13 +129,7 @@ export const EditRoute = (params) => {
             </Form>
           </Col>
         </Container>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
+      )}
+    </>
+  );
 };

@@ -34,11 +34,11 @@ export const Trip = (params) => {
         setDagsreise(resp[0].dagsreise);
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 1000);
       } else if (resp.length === 0) {
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 1000);
       }
     }
     fetchRoute();
@@ -55,7 +55,7 @@ export const Trip = (params) => {
       return (
         <>
           {" "}
-          <Container>
+          <Container className="fade-this">
             <h1 style={{ color: "#FF6600" }}>
               Reiser for {ruteFra} - {ruteTil}
             </h1>

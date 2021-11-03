@@ -41,7 +41,7 @@ export const EditTrip = (params) => {
     fetchTrip();
   }, [url]);
 
-  console.log(ruteId)
+  console.log(ruteId);
 
   // ----- Handle submit -----
   const handleSubmit = (e) => {
@@ -80,7 +80,7 @@ export const EditTrip = (params) => {
 
   return (
     <>
-      <Container className="single-component">
+      <Container className="single-component fade-this">
         <Col md="6" className="border rounded m-2 p-4">
           <Form>
             <div className="py-2">
