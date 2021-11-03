@@ -5,7 +5,6 @@ import { Route } from "./Route";
 import { Hero } from "./Hero";
 
 export const Home = () => {
-  
   const [session, setSession] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,12 +24,12 @@ export const Home = () => {
   return (
     <>
       {session && !isLoading ? (
-        <Container>
-          <div className={"flex d-flex"}>
-            <h1 style={{ color: "#FF6600" }}>Reiseruter</h1>
+        <Container className="pt-5">
+          <div className={"flex d-flex "}>
+            <h1 style={{ color: "#FF6600" }}>Ruter</h1>
           </div>
           <Breadcrumb>
-            <Breadcrumb.Item active>Reiseruter</Breadcrumb.Item>
+            <Breadcrumb.Item active>Ruter</Breadcrumb.Item>
           </Breadcrumb>
 
           <table className={"table content-table text-justify"}>

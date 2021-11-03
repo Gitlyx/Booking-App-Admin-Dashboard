@@ -39,9 +39,6 @@ export const Login = (props) => {
             setVariant("success");
             history.goBack();
           }
-
-      
-          
         })
         .catch((error) => console.error("Feil i innlogging: ", error));
     } else {
