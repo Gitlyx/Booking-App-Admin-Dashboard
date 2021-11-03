@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { Form, Container, Alert, Col } from "react-bootstrap";
+import { Loading } from "./Loading";
 
 export const EditRoute = (params) => {
   const history = useHistory();
@@ -129,6 +130,10 @@ export const EditRoute = (params) => {
       </>
     );
   } else {
-    return <></>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 };

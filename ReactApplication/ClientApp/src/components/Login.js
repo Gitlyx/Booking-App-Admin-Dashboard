@@ -37,8 +37,9 @@ export const Login = (props) => {
           } else {
             setIsLoading(true);
             setTimeout(() => {
+              setIsLoading(false);
               history.goBack();
-            }, 500);
+            }, 800);
           }
         })
         .catch((error) => console.error("Feil i innlogging: ", error));

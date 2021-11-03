@@ -3,9 +3,9 @@ html* {
 }
 
 .fade-this {
-  -webkit-animation: fadein 0.4s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 0.4s; /* Firefox < 16 */
-  animation: fadein 0.4s;
+  -webkit-animation: fadein 0.7s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.7s; /* Firefox < 16 */
+  animation: fadein 0.7s;
 }
 
 @keyframes fadein {
@@ -35,6 +35,17 @@ html* {
   to {
     opacity: 1;
   }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #fff;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 }
 
 .pop-up {

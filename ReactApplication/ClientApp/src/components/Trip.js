@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import { DeleteTrip } from "../Hooks/useTripData";
 import { Alert, Breadcrumb, Container } from "react-bootstrap";
-import { Spinner } from "react-bootstrap";
+import { Loading } from "./Loading";
 export const Trip = (params) => {
   const history = useHistory();
   // Hent rute ID
@@ -208,16 +208,7 @@ export const Trip = (params) => {
   } else if (isLoading) {
     return (
       <>
-        <div className={"d-flex flex-column vh-50"} style={{height: "10rem", paddingTop: "5rem"}}>
-          <div className={"d-flex justify-content-center"}>
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          </div>
-          <div className={"d-flex justify-content-center"}>
-          Loading...
-          </div>
-        </div>
+        <Loading />
       </>
     );
   }
