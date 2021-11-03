@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { Form, Container, Alert, Col } from "react-bootstrap";
+import { Loading } from "./Loading";
 
 export const EditRoute = (params) => {
   const history = useHistory();
@@ -68,9 +69,11 @@ export const EditRoute = (params) => {
     }
   };
 
-  if (!isLoading) {
-    return (
-      <>
+  return (
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
         <Container className="single-component fade-this">
           <Col md="6" className="border rounded m-2 p-4">
             <Form>
@@ -126,9 +129,7 @@ export const EditRoute = (params) => {
             </Form>
           </Col>
         </Container>
-      </>
-    );
-  } else {
-    return <></>;
-  }
+      )}
+    </>
+  );
 };

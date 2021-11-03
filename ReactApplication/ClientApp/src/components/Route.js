@@ -26,7 +26,8 @@ useEffect(() => {
           setErrorMessage(
             "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
           );
-        } 
+        } else {
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
