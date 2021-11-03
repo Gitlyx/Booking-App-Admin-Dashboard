@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Breadcrumb } from "react-bootstrap";
 import { Hero } from "./Hero";
 import {
+  checkSession,
   deleteRoute,
   fetchAll,
 } from "../Hooks/useRouteData";
@@ -12,14 +13,7 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [routeData, setRouteData] = useState([]);
 
-  const checkSession = () => {
-    fetch("https://localhost:5001/api/session")
-      .then((resp) => resp.json())
-      .then((resp) => {
-        setSession(resp);
-        setIsLoading(false);
-      });
-  };
+  
 
   const getRouteData = () => {
     fetchAll("https://localhost:5001/api/alleruter").then((r) =>
@@ -28,7 +22,10 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    checkSession();
+    checkSession().then(r=>{
+      setSession(r)
+      setIsLoading(!isLoading);
+    })
     getRouteData();
   }, []);
 

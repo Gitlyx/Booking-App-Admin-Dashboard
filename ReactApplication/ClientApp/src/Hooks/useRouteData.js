@@ -62,3 +62,10 @@ export async function deleteRoute(id) {
   console.log("DELETE request : ", data);
   return data;
 }
+
+export async function checkSession(){
+  const response = await fetch("https://localhost:5001/api/session");
+  const data = await response.json();
+  console.log("GET request (CheckSession) : ", data)
+  return data;
+}
