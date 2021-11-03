@@ -9,6 +9,30 @@ export const NewTrip = (params) => {
   const location = useLocation();
   const id = location.state.ruteId;
   const url = "https://localhost:5001/api/enrute?ruteId=" + id;
+  const idag = new Date();
+  const år = idag.getFullYear();
+  let mnd = idag.getMonth();
+  let dato = idag.getDate();
+  let timer = idag.getHours();
+  let minutter = idag.getMinutes();
+
+
+  if (mnd < 10) {
+    mnd = "0" + mnd;
+  } else if (dato < 10) {
+    dato = "0" + dato;
+  } else if(timer < 10){
+    timer = "0" + timer;
+  } else if(minutter < 10){
+    minutter = "0" + minutter;
+  }
+
+  const dagsDato = år + "-" + mnd + "-" + dato + "T" + timer + ":" + minutter;
+
+console.log(dagsDato)
+
+  
+  
 
   // States
   const [ruteFra, setRuteFra] = useState("");
@@ -20,7 +44,6 @@ export const NewTrip = (params) => {
   const [prisLugarStandard, setprisLugarStandard] = useState(1290);
   const [prisLugarPremium, setprisLugarPremium] = useState(2290);
   const [feilmelding, setFeilmelding] = useState("");
-
 
   // GET request
   useEffect(() => {
@@ -38,7 +61,7 @@ export const NewTrip = (params) => {
 
   // handleSubmit
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (
       prisBarn < 0 ||
       prisVoksen < 0 ||
@@ -79,10 +102,8 @@ export const NewTrip = (params) => {
         });
     }
   };
-  console.log();
 
   return (
-    
     <>
       <Container className="single-component">
         <Col md="6" className="border rounded m-2 p-4">
@@ -93,6 +114,8 @@ export const NewTrip = (params) => {
             <Form.Label>Avreisedato</Form.Label>
             <Form.Control
               type="datetime-local"
+              value={dagsDato}
+              id={"date_picker"}
               onChange={(e) => {
                 setAvreiseDatoTid(e.target.value);
               }}
