@@ -18,12 +18,12 @@ export const Route = (params) => {
     })
       .then((response) => response.json())
       .then((resp) => {
-        if (resp.ok === false) {
+        if (resp === false) {
           setErrorMessage(
             "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
           );
           setTimeout(() => {
-            setErrorMessage(false);
+            setErrorMessage("");
           }, 5 * 2000);
         } else {
           history.go(0);
@@ -34,13 +34,10 @@ export const Route = (params) => {
       });
   };
 
-  console.log(routeData)
-
   return (
     <>
       {errorMessage && (
         <Alert
-          animation
           variant="warning"
           className="pop-up"
           dismissible
@@ -55,7 +52,7 @@ export const Route = (params) => {
         <tr key={rute.ruteId}>
           <td>{rute.ruteFra}</td>
           <td>{rute.ruteTil}</td>
-          <td>{rute.dagsreise ? "Ja" : "Nei"}</td>
+          <td>{rute.dagsreise ? "Dagsreise" : "Flerdagsreise"}</td>
           <td>
             <Link
               className={"btn btn-warning mx-1"}

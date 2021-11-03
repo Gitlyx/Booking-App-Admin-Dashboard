@@ -3,11 +3,12 @@ html* {
 }
 .pop-up {
   position: fixed;
-  top: 100px;
+  top: 80px;
   margin: 0 auto;
   right: 0;
   left: 0;
-  width: 80vw;
+  width: 80%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .single-component {
