@@ -14,7 +14,7 @@ export const GetAllRoutes = () => {
         (result) => {
           setData(result);
           setIsLoading(false);
-          console.log(result)
+          console.log(result);
         },
         (error) => {
           setIsError(true);
@@ -32,20 +32,33 @@ export const GetAllRoutes = () => {
 
 // API DELETE
 export const DeleteRoute = (id) => {
-  const [data, setData] =useState()
-;  const url = "https://localhost:5001/reise/rute?ruteId=" + id;
+  const [data, setData] = useState();
+  const url = "https://localhost:5001/reise/rute?ruteId=" + id;
   fetch(url, {
     method: "DELETE",
   })
     .then((response) => response.json())
     .then((resp) => {
-      setData(resp)
+      setData(resp);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 
-    return data;
+  return data;
 };
 
+export async function fetchAll(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("GET request : ", data);
+  return data;
+}
 
+export async function deleteRoute(id) {
+  let url = 'https://localhost:5001/api/slettrute?ruteId=' + id;
+  const response = await fetch(url, { method: "DELETE" });
+  const data = await response.json();
+  console.log("DELETE request : ", data);
+  return data;
+}
