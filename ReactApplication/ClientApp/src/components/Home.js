@@ -24,7 +24,7 @@ export const Home = () => {
   return (
     <>
       {session && !isLoading ? (
-        <Container className="pt-5">
+        <Container className="pt-5 fade-this">
           <div className={"flex d-flex "}>
             <h1 style={{ color: "#FF6600" }}>Ruter</h1>
           </div>

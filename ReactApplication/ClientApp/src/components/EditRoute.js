@@ -71,7 +71,7 @@ export const EditRoute = (params) => {
   if (!isLoading) {
     return (
       <>
-        <Container className="single-component">
+        <Container className="single-component fade-this">
           <Col md="6" className="border rounded m-2 p-4">
             <Form>
               <div className="py-2">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const Hero = () => {
   return (
     <>
-      <Container>
+      <Container className="fade-this">
         <Row className="single-component">
           <Col md="6" sm="12">
             <h1
@@ -26,7 +26,7 @@ export const Hero = () => {
             </Link>
           </Col>
           <Col md="6" className="d-none d-md-block">
-            <img src={Ship} width="80%" alt={"Illustration"}/>
+            <img src={Ship} width="80%" alt={"Illustration"} />
           </Col>
         </Row>
       </Container>

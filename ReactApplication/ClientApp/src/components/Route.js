@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { GetAllRoutes } from "../Hooks/useRouteData";
 import { Alert } from "react-bootstrap";
+import { Loading } from "./Loading";
 
 export const Route = (params) => {
   const routeData = GetAllRoutes();
@@ -9,6 +10,7 @@ export const Route = (params) => {
 
   // ----- State -----
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // ----- DELETE Request ------
   const Delete = (id) => {
@@ -22,11 +24,12 @@ export const Route = (params) => {
           setErrorMessage(
             "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
           );
-          setTimeout(() => {
-            setErrorMessage("");
-          }, 5 * 2000);
         } else {
+          setIsLoading(true)
           history.go(0);
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 500);
         }
       })
       .catch((error) => {
@@ -48,6 +51,7 @@ export const Route = (params) => {
           {errorMessage}
         </Alert>
       )}
+
       {routeData.data.map((rute) => (
         <tr key={rute.ruteId}>
           <td>{rute.ruteFra}</td>

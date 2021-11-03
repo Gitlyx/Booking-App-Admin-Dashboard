@@ -47,7 +47,7 @@ export const NewRoute = () => {
 
   return (
     <>
-      <Container>
+      <Container className="fade-this">
         <Row className="single-component">
           <Col md="6" className="border rounded m-2 p-4">
             <Form>
