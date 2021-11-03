@@ -95,7 +95,7 @@ export const EditRoute = (params) => {
                   onChange={(e) => setRuteTil(e.target.value)}
                 />
               </Form.Group>
-              <div className={"form-check form-switch mb-3"}>
+              <div className={"form-check form-switch"}>
                 <input
                   className={"form-check-input"}
                   type="checkbox"
@@ -103,10 +103,11 @@ export const EditRoute = (params) => {
                   onChange={(e) => setDagsreise(!dagsreise)}
                 />
                 <label className={"form-check-label"}>
-                  {dagsreise === true && <small>Dagsreise</small>}
-                  {dagsreise === false && <small>Flerdagsreise</small>}
+                  {dagsreise === true && <p>Dagsreise</p>}
+                  {dagsreise === false && <p>Flerdagsreise</p>}
                 </label>
               </div>
+              <p>Lugarer vil kun tilbys på flerdagsreiser.</p>
               {isErrorShown && (
                 <Alert
                   variant="warning"

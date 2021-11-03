@@ -26,6 +26,7 @@ export const Route = (params) => {
             setErrorMessage(false);
           }, 5 * 2000);
         } else {
+          
           history.go(0);
         }
       })
@@ -55,7 +56,7 @@ export const Route = (params) => {
         <tr key={rute.ruteId}>
           <td>{rute.ruteFra}</td>
           <td>{rute.ruteTil}</td>
-          <td>{rute.dagsreise ? "Ja" : "Nei"}</td>
+          <td>{rute.dagsreise ? "Dagsreise" : "Flerdagsreise"}</td>
           <td>
             <Link
               className={"btn btn-warning mx-1"}

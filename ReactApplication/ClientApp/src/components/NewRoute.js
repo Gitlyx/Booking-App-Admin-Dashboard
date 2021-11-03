@@ -49,7 +49,7 @@ export const NewRoute = () => {
     <>
       <Container>
         <Row className="single-component">
-          <Col md="8" className="border rounded m-2 p-4">
+          <Col md="6" className="border rounded m-2 p-4">
             <Form>
               <div className="py-2">
                 <h2 className="">Ny reise</h2>
@@ -72,17 +72,18 @@ export const NewRoute = () => {
                   onChange={(e) => setRuteTil(e.target.value)}
                 />
               </Form.Group>
-              <div className={"form-check form-switch mb-3"}>
+              <div className={"form-check form-switch"}>
                 <input
                   className={"form-check-input"}
                   type="checkbox"
                   onChange={() => setDagsreise(!dagsreise)}
                 />
                 <label className={"form-check-label"}>
-                  {dagsreise === true && <small>Dagsreise</small>}
-                  {dagsreise === false && <small>Flerdagsreise</small>}
+                  {dagsreise === true && <p>Dagsreise</p>}
+                  {dagsreise === false && <p>Flerdagsreise</p>}
                 </label>
               </div>
+              <p>Lugarer vil kun tilbys på flerdagsreiser.</p>
               {isErrorShown && (
                 <Alert
                   variant="warning"

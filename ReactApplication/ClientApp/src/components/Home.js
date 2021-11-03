@@ -38,7 +38,7 @@ export const Home = () => {
               <tr>
                 <th style={{ width: "25%" }}>Avreise</th>
                 <th style={{ width: "25%" }}>Destinasjon</th>
-                <th style={{ width: "20%" }}>Dagsreise</th>
+                <th style={{ width: "20%" }}>Reisetype</th>
                 <th className="justify-content" style={{ width: "30%" }}>
                   Håndter
                 </th>
