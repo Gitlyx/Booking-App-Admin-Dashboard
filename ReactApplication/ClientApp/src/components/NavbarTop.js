@@ -48,7 +48,7 @@ export const NavbarTop = (props) => {
               style={{ marginLeft: "20px" }}
             />
           </Link>
-          <Navbar.Brand href="/">Ackerman Sailing</Navbar.Brand>
+          <Navbar.Brand to="/">Ackerman Sailing</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -56,7 +56,9 @@ export const NavbarTop = (props) => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/">Administrer Reiser</Nav.Link>
+              <Link className="btn btn-light-secondary" to="/">
+                Hjem
+              </Link>
             </Nav>
             <Form className="d-flex pr-3">
               {props.isLoggedIn && (

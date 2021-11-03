@@ -65,7 +65,7 @@ export const EditTrip = (params) => {
       .then((response) => response.json())
       .then((data) => {
         if (data === false) {
-          setErrorMessage("Noe gikk galt, prøv igjen")
+          setErrorMessage("Noe gikk galt, prøv igjen");
         } else {
           history.goBack();
         }
@@ -139,7 +139,7 @@ export const EditTrip = (params) => {
                 </Row>
               </Form.Group>
             )}
-            <button className="btn btn-cta " onClick={(e)=>handleSubmit(e)}>
+            <button className="btn btn-cta " onClick={(e) => handleSubmit(e)}>
               Lagre
             </button>{" "}
             <Link className="btn btn-outline-cta" to="/">

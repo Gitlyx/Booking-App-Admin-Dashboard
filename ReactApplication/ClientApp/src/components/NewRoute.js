@@ -79,11 +79,8 @@ export const NewRoute = () => {
                   onChange={() => setDagsreise(!dagsreise)}
                 />
                 <label className={"form-check-label"}>
-                  {dagsreise ? (
-                    <p>Dagsreise</p>
-                  ) : (
-                    <p style={{ textDecoration: "line-through" }}>Dagsreise</p>
-                  )}
+                  {dagsreise === true && <small>Dagsreise</small>}
+                  {dagsreise === false && <small>Flerdagsreise</small>}
                 </label>
               </div>
               {isErrorShown && (

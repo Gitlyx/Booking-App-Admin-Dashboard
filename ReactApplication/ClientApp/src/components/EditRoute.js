@@ -7,7 +7,7 @@ export const EditRoute = (params) => {
   // Hent rute ID
   let location = useLocation();
   let id = location.state.ruteId;
-  console.log(id)
+  console.log(id);
   const url = "https://localhost:5001/api/enrute?ruteId=" + id;
 
   // ----- States ------
@@ -104,7 +104,7 @@ export const EditRoute = (params) => {
                 />
                 <label className={"form-check-label"}>
                   {dagsreise === true && <small>Dagsreise</small>}
-                  {dagsreise === false && <small>IKKE dagsreise</small>}
+                  {dagsreise === false && <small>Flerdagsreise</small>}
                 </label>
               </div>
               {isErrorShown && (
