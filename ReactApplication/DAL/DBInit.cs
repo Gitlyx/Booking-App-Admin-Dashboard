@@ -24,6 +24,21 @@ namespace ReactApplication.DAL
             adminUser.Salt = salt;
             adminUser.Passord = hash;
 
+            
+            //Oppretter default reiser for testing.
+            var defaultRuteEn = new Rute();
+            defaultRuteEn.ruteFra = "Oslo";
+            defaultRuteEn.ruteTil = "Bergen";
+            defaultRuteEn.dagsreise = true;
+
+            var defaultRuteTo = new Rute();
+            defaultRuteTo.ruteFra = "Hamar";
+            defaultRuteTo.ruteTil = "Gjøvik";
+            defaultRuteTo.dagsreise = false;
+
+            context.Ruter.Add(defaultRuteEn);
+            context.Ruter.Add(defaultRuteTo);
+
             context.Brukere.Add(adminUser);
             context.SaveChanges();
         }
