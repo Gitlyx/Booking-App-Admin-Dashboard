@@ -17,7 +17,7 @@ export const Trip = (params) => {
   const [dagsreise, setDagsreise] = useState("");
 
   // GET-request on pageload
-  const url = "https://localhost:5001/reise/reiser?id=" + id;
+  const url = "https://localhost:5001/api/reiser?id=" + id;
 
   useEffect(() => {
     async function fetchRoute() {
@@ -32,11 +32,13 @@ export const Trip = (params) => {
       }
     }
     fetchRoute();
-  }, []);
+  }, [url]);
 
   const reload = () => {
     history.go(0);
   };
+
+  console.log(data)
 
   if (data.length > 0) {
     return (
@@ -91,7 +93,7 @@ export const Trip = (params) => {
                         to={{
                           pathname: "/edittrip",
                           state: {
-                            reiseId: reise.reiseId,
+                            reiseId: reise.id,
                           },
                         }}
                       >
@@ -126,7 +128,7 @@ export const Trip = (params) => {
                         to={{
                           pathname: "/edittrip",
                           state: {
-                            reiseId: reise.reiseId,
+                            reiseId: reise.id,
                           },
                         }}
                       >
@@ -136,9 +138,9 @@ export const Trip = (params) => {
                         className={"btn btn-danger mx-1"}
                         style={{ width: "70px" }}
                         onClick={() => {
-                          DeleteTrip(reise.reiseId);
+                          DeleteTrip(reise.id);
                           reload();
-                          console.log(reise.reiseId);
+                          console.log(reise.id);
                         }}
                       >
                         Slett

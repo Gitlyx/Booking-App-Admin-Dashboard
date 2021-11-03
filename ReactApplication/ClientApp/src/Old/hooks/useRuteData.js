@@ -8,8 +8,9 @@ export const useRuteData = () => {
 
   // Hent liste med ruter
   useEffect(() => {
-    axios.get("https://localhost:5001/reise/rute").then((returnData) => {
+    axios.get("https://localhost:5001/api/alleruter").then((returnData) => {
       setRute(returnData.data);
+      console.log(returnData)
       setIsLoading(false);
     });
   }, []);

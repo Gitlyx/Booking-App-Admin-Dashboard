@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ReactApplication.DAL;
 using WebApp_Oblig2.DAL;
-using ReiseDB = WebApp_Oblig2.DAL.Reise;
-using Reise = WebApp_Oblig2.Model.Reise;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using ReactApplication.Models;
+using WebApp_Oblig2.Model;
 
 namespace ReactApplication.Controllers
 {
@@ -34,7 +33,7 @@ namespace ReactApplication.Controllers
 
         // Opprett ny rute
         [HttpPost]
-        public async Task<ActionResult> NyRute(Reise reise)
+        public async Task<ActionResult> NyRute(RuteMod rute)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
@@ -42,12 +41,12 @@ namespace ReactApplication.Controllers
             }
             if (ModelState.IsValid)
             {
-                Boolean vellykket = await _db.NyRute(reise);
+                Boolean vellykket = await _db.NyRute(rute);
 
                 if (!vellykket)
                 {
                     _log.LogInformation("Ruten eksisterer allerede");
-                    return BadRequest("Ruten eksisterer allerede");
+                    return BadRequest(vellykket);
                 }
                 else
                 {
@@ -70,7 +69,7 @@ namespace ReactApplication.Controllers
             if (!vellykket)
             {
                 _log.LogInformation("Ruten eksisterer ikke");
-                return NotFound("Ruten eksisterer ikke");
+                return NotFound(vellykket);
 
             }
             else
@@ -87,11 +86,11 @@ namespace ReactApplication.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            Rute hentetRute = await _db.EnRute(ruteId);
+            RuteMod hentetRute = await _db.EnRute(ruteId);
             if (hentetRute == null)
             {
                 _log.LogInformation("Reisen ble ikke funnet!");
-                return BadRequest("Reisen ble ikke funnet!");
+                return BadRequest(false);
             }
             else
             {
@@ -107,12 +106,12 @@ namespace ReactApplication.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            List<Rute> funnet = await _db.AlleRuter();
+            List<RuteMod> funnet = await _db.AlleRuter();
 
             if (funnet == null)
             {
                 _log.LogInformation("Ingen ruter funnet!");
-                return BadRequest("Ingen ruter funnet");
+                return BadRequest(false);
             }
             else
             {
@@ -122,7 +121,7 @@ namespace ReactApplication.Controllers
 
         // Oppdater en eksisterende rute
         [HttpPut]
-        public async Task<ActionResult> oppdaterRute(Reise reise)
+        public async Task<ActionResult> oppdaterRute(RuteMod rute)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
@@ -130,11 +129,11 @@ namespace ReactApplication.Controllers
             }
             if (ModelState.IsValid)
             {
-                Boolean vellykket = await _db.oppdaterRute(reise);
+                Boolean vellykket = await _db.oppdaterRute(rute);
                 if (!vellykket)
                 {
                     _log.LogInformation("Ruten ble ikke endret!");
-                    return BadRequest("Ruten ble ikke endret!");
+                    return BadRequest(false);
                 }
                 else
                 {
@@ -148,7 +147,7 @@ namespace ReactApplication.Controllers
 
         // Opprett ny reise
         [HttpPost]
-        public async Task<ActionResult> Reise(Reise reise)
+        public async Task<ActionResult> Reise(ReiseMod reise)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
@@ -160,7 +159,7 @@ namespace ReactApplication.Controllers
                 if (!vellykket)
                 {
                     _log.LogInformation("Reisen ble ikke opprett");
-                    return BadRequest("Reisen ble ikke opprett");
+                    return BadRequest(false);
                 }
                 else
                 {
@@ -179,16 +178,17 @@ namespace ReactApplication.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            Reise enReise = await _db.EnReise(id);
+            ReiseMod enReise = await _db.EnReise(id);
             if (enReise == null)
             {
                 _log.LogInformation("Reisen eksisterer ikke eller ikke funnet");
-                return BadRequest("Reisen eksister ikke eller ble ikke funnet");
+                return BadRequest(false);
             }
             else
             {
                 return Ok(enReise);
             }
+
         }
 
         // Slett en eksisterende reise
@@ -213,7 +213,7 @@ namespace ReactApplication.Controllers
 
         // Oppdater en eksisterende reise
         [HttpPut]
-        public async Task<ActionResult> OppdaterReise(Reise reise)
+        public async Task<ActionResult> OppdaterReise(ReiseMod reise)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
@@ -245,7 +245,7 @@ namespace ReactApplication.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            List<Reise> reiser = await _db.AlleReiser(id);
+            List<ReiseMod> reiser = await _db.AlleReiser(id);
             if (reiser == null)
             {
                 _log.LogInformation("Ingen reiser funnet!");

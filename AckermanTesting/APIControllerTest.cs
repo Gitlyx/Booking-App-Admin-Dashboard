@@ -461,6 +461,7 @@ namespace AckermanTesting
             var reise1 = new Reise
             {
                 id = 1,
+                reiseDatoTid = new DateTime(),
                 ruteFra = "Oslo",
                 ruteTil = "Tokyo",
                 prisBarn = 99,
@@ -876,6 +877,30 @@ namespace AckermanTesting
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
             Assert.True((bool)resultat.Value);
         }
+
+        [Fact]
+        public async Task LoggInnFeilModel()
+        {
+            // ARRANGE
+            mockBrukerRep.Setup(b => b.LoggInn(It.IsAny<Bruker>())).ReturnsAsync(true);
+
+            var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
+
+            apiController.ModelState.AddModelError("Feil brukernavn/passord", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            apiController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+
+            // ACT
+            var resultat = await apiController.LoggInn(It.IsAny<Bruker>()) as BadRequestObjectResult;
+
+            // ASSERT
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+
 
         /*
          * KOPIERT FRA FORELESNING "Enhentstest av KundeApp - logginn løsning"

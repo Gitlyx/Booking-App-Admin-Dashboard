@@ -5,11 +5,12 @@ import { Route } from "./Route";
 import { Hero } from "./Hero";
 
 export const Home = () => {
+  
   const [session, setSession] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const checkSession = () => {
-    fetch("https://localhost:5001/reise/session")
+    fetch("https://localhost:5001/api/session")
       .then((resp) => resp.json())
       .then((resp) => {
         setSession(resp);
@@ -26,10 +27,10 @@ export const Home = () => {
       {session && !isLoading ? (
         <Container>
           <div className={"flex d-flex"}>
-            <h1 style={{ color: "#FF6600" }}>Reiser</h1>
+            <h1 style={{ color: "#FF6600" }}>Reiseruter</h1>
           </div>
           <Breadcrumb>
-            <Breadcrumb.Item active>Reiser</Breadcrumb.Item>
+            <Breadcrumb.Item active>Reiseruter</Breadcrumb.Item>
           </Breadcrumb>
 
           <table className={"table content-table text-justify"}>

@@ -17,7 +17,7 @@ export const NewRoute = () => {
     e.preventDefault();
     if (ruteFra && ruteTil) {
       const route = { ruteFra, ruteTil, dagsreise };
-      fetch("https://localhost:5001/reise/rute", {
+      fetch("https://localhost:5001/api/nyrute", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

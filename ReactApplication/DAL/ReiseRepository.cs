@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WebApp_Oblig2.DAL;
 using WebApp_Oblig2.Model;
-using ReiseDB = WebApp_Oblig2.DAL.Reise;
-using Reise = WebApp_Oblig2.Model.Reise;
 using System.Diagnostics.CodeAnalysis;
+using ReactApplication.Models;
+using WebApp_Oblig2.DAL;
 
 namespace ReactApplication.DAL
 {
@@ -26,20 +25,20 @@ namespace ReactApplication.DAL
 
         // Opprett ny rute
         // TODO: Skill mellom catch-false og try-false
-        public async Task<Boolean> NyRute(Reise reise)
+        public async Task<Boolean> NyRute(RuteMod rute)
         {
             try
             {
                 Rute eksisterer = await _db.Ruter.FirstOrDefaultAsync(r =>
-                r.ruteFra == reise.ruteFra && r.ruteTil == reise.ruteTil);
+                r.ruteFra == rute.ruteFra && r.ruteTil == rute.ruteTil);
 
                 if (eksisterer == null)
                 {
                     Rute nyRute = new Rute
                     {
-                        ruteFra = reise.ruteFra,
-                        ruteTil = reise.ruteTil,
-                        dagsreise = reise.dagsreise,
+                        ruteFra = rute.ruteFra,
+                        ruteTil = rute.ruteTil,
+                        dagsreise = rute.dagsreise,
                     };
 
                     await _db.Ruter.AddAsync(nyRute);
@@ -78,7 +77,7 @@ namespace ReactApplication.DAL
         }
 
         // Hent en rute
-        public async Task<Rute> EnRute(int ruteId)
+        public async Task<RuteMod> EnRute(int ruteId)
         {
             try
             {
@@ -87,7 +86,15 @@ namespace ReactApplication.DAL
 
                 if (funnetRute != null)
                 {
-                    return funnetRute;
+                    RuteMod temp_rute = new RuteMod
+                    {
+                        id = funnetRute.ruteId,
+                        ruteFra = funnetRute.ruteFra,
+                        ruteTil = funnetRute.ruteTil,
+                        dagsreise = funnetRute.dagsreise
+                    };
+
+                    return temp_rute;
                 }
 
                 return null;
@@ -99,18 +106,18 @@ namespace ReactApplication.DAL
         }
 
         // Hent alle ruter
-        public async Task<List<Rute>> AlleRuter()
+        public async Task<List<RuteMod>> AlleRuter()
         {
             try
             {
                 List<Rute> ruter = await _db.Ruter.ToListAsync();
-                List<Rute> returnRuter = new List<Rute>();
+                List<RuteMod> returnRuter = new List<RuteMod>();
 
                 foreach (var rute in ruter)
                 {
-                    Rute temp_rute = new Rute
+                    RuteMod temp_rute = new RuteMod
                     {
-                        ruteId = rute.ruteId,
+                        id = rute.ruteId,
                         ruteFra = rute.ruteFra,
                         ruteTil = rute.ruteTil,
                         dagsreise = rute.dagsreise
@@ -128,18 +135,18 @@ namespace ReactApplication.DAL
         }
 
         // Oppdater en rute
-        public async Task<Boolean> oppdaterRute(Reise reise)
+        public async Task<Boolean> oppdaterRute(RuteMod rute)
         {
             try
             {
                 Rute funnetRute = await _db.Ruter.FirstOrDefaultAsync(r =>
-                    r.ruteId == reise.id);
+                    r.ruteId == rute.id);
 
                 if (funnetRute != null)
                 {
-                    funnetRute.dagsreise = reise.dagsreise;
-                    funnetRute.ruteFra = reise.ruteFra;
-                    funnetRute.ruteTil = reise.ruteTil;
+                    funnetRute.dagsreise = rute.dagsreise;
+                    funnetRute.ruteFra = rute.ruteFra;
+                    funnetRute.ruteTil = rute.ruteTil;
 
                     await _db.SaveChangesAsync();
                     return true;
@@ -155,11 +162,11 @@ namespace ReactApplication.DAL
 
         // Opprett ny reise
         // Sjekker om reise eksisterer ved bruk av avreisedato
-        public async Task<Boolean> NyReise(Reise reise)
+        public async Task<Boolean> NyReise(ReiseMod reise)
         {
             try
             {
-                ReiseDB funnetReise =
+                Reise funnetReise =
                     await _db.Reiser.FirstOrDefaultAsync(
                         r => r.ReiseDatoTid == reise.reiseDatoTid &&
                         r.RuteId.ruteFra == reise.ruteFra &&
@@ -171,7 +178,7 @@ namespace ReactApplication.DAL
                 if (funnetReise == null)
                 {
 
-                    ReiseDB nyReise = new ReiseDB
+                    Reise nyReise = new Reise
                     {
                         ReiseDatoTid = reise.reiseDatoTid,
                         RuteId = funnetRute,
@@ -200,7 +207,7 @@ namespace ReactApplication.DAL
         {
             try
             {
-                ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
+                Reise funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
                 r.ReiseId == reiseId);
 
                 if (funnetReise != null)
@@ -219,16 +226,16 @@ namespace ReactApplication.DAL
         }
 
         // Hent en eksisterende reise
-        public async Task<Reise> EnReise(int reiseId)
+        public async Task<ReiseMod> EnReise(int reiseId)
         {
             try
             {
-                ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(
+                Reise funnetReise = await _db.Reiser.FirstOrDefaultAsync(
                     r => r.ReiseId == reiseId);
 
                 if (funnetReise != null)
                 {
-                    Reise tempReise = new Reise
+                    ReiseMod tempReise = new ReiseMod
                     {
                         reiseDatoTid = funnetReise.ReiseDatoTid,
                         ruteFra = funnetReise.RuteId.ruteFra,
@@ -251,11 +258,11 @@ namespace ReactApplication.DAL
         }
 
         // Oppdater eksisterende reise
-        public async Task<Boolean> OppdaterReise(Reise reise)
+        public async Task<Boolean> OppdaterReise(ReiseMod reise)
         {
             try
             {
-                ReiseDB funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
+                Reise funnetReise = await _db.Reiser.FirstOrDefaultAsync(r =>
                 r.ReiseId == reise.id);
 
                 if (funnetReise != null)
@@ -279,18 +286,18 @@ namespace ReactApplication.DAL
         }
 
         // Hent alle eksisterende reiser
-        public async Task<List<Reise>> AlleReiser(int id)
+        public async Task<List<ReiseMod>> AlleReiser(int id)
         {
             try
             {
-                List<ReiseDB> reiserDB = await _db.Reiser.ToListAsync();
-                List<Reise> reiser = new List<Reise>();
+                List<Reise> reiserDB = await _db.Reiser.ToListAsync();
+                List<ReiseMod> reiser = new List<ReiseMod>();
 
                 foreach (var reise in reiserDB)
                 {
                     if (reise.RuteId.ruteId == id)
                     {
-                        Reise reiseObjekt = new Reise
+                        ReiseMod reiseObjekt = new ReiseMod
                         {
                             id = reise.ReiseId,
                             reiseDatoTid = reise.ReiseDatoTid,

@@ -12,7 +12,7 @@ export const NavbarTop = (props) => {
   const [session, setSession] = useState(false);
 
   const checkSession = () => {
-    fetch("https://localhost:5001/reise/session")
+    fetch("https://localhost:5001/api/session")
       .then((resp) => resp.json())
       .then((resp) => setSession(resp));
   };
@@ -24,7 +24,7 @@ export const NavbarTop = (props) => {
 
   // ----- Logg ut -----
   const loggut = () => {
-    fetch("https://localhost:5001/reise/loggut")
+    fetch("https://localhost:5001/api/loggut")
       .then((resp) => {
         if (resp) {
           checkSession();
@@ -67,7 +67,7 @@ export const NavbarTop = (props) => {
             </Form>
             <Form className="d-flex">
               {session ? (
-                <Link cto="/" className="btn btn-cta" onClick={loggut}>
+                <Link to="/" className="btn btn-cta" onClick={loggut}>
                   Logg Ut
                 </Link>
               ) : (

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { GetAllRoutes } from "../Hooks/useRouteData";
-import Toast from "react-bootstrap/Toast";
-import { Container, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 
 export const Route = (params) => {
   const routeData = GetAllRoutes();
   const history = useHistory();
 
   // ----- State -----
-  const [data, setData] = useState();
   const [errorMessage, setErrorMessage] = useState("");
 
   // ----- DELETE Request ------
   const Delete = (id) => {
-    const url = "https://localhost:5001/reise/rute?ruteId=" + id;
+    const url = "https://localhost:5001/api/slettrute?ruteId=" + id;
     fetch(url, {
       method: "DELETE",
     })
@@ -34,9 +32,9 @@ export const Route = (params) => {
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    console.log(data);
   };
+
+  console.log(routeData)
 
   return (
     <>
@@ -65,7 +63,7 @@ export const Route = (params) => {
               to={{
                 pathname: "/trip",
                 state: {
-                  ruteId: rute.ruteId,
+                  ruteId: rute.id,
                   fra: rute.ruteFra,
                   til: rute.ruteTil,
                 },
@@ -76,7 +74,7 @@ export const Route = (params) => {
             <Link
               className={"btn btn-primary mx-1"}
               style={{ width: "70px" }}
-              to={{ pathname: "/editroute", state: { ruteId: rute.ruteId } }}
+              to={{ pathname: "/editroute", state: { ruteId: rute.id } }}
             >
               Endre
             </Link>
@@ -84,7 +82,7 @@ export const Route = (params) => {
               className={"btn btn-danger mx-1"}
               style={{ width: "70px" }}
               onClick={() => {
-                Delete(rute.ruteId);
+                Delete(rute.id);
               }}
             >
               Slett

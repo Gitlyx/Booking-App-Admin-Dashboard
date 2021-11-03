@@ -17,7 +17,7 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (brukernavn && passord) {
-      fetch("https://localhost:5001/reise/logginn", {
+      fetch("https://localhost:5001/api/logginn", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +29,9 @@ export const Login = (props) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.ok === false) {
+
+
+          if (data === false) {
             setErrorMessage(data.message);
             setVariant("danger");
           } else {
@@ -37,6 +39,9 @@ export const Login = (props) => {
             setVariant("success");
             history.goBack();
           }
+
+      
+          
         })
         .catch((error) => console.error("Feil i innlogging: ", error));
     } else {
@@ -83,7 +88,6 @@ export const Login = (props) => {
 
             {isErrorShown && (
               <Alert
-                animation
                 variant={variant}
                 className="pop-up"
                 onClose={() => setIsErrorShown(false)}

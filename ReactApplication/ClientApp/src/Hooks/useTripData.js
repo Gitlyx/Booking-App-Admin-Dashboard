@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // API DELETE
 export const DeleteTrip = (id) => {
-  const url = "https://localhost:5001/reise/reise?reiseId=" + id;
+  const url = "https://localhost:5001/api/reise?reiseId=" + id;
   fetch(url, {
     method: "DELETE",
   })

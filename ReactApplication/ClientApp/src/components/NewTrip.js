@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Form, Container, Alert, Col, Row } from "react-bootstrap";
+import { Form, Container, Col, Row } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import "./NewTrip.css";
 
@@ -8,7 +8,7 @@ export const NewTrip = (params) => {
   const history = useHistory();
   const location = useLocation();
   const id = location.state.ruteId;
-  const url = "https://localhost:5001/reise/enrute?ruteId=" + id;
+  const url = "https://localhost:5001/api/enrute?ruteId=" + id;
 
   // States
   const [ruteFra, setRuteFra] = useState("");
@@ -21,7 +21,6 @@ export const NewTrip = (params) => {
   const [prisLugarPremium, setprisLugarPremium] = useState(2290);
   const [feilmelding, setFeilmelding] = useState("");
 
-  console.log();
 
   // GET request
   useEffect(() => {
@@ -38,7 +37,8 @@ export const NewTrip = (params) => {
   }, [url]);
 
   // handleSubmit
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     if (
       prisBarn < 0 ||
       prisVoksen < 0 ||
@@ -57,7 +57,7 @@ export const NewTrip = (params) => {
         ReiseDatoTid,
       };
 
-      fetch("https://localhost:5001/reise/reise", {
+      fetch("https://localhost:5001/api/reise", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export const NewTrip = (params) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.ok === false) {
+          if (data === false) {
             setFeilmelding(data.response);
           } else {
             console.log(newTrip);
@@ -80,7 +80,9 @@ export const NewTrip = (params) => {
     }
   };
   console.log();
+
   return (
+    
     <>
       <Container className="single-component">
         <Col md="6" className="border rounded m-2 p-4">
@@ -141,13 +143,14 @@ export const NewTrip = (params) => {
                 </Row>
               </Form.Group>
             )}
-            <button className="btn btn-cta" onClick={handleSubmit}>
+            <button className="btn btn-cta" onClick={(e) => handleSubmit(e)}>
               Lagre
             </button>{" "}
             <Link className="btn btn-outline-cta" to="/">
               Tilbake
             </Link>
           </Form>
+          <small className={"text-danger"}>{feilmelding}</small>
         </Col>
       </Container>
     </>

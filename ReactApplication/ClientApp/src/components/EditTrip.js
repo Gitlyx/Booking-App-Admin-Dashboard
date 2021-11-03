@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Alert, Container } from "react-bootstrap";
 import { useLocation, useHistory, Link } from "react-router-dom";
-import { GetOneTrip } from "../Hooks/useTripData";
 
 export const EditTrip = (params) => {
   const history = useHistory();
@@ -23,7 +22,7 @@ export const EditTrip = (params) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // ------ GET REQUEST ------
-  const url = "https://localhost:5001/reise/enreise?id=" + id;
+  const url = "https://localhost:5001/api/enreise?id=" + id;
   useEffect(() => {
     async function fetchTrip() {
       const response = await fetch(url);
@@ -42,9 +41,10 @@ export const EditTrip = (params) => {
   }, [url]);
 
   // ----- Handle submit -----
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const updatedTrip = {
-      reiseId: id,
+      id: id,
       ruteFra,
       ruteTil,
       ReiseDatoTid,
@@ -55,7 +55,7 @@ export const EditTrip = (params) => {
       prisLugarPremium,
     };
 
-    fetch("https://localhost:5001/reise/oppdaterreise", {
+    fetch("https://localhost:5001/api/oppdaterreise", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -64,8 +64,8 @@ export const EditTrip = (params) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.ok === false) {
-          console.log(data.message);
+        if (data === false) {
+          setErrorMessage("Noe gikk galt, prøv igjen")
         } else {
           history.goBack();
         }
@@ -139,7 +139,7 @@ export const EditTrip = (params) => {
                 </Row>
               </Form.Group>
             )}
-            <button className="btn btn-cta " onClick={handleSubmit}>
+            <button className="btn btn-cta " onClick={(e)=>handleSubmit(e)}>
               Lagre
             </button>{" "}
             <Link className="btn btn-outline-cta" to="/">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // API GET ALL
 export const GetAllRoutes = () => {
@@ -8,12 +8,13 @@ export const GetAllRoutes = () => {
 
   // On page load perform this
   useEffect(() => {
-    fetch("https://localhost:5001/reise/rute")
+    fetch("https://localhost:5001/api/alleruter")
       .then((res) => res.json())
       .then(
         (result) => {
           setData(result);
           setIsLoading(false);
+          console.log(result)
         },
         (error) => {
           setIsError(true);

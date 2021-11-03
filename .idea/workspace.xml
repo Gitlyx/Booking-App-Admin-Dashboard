@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1ed353fc-791a-48f2-bf24-f68ff6ba0def" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Trip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/TripRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ReactApplication/xs/UserPrefs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ReactApplication/xs/UserPrefs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ReactApplication/xs/project-cache/ReactApplication-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ReactApplication/xs/project-cache/ReactApplication-Debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/Controllers/ReiseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Controllers/ReiseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/DAL/IReiseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/DAL/IReiseRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Hero.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Hero/tech.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/images/images.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/images/ship.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211102.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/EditRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/EditRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/EditTrip.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/EditTrip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavbarTop.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NavbarTop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NewRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NewRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NewTrip.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/NewTrip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Trip.js" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/ClientApp/src/components/Trip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/ClientApp/src/custom.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ReactApplication/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211018.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211018.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211101.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ReactApplication/Logs/ReiseLog-20211101.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +50,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -50,6 +65,7 @@
       <updated>1634397169023</updated>
       <workItem from="1634397172050" duration="25000" />
       <workItem from="1634715961214" duration="79000" />
+      <workItem from="1635815434231" duration="598000" />
     </task>
     <servers />
   </component>

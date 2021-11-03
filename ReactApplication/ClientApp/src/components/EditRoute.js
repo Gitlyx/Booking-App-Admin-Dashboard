@@ -7,10 +7,10 @@ export const EditRoute = (params) => {
   // Hent rute ID
   let location = useLocation();
   let id = location.state.ruteId;
-  const url = "https://localhost:5001/reise/enrute?ruteId=" + id;
+  console.log(id)
+  const url = "https://localhost:5001/api/enrute?ruteId=" + id;
 
   // ----- States ------
-  const [ReiseId, setReiseId] = useState(-1);
   const [ruteFra, setRuteFra] = useState("");
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
@@ -24,7 +24,6 @@ export const EditRoute = (params) => {
       const response = await fetch(url);
       const resp = await response.json();
       console.log("API result :", resp);
-      setReiseId(resp.ruteId);
       setRuteFra(resp.ruteFra);
       setRuteTil(resp.ruteTil);
       setDagsreise(resp.dagsreise);
@@ -38,14 +37,14 @@ export const EditRoute = (params) => {
     e.preventDefault();
     if (ruteFra && ruteTil) {
       const updatedRoute = {
-        ReiseId,
+        id,
         ruteFra,
         ruteTil,
         dagsreise,
       };
 
       console.log(updatedRoute);
-      fetch("https://localhost:5001/reise/oppdaterrute", {
+      fetch("https://localhost:5001/api/oppdaterrute", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

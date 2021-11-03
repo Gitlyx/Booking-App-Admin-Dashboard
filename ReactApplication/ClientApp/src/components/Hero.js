@@ -26,7 +26,7 @@ export const Hero = () => {
             </Link>
           </Col>
           <Col md="6" className="d-none d-md-block">
-            <img src={Ship} width="80%" />
+            <img src={Ship} width="80%" alt={"Illustration"}/>
           </Col>
         </Row>
       </Container>
