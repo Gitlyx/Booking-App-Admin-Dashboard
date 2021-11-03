@@ -10,6 +10,8 @@ export const Trip = (params) => {
   let location = useLocation();
   let id = location.state.ruteId;
 
+  console.log(id)
+
   // State
   const [data, setData] = useState([{}]);
   const [ruteFra, setRuteFra] = useState("");
@@ -94,6 +96,7 @@ export const Trip = (params) => {
                           pathname: "/edittrip",
                           state: {
                             reiseId: reise.id,
+                            ruteId: id
                           },
                         }}
                       >
@@ -103,9 +106,8 @@ export const Trip = (params) => {
                         className={"btn btn-danger mx-1"}
                         style={{ width: "70px" }}
                         onClick={() => {
-                          DeleteTrip(reise.reiseId);
+                          DeleteTrip(reise.id);
                           reload();
-                          console.log(reise.reiseId);
                         }}
                       >
                         Slett
@@ -129,6 +131,7 @@ export const Trip = (params) => {
                           pathname: "/edittrip",
                           state: {
                             reiseId: reise.id,
+                            ruteId: id
                           },
                         }}
                       >
