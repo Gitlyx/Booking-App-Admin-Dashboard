@@ -52,10 +52,13 @@ html* {
   position: fixed;
   top: 80px;
   margin: 0 auto;
-  right: 0;
-  left: 0;
-  width: 80%;
+  right: 10px;
+  width: 20rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+@media screen {
+  
 }
 
 .single-component {
