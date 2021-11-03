@@ -10,7 +10,6 @@ export const Trip = (params) => {
   let location = useLocation();
   let id = location.state.ruteId;
 
-  console.log(id);
 
   // State
   const [data, setData] = useState([{}]);
@@ -26,7 +25,6 @@ export const Trip = (params) => {
     async function fetchRoute() {
       const response = await fetch(url);
       const resp = await response.json();
-      console.log("API result :", resp);
       setData(resp);
       if (resp.length > 0) {
         setRuteFra(resp[0].ruteFra);
@@ -48,7 +46,17 @@ export const Trip = (params) => {
     history.go(0);
   };
 
-  console.log(data);
+  const formaterDatoTid = (data) => {
+    let dato = new Date(data)
+
+    let dag_index = dato.getDate();
+    let mnd_index = dato.getMonth()+1;
+    let year = dato.getFullYear();
+    let timer = dato.getHours();
+    let min = dato.getMinutes();
+
+    return (dag_index + "." + mnd_index + "." + year +  " - Kl. " + timer + ":"+ min); 
+  }
 
   if (!isLoading) {
     if (data.length > 0) {
@@ -92,7 +100,10 @@ export const Trip = (params) => {
                 {dagsreise === false &&
                   data.map((reise, index) => (
                     <tr key={index}>
-                      <td>{reise.reiseDatoTid}</td>
+                      <td>
+                     {formaterDatoTid(reise.reiseDatoTid)}
+                    
+                      </td>
                       <td>Kr.{reise.prisBarn},-</td>
                       <td>Kr.{reise.prisVoksen},-</td>
                       <td>Kr.{reise.prisLugarStandard},-</td>
