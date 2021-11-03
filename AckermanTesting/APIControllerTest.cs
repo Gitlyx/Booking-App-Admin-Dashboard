@@ -16,7 +16,6 @@ using ReactApplication.Models;
 using WebApp_Oblig2.DAL;
 using WebApp_Oblig2.Model;
 using Xunit;
-using Reise = WebApp_Oblig2.Model.Reise;
 using ReiseDB = WebApp_Oblig2.DAL.Reise;
 
 namespace AckermanTesting
@@ -54,32 +53,32 @@ namespace AckermanTesting
         public async Task AlleRuterLoggetInnOk() // AlleRuter-metode gitt at vi er logget inn og alt er ok
         {
             //Arrange - Legg opp testen
-            var rute1 = new Rute
+            var rute1 = new RuteMod
             {
-                ruteId = 1,
+                id = 1,
                 ruteFra = "Oslo",
                 ruteTil = "Tokyo",
                 dagsreise = false,
             };
 
-            var rute2 = new Rute
+            var rute2 = new RuteMod
             {
-                ruteId = 2,
+                id = 2,
                 ruteFra = "Oslo",
                 ruteTil = "Bangladesh",
                 dagsreise = false,
             };
 
-            var rute3 = new Rute
+            var rute3 = new RuteMod
             {
-                ruteId = 3,
+                id = 3,
                 ruteFra = "Oslo",
                 ruteTil = "Reykjavik",
                 dagsreise = false,
             };
 
             // Opprett liste og legg til rute
-            var ruteListe = new List<Rute>();
+            var ruteListe = new List<RuteMod>();
             ruteListe.Add(rute1);
             ruteListe.Add(rute2);
             ruteListe.Add(rute3);
@@ -102,7 +101,7 @@ namespace AckermanTesting
             // Sjekk at vi får returner Ok(...)
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
             // Sjekk at vi får returner Listen
-            Assert.Equal<List<Rute>>((List<Rute>)resultat.Value, ruteListe);
+            Assert.Equal<List<RuteMod>>((List<RuteMod>)resultat.Value, ruteListe);
         }
 
         // AlleRuter-metode, Logget inn, Metode returnerer null
@@ -127,7 +126,7 @@ namespace AckermanTesting
 
             // Assert
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Ingen ruter funnet", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         // AlleRuter-metode, ikke logget inn
@@ -135,7 +134,7 @@ namespace AckermanTesting
         public async Task AlleRuterIkkeLoggetInn()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.AlleRuter()).ReturnsAsync(It.IsAny<List<Rute>>);
+            mockReiseRep.Setup(r => r.AlleRuter()).ReturnsAsync(It.IsAny<List<RuteMod>>);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -156,9 +155,9 @@ namespace AckermanTesting
         {
             // ARRANGE
 
-            var rute1 = new Rute
+            var rute1 = new RuteMod
             {
-                ruteId = 1,
+                id = 1,
                 ruteFra = "Oslo",
                 ruteTil = "Tokyo"
             };
@@ -181,7 +180,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal<Rute>(rute1, (Rute)resultat.Value);
+            Assert.Equal<RuteMod>(rute1, (RuteMod)resultat.Value);
         }
 
         [Fact]
@@ -201,7 +200,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Reisen ble ikke funnet!", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
@@ -263,7 +262,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
-            Assert.Equal("Ruten eksisterer ikke", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
@@ -291,7 +290,7 @@ namespace AckermanTesting
         public async Task NyRuteLoggetInnOK()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -300,7 +299,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.NyRute(It.IsAny<Reise>()) as OkObjectResult;
+            var resultat = await apiController.NyRute(It.IsAny<RuteMod>()) as OkObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -311,7 +310,7 @@ namespace AckermanTesting
         public async Task NyRuteLoggetInnDBFeil()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyRute(It.IsAny<Reise>())).ReturnsAsync(false);
+            mockReiseRep.Setup(r => r.NyRute(It.IsAny<RuteMod>())).ReturnsAsync(false);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -320,19 +319,19 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.NyRute(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.NyRute(It.IsAny<RuteMod>()) as BadRequestObjectResult;
 
             // ASSERT
 
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Ruten eksisterer allerede", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
         public async Task NyRuteIkkeLoggetinn()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -341,7 +340,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.NyRute(It.IsAny<Reise>()) as UnauthorizedObjectResult;
+            var resultat = await apiController.NyRute(It.IsAny<RuteMod>()) as UnauthorizedObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -352,7 +351,7 @@ namespace AckermanTesting
         public async Task NyRuteLoggetInnFeilModel()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -363,7 +362,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.NyRute(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.NyRute(It.IsAny<RuteMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
@@ -374,7 +373,7 @@ namespace AckermanTesting
         public async Task EndreRuteLoggetInnOk()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -383,7 +382,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.oppdaterRute(It.IsAny<Reise>()) as OkObjectResult;
+            var resultat = await apiController.oppdaterRute(It.IsAny<RuteMod>()) as OkObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -394,7 +393,7 @@ namespace AckermanTesting
         public async Task EndreRuteLoggetInnDBFeil()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<Reise>())).ReturnsAsync(false);
+            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<RuteMod>())).ReturnsAsync(false);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -403,18 +402,18 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.oppdaterRute(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.oppdaterRute(It.IsAny<RuteMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Ruten ble ikke endret!", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
         public async Task EndreRuteIkkeLoggetinn()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -423,7 +422,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.oppdaterRute(It.IsAny<Reise>()) as UnauthorizedObjectResult;
+            var resultat = await apiController.oppdaterRute(It.IsAny<RuteMod>()) as UnauthorizedObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -434,7 +433,7 @@ namespace AckermanTesting
         public async Task EndreRuteLoggetInnFeilModel()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.oppdaterRute(It.IsAny<RuteMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -445,7 +444,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.oppdaterRute(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.oppdaterRute(It.IsAny<RuteMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
@@ -458,7 +457,7 @@ namespace AckermanTesting
         public async Task AlleReiserLoggetinnOK()
         {
             // ARRANGE
-            var reise1 = new Reise
+            var reise1 = new ReiseMod
             {
                 id = 1,
                 reiseDatoTid = new DateTime(),
@@ -471,7 +470,7 @@ namespace AckermanTesting
                 dagsreise = true,
             };
 
-            var reise2 = new Reise
+            var reise2 = new ReiseMod
             {
                 id = 2,
                 ruteFra = "Oslo",
@@ -484,7 +483,7 @@ namespace AckermanTesting
             };
 
 
-            var reise3 = new Reise
+            var reise3 = new ReiseMod
             {
                 id = 1,
                 ruteFra = "Oslo",
@@ -496,7 +495,7 @@ namespace AckermanTesting
                 dagsreise = true,
             };
 
-            var reiseListe = new List<Reise>();
+            var reiseListe = new List<ReiseMod>();
             reiseListe.Add(reise1);
             reiseListe.Add(reise2);
             reiseListe.Add(reise3);
@@ -514,7 +513,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal<List<Reise>>((List<Reise>)resultat.Value, reiseListe);
+            Assert.Equal<List<ReiseMod>>((List<ReiseMod>)resultat.Value, reiseListe);
         }
 
         [Fact]
@@ -534,7 +533,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Ingen reiser funnet", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
@@ -561,7 +560,7 @@ namespace AckermanTesting
         public async Task EnReiseLoggetinnOk()
         {
             // ARRANGE
-            var reise1 = new Reise
+            var reise1 = new ReiseMod
             {
                 id = 1,
                 ruteFra = "Oslo",
@@ -586,7 +585,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal<Reise>(reise1, (Reise)resultat.Value);
+            Assert.Equal<ReiseMod>(reise1, (ReiseMod)resultat.Value);
         }
 
         [Fact]
@@ -606,7 +605,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Reisen eksister ikke eller ble ikke funnet", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
@@ -668,7 +667,7 @@ namespace AckermanTesting
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Reisen eksister ikke", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
@@ -696,7 +695,7 @@ namespace AckermanTesting
         public async Task NyReiseLoggetInnOK()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -705,7 +704,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.Reise(It.IsAny<Reise>()) as OkObjectResult;
+            var resultat = await apiController.Reise(It.IsAny<ReiseMod>()) as OkObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -716,7 +715,7 @@ namespace AckermanTesting
         public async Task NyReiseLoggetInnDBFeil()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyReise(It.IsAny<Reise>())).ReturnsAsync(false);
+            mockReiseRep.Setup(r => r.NyReise(It.IsAny<ReiseMod>())).ReturnsAsync(false);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -725,12 +724,12 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.Reise(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.Reise(It.IsAny<ReiseMod>()) as BadRequestObjectResult;
 
             // ASSERT
 
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Reisen ble ikke opprett", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
 
@@ -738,7 +737,7 @@ namespace AckermanTesting
         public async Task NyReiseIkkeLoggetinn()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -747,7 +746,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.Reise(It.IsAny<Reise>()) as UnauthorizedObjectResult;
+            var resultat = await apiController.Reise(It.IsAny<ReiseMod>()) as UnauthorizedObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -758,7 +757,7 @@ namespace AckermanTesting
         public async Task NyReiseLoggetInnFeilModel()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.NyReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.NyReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -769,7 +768,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.Reise(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.Reise(It.IsAny<ReiseMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
@@ -780,7 +779,7 @@ namespace AckermanTesting
         public async Task EndreReiseLoggetInnOk()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -789,7 +788,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.OppdaterReise(It.IsAny<Reise>()) as OkObjectResult;
+            var resultat = await apiController.OppdaterReise(It.IsAny<ReiseMod>()) as OkObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -800,7 +799,7 @@ namespace AckermanTesting
         public async Task EndreReiseLoggetInnDBFeil()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<Reise>())).ReturnsAsync(false);
+            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<ReiseMod>())).ReturnsAsync(false);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -809,18 +808,18 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.OppdaterReise(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.OppdaterReise(It.IsAny<ReiseMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
-            Assert.Equal("Reisen ble ikke oppdatert", resultat.Value);
+            Assert.False((Boolean)resultat.Value);
         }
 
         [Fact]
         public async Task EndreReiseIkkeLoggetinn()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -829,7 +828,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.OppdaterReise(It.IsAny<Reise>()) as UnauthorizedObjectResult;
+            var resultat = await apiController.OppdaterReise(It.IsAny<ReiseMod>()) as UnauthorizedObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -840,7 +839,7 @@ namespace AckermanTesting
         public async Task EndreReiseLoggetInnFeilModel()
         {
             // ARRANGE
-            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<Reise>())).ReturnsAsync(true);
+            mockReiseRep.Setup(r => r.OppdaterReise(It.IsAny<ReiseMod>())).ReturnsAsync(true);
 
             var apiController = new APIController(mockReiseRep.Object, mockBrukerRep.Object, mockLog.Object);
 
@@ -851,7 +850,7 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.OppdaterReise(It.IsAny<Reise>()) as BadRequestObjectResult;
+            var resultat = await apiController.OppdaterReise(It.IsAny<ReiseMod>()) as BadRequestObjectResult;
 
             // ASSERT
             Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);

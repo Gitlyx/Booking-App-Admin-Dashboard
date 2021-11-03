@@ -8,6 +8,7 @@ export const EditTrip = (params) => {
   // ----- Hent id -----
   let location = useLocation();
   let id = location.state.reiseId;
+  let ruteId = location.state.ruteId;
 
   // ------ States ------
   const [ruteFra, setRuteFra] = useState("");
@@ -40,6 +41,8 @@ export const EditTrip = (params) => {
     fetchTrip();
   }, [url]);
 
+  console.log(ruteId)
+
   // ----- Handle submit -----
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +68,7 @@ export const EditTrip = (params) => {
       .then((response) => response.json())
       .then((data) => {
         if (data === false) {
-          setErrorMessage("Noe gikk galt, prøv igjen")
+          setErrorMessage("Noe gikk galt, prøv igjen");
         } else {
           history.goBack();
         }
@@ -139,10 +142,13 @@ export const EditTrip = (params) => {
                 </Row>
               </Form.Group>
             )}
-            <button className="btn btn-cta " onClick={(e)=>handleSubmit(e)}>
+            <button className="btn btn-cta " onClick={(e) => handleSubmit(e)}>
               Lagre
             </button>{" "}
-            <Link className="btn btn-outline-cta" to="/">
+            <Link
+              className="btn btn-outline-cta"
+              to={{ pathname: "/trip", state: { ruteId } }}
+            >
               Tilbake
             </Link>
           </Form>
