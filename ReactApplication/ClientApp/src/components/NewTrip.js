@@ -38,13 +38,13 @@ export const NewTrip = () => {
   const [ruteFra, setRuteFra] = useState("");
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
-  const [ReiseDatoTid, setAvreiseDatoTid] = useState(dagsDato);
+  const [ReiseDatoTid, setReiseDatoTid] = useState(dagsDato);
   const [prisBarn, setPrisBarn] = useState(499);
   const [prisVoksen, setPrisVoksen] = useState(990);
   const [prisLugarStandard, setprisLugarStandard] = useState(1290);
   const [prisLugarPremium, setprisLugarPremium] = useState(2290);
-  const [feilmelding, setFeilmelding] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [feilmelding, setFeilmelding] = useState("");
   const [variant, setVariant] = useState("");
 
   // GET request
@@ -79,7 +79,7 @@ export const NewTrip = () => {
       gyldigDateTime
     ) {
       // Opprett ny reise
-      setAvreiseDatoTid(tid);
+      setReiseDatoTid(tid);
       const newTrip = {
         ruteFra,
         ruteTil,
@@ -128,7 +128,7 @@ export const NewTrip = () => {
                 className={"form-control"}
                 type="datetime-local"
                 onChange={(e) => {
-                  setAvreiseDatoTid(e.target.value);
+                  setReiseDatoTid(e.target.value);
                   if (!validerDato(e.target.value)) {
                     setFeilmelding("Ugyldig dat");
                     gyldigDateTime = false;

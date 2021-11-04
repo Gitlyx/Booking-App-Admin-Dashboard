@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Alert, Container } from "react-bootstrap";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { fetchTrip, updateTrip } from "../Hooks/useTripData";
+import { validerDato, validerTrip } from "./Validering";
 
 export const EditTrip = (params) => {
   const history = useHistory();
   let gyldigDateTime = false;
-
 
   // ----- Hent id -----
   let location = useLocation();
@@ -23,6 +23,8 @@ export const EditTrip = (params) => {
   const [prisLugarStandard, setprisLugarStandard] = useState(0);
   const [prisLugarPremium, setprisLugarPremium] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [feilmelding, setFeilmelding] = useState("");
+
   const [variant, setVariant] = useState("");
 
   // ------ GET REQUEST ------
@@ -40,7 +42,7 @@ export const EditTrip = (params) => {
   };
 
   useEffect(() => {
-    getOneTrip(id)
+    getOneTrip(id);
   }, [id]);
 
   console.log(ruteId);
@@ -49,23 +51,34 @@ export const EditTrip = (params) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (true) {
-      const updatedTrip = {
-        id: id,
-        ruteFra,
-        ruteTil,
-        ReiseDatoTid,
+    if (
+      validerTrip({
         dagsreise,
         prisBarn,
         prisVoksen,
         prisLugarStandard,
         prisLugarPremium,
-      };
-      updateTrip(updatedTrip).then((r)=> {
-        history.goBack();
-      })
-    } else if (true) {
-
+        setErrorMessage,
+        setVariant,
+      }) &&
+      gyldigDateTime
+    ) {
+      if (true) {
+        const updatedTrip = {
+          id: id,
+          ruteFra,
+          ruteTil,
+          ReiseDatoTid,
+          dagsreise,
+          prisBarn,
+          prisVoksen,
+          prisLugarStandard,
+          prisLugarPremium,
+        };
+        updateTrip(updatedTrip).then((r) => {
+          history.goBack();
+        });
+      }
     }
   };
 
@@ -84,8 +97,16 @@ export const EditTrip = (params) => {
                 type="datetime-local"
                 onChange={(e) => {
                   setReiseDatoTid(e.target.value);
+                  if (!validerDato(e.target.value)) {
+                    setFeilmelding("Ugyldig dat");
+                    gyldigDateTime = false;
+                  } else {
+                    setFeilmelding("");
+                    gyldigDateTime = true;
+                  }
                 }}
               />
+              <small className={"text-danger"}>{feilmelding}</small>
             </Form.Group>
             <Form.Group className={"my-3"}>
               <Row>

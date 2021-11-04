@@ -1,9 +1,8 @@
 export const validateFromTo = (from, to) => {
   if (from === to) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 };
 
 export const validerNoNumber = (innString) => {
@@ -11,15 +10,12 @@ export const validerNoNumber = (innString) => {
   let ok = regex.test(innString);
   if (ok) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 };
 
 export const validerPris = (pris) => {
-  if (pris === "") {
-    return false;
-  } else if (pris < parseInt(0)) {
+  if (pris === "" || pris < parseInt(0)) {
     return false;
   }
   return true;
@@ -51,7 +47,7 @@ export const validerDato = (tid) => {
   if (Date.parse(dagsDato) > Date.parse(tid)) {
     return false;
   }
-  
+
   return true;
 };
 
@@ -67,7 +63,6 @@ export const validerLogin = (props) => {
 
 export const validerTrip = (props) => {
   if (props.dagsreise) {
-    console.log(props.dagsreise);
     if (!props.prisBarn || !props.prisVoksen) {
       props.setErrorMessage("Et eller flere felt er tomme.");
       props.setVariant("warning");
@@ -76,7 +71,6 @@ export const validerTrip = (props) => {
   }
 
   if (!props.dagsreise) {
-    console.log(props.dagsreise);
 
     if (
       !props.prisBarn ||
@@ -89,6 +83,5 @@ export const validerTrip = (props) => {
       return false;
     }
   }
-
   return true;
 };
