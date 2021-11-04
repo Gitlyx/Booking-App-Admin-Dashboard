@@ -15,7 +15,3 @@ Fix what, what behaviour, behaviour expected.
     Fix validation on frontend. Currently accepts empty field. validation needed for stop redirect.
     Fix validation on frontend. Empty date is accepted but no change on state. Needs validation to stop submit of empty string.
 
-/newTrip
-    Fix validation. Currently no errormessage on submit, empty string is accepted and redirection started. Needs implementation.
-    Fix validation. Currently accepts empty field, and accepted on submit. Should stop redirection.
-
