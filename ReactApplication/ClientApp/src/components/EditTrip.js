@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Alert, Container } from "react-bootstrap";
 import { useLocation, useHistory, Link } from "react-router-dom";
+import { fetchTrip, updateTrip } from "../Hooks/useTripData";
 
 export const EditTrip = (params) => {
   const history = useHistory();
@@ -23,59 +24,47 @@ export const EditTrip = (params) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // ------ GET REQUEST ------
-  const url = "https://localhost:5001/api/enreise?id=" + id;
+  const getOneTrip = (id) => {
+    fetchTrip(id).then((r) => {
+      setRuteFra(r.ruteFra);
+      setRuteTil(r.ruteTil);
+      setReiseDatoTid(r.reiseDatoTid);
+      setPrisBarn(r.prisBarn);
+      setPrisVoksen(r.prisVoksen);
+      setprisLugarStandard(r.prisLugarStandard);
+      setprisLugarPremium(r.prisLugarPremium);
+      setDagsreise(r.dagsreise);
+    });
+  };
+
   useEffect(() => {
-    async function fetchTrip() {
-      const response = await fetch(url);
-      const trip = await response.json();
-      // Set states
-      setRuteFra(trip.ruteFra);
-      setRuteTil(trip.ruteTil);
-      setReiseDatoTid(trip.reiseDatoTid);
-      setPrisBarn(trip.prisBarn);
-      setPrisVoksen(trip.prisVoksen);
-      setprisLugarStandard(trip.prisLugarStandard);
-      setprisLugarPremium(trip.prisLugarPremium);
-      setDagsreise(trip.dagsreise);
-    }
-    fetchTrip();
-  }, [url]);
+    getOneTrip(id)
+  }, [id]);
 
   console.log(ruteId);
 
   // ----- Handle submit -----
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedTrip = {
-      id: id,
-      ruteFra,
-      ruteTil,
-      ReiseDatoTid,
-      dagsreise,
-      prisBarn,
-      prisVoksen,
-      prisLugarStandard,
-      prisLugarPremium,
-    };
 
-    fetch("https://localhost:5001/api/oppdaterreise", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedTrip),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data === false) {
-          setErrorMessage("Noe gikk galt, prøv igjen");
-        } else {
-          history.goBack();
-        }
+    if (true) {
+      const updatedTrip = {
+        id: id,
+        ruteFra,
+        ruteTil,
+        ReiseDatoTid,
+        dagsreise,
+        prisBarn,
+        prisVoksen,
+        prisLugarStandard,
+        prisLugarPremium,
+      };
+      updateTrip(updatedTrip).then((r)=> {
+        history.goBack();
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    } else if (true) {
+
+    }
   };
 
   return (

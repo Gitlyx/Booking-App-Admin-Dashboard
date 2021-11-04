@@ -1,36 +1,42 @@
-import { useState, useEffect } from "react";
-
-// API GET REQUEST - one trip
-export const GetOneTrip = (id) => {
-  const [data, setData] = useState({});
-  const url = "https://localhost:5001/reise/enreise?id=" + id;
-  useEffect(() => {
-    async function fetchTrip() {
-      const response = await fetch(url);
-      const resp = await response.json();
-      setData(resp);
-    }
-    fetchTrip();
-  }, [url]);
+export async function fetchTrip(id) {
+  const url = "https://localhost:5001/api/enreise?id=" + id;
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("GET request : ", data)
   return data;
+  
 };
 
 export async function fetchAll(id) {
   const url = "https://localhost:5001/api/reiser?id=" + id;
   const response = await fetch(url);
   const data = await response.json();
-  console.log("GET request : ", data)
+  console.log("GET request : ", data);
   return data;
 }
 
-export async function deleteTrip(id){
-  if(window.confirm("Er du sikker på å slette denne reisen?")){
+export async function deleteTrip(id) {
+  if (window.confirm("Er du sikker på å slette denne reisen?")) {
     let url = "https://localhost:5001/api/reise?reiseId=" + id;
-    const response = await fetch(url, {method: "DELETE"});
+    const response = await fetch(url, { method: "DELETE" });
     const data = await response.json();
     console.log("DELETE request : ", data);
     return data;
   } else {
-    console.log("DELETE request : Declined")
+    console.log("DELETE request : Declined");
   }
+}
+
+export async function updateTrip(inndata) {
+  const url = "https://localhost:5001/api/oppdaterreise";
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inndata),
+  });
+  const data = await response.json();
+  console.log("PUT request : ", data);
+  return data;
 }

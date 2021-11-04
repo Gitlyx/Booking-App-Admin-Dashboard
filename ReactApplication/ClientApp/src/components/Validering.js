@@ -1,11 +1,29 @@
-export const validerPris = (pris) => {
-    if(pris === ""){
-        return false
-    } else if (pris < parseInt(0)){
-        return false;
-    }
+export const validateFromTo = (from, to) => {
+  if (from === to) {
+    return false;
+  } else {
     return true;
-}
+  }
+};
+
+export const validerNoNumber = (innString) => {
+  let regex = /^[a-zA-ZæøåÆØÅ.-]{2,20}$/;
+  let ok = regex.test(innString);
+  if (ok) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const validerPris = (pris) => {
+  if (pris === "") {
+    return false;
+  } else if (pris < parseInt(0)) {
+    return false;
+  }
+  return true;
+};
 
 export const validerDato = (tid) => {
   const idag = new Date();
