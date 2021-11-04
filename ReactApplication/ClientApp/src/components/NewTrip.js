@@ -9,6 +9,7 @@ export const NewTrip = (params) => {
   const history = useHistory();
   const location = useLocation();
   const id = location.state.ruteId;
+  const ruteId = location.state.ruteId;
   const url = "https://localhost:5001/api/enrute?ruteId=" + id;
   let tid;
   const idag = new Date();
@@ -120,11 +121,11 @@ export const NewTrip = (params) => {
                 type="datetime-local"
                 onChange={(e) => {
                   setAvreiseDatoTid(e.target.value);
-                  if(!validerDato(e.target.value)){
-                    setFeilmelding("Ugyldig dat")
-                  } else{
-                    setFeilmelding("")
-                  };
+                  if (!validerDato(e.target.value)) {
+                    setFeilmelding("Ugyldig dat");
+                  } else {
+                    setFeilmelding("");
+                  }
                 }}
               />
               <small className={"text-danger"}>{feilmelding}</small>
@@ -179,7 +180,10 @@ export const NewTrip = (params) => {
             <button className="btn btn-cta" onClick={(e) => handleSubmit(e)}>
               Lagre
             </button>{" "}
-            <Link className="btn btn-outline-cta" to="/">
+            <Link
+              className="btn btn-outline-cta"
+              to={{ pathname: "/trip", state: { ruteId } }}
+            >
               Tilbake
             </Link>
           </Form>
