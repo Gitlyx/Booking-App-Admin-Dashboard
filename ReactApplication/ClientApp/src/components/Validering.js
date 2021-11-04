@@ -1,12 +1,3 @@
-export const validerPris = (pris) => {
-  if (pris === "") {
-    return false;
-  } else if (pris < parseInt(0)) {
-    return false;
-  }
-  return true;
-};
-
 export const validerDato = (tid) => {
   const idag = new Date();
   const år = idag.getFullYear();
@@ -43,9 +34,34 @@ export const validerDato = (tid) => {
 export const validerLogin = (props) => {
   if (!props.brukernavn || !props.passord) {
     props.setErrorMessage("Et eller flere felt er tomme.");
-    props.setVariant("warning")
+    props.setVariant("warning");
     console.log("Et eller flere felt er tomme.");
     return false;
   }
+  return true;
+};
+
+export const validerNewTrip = (props) => {
+  if (!props.dagsreise) {
+    if (!props.prisBarn || !props.prisVoksen) {
+      props.setErrorMessage("Et eller flere felt er tomme.");
+      props.setVariant("warning");
+      return false;
+    }
+  }
+
+  if (props.dagsreise) {
+    if (
+      !props.prisBarn ||
+      !props.prisVoksen ||
+      !props.prisLugarStandard ||
+      !props.prisLugarPremium
+    ) {
+      props.setErrorMessage("Et eller flere felt er tomme.");
+      props.setVariant("warning");
+      return false;
+    }
+  }
+
   return true;
 };

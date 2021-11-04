@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Form, Container, Col, Row } from "react-bootstrap";
+import { Form, Container, Col, Row, Alert } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import "./NewTrip.css";
-import { validerPris, validerDato } from "./Validering";
+import { validerDato, validerNewTrip } from "./Validering";
 
 export const NewTrip = (params) => {
   const history = useHistory();
@@ -44,7 +44,8 @@ export const NewTrip = (params) => {
   const [prisLugarStandard, setprisLugarStandard] = useState(1290);
   const [prisLugarPremium, setprisLugarPremium] = useState(2290);
   const [feilmelding, setFeilmelding] = useState("");
-  const [feilmelding1, setFeilmelding1] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [variant, setVariant] = useState("");
 
   // GET request
   useEffect(() => {
@@ -65,13 +66,18 @@ export const NewTrip = (params) => {
     e.preventDefault();
     // Valider
     if (
-      validerPris(prisBarn) &&
-      validerPris(prisVoksen) &&
-      validerPris(prisLugarStandard) &&
-      validerPris(prisLugarPremium)
+      validerNewTrip({
+        dagsreise,
+        prisBarn,
+        prisVoksen,
+        prisLugarStandard,
+        prisLugarPremium,
+        setErrorMessage,
+        setVariant,
+      })
     ) {
       // Opprett ny reise
-      setAvreiseDatoTid(tid)
+      setAvreiseDatoTid(tid);
       const newTrip = {
         ruteFra,
         ruteTil,
@@ -93,9 +99,9 @@ export const NewTrip = (params) => {
         .then((response) => response.json())
         .then((data) => {
           if (data === false) {
-            setFeilmelding1("Det eksisterer en reise for valgt dato");
+            setErrorMessage("Det eksisterer allerede en reise for valgt dato");
+            setVariant("danger");
           } else {
- 
             history.goBack();
           }
         })
@@ -176,7 +182,16 @@ export const NewTrip = (params) => {
                 </Row>
               </Form.Group>
             )}
-            <small>{feilmelding1}</small>
+            {errorMessage && (
+              <Alert
+                variant={variant}
+                className="pop-up"
+                onClose={() => setErrorMessage("")}
+                dismissible
+              >
+                {errorMessage}
+              </Alert>
+            )}
             <button className="btn btn-cta" onClick={(e) => handleSubmit(e)}>
               Lagre
             </button>{" "}
