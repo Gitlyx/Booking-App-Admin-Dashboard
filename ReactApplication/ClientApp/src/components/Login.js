@@ -75,7 +75,7 @@ export const Login = (props) => {
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Passord</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password"
                   placeholder="Skriv in passord"
                   className={"form-control"}
                   onChange={(e) => {

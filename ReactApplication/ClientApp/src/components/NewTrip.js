@@ -38,10 +38,10 @@ export const NewTrip = () => {
   const [ruteTil, setRuteTil] = useState("");
   const [dagsreise, setDagsreise] = useState(false);
   const [ReiseDatoTid, setReiseDatoTid] = useState(dagsDato);
-  const [prisBarn, setPrisBarn] = useState(499);
-  const [prisVoksen, setPrisVoksen] = useState(990);
-  const [prisLugarStandard, setprisLugarStandard] = useState(1290);
-  const [prisLugarPremium, setprisLugarPremium] = useState(2290);
+  const [prisBarn, setPrisBarn] = useState(100);
+  const [prisVoksen, setPrisVoksen] = useState(150);
+  const [prisLugarStandard, setprisLugarStandard] = useState(275);
+  const [prisLugarPremium, setprisLugarPremium] = useState(400);
   const [errorMessage, setErrorMessage] = useState("");
   const [feilmelding, setFeilmelding] = useState("");
   const [variant, setVariant] = useState("");

@@ -486,3 +486,59 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updatin
 2021-11-04T13:26:32.8234750+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2021-11-04T13:26:32.8254750+01:00  [INF] Hosting environment: "Development" (c3307c92)
 2021-11-04T13:26:32.8264040+01:00  [INF] Content root path: "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication" (b5d60022)
+2021-11-04T14:07:19.1775240+01:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-11-04T14:07:19.1888380+01:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-11-04T14:07:19.1933940+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-11-04T14:07:19.1945020+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-11-04T14:07:19.1947800+01:00  [INF] Content root path: "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication" (b5d60022)
+2021-11-04T14:07:55.5429570+01:00 0HMCVIG43TFHK:00000010 [INF] Object reference not set to an instance of an object. (f59a5554)
+2021-11-04T14:07:55.5499770+01:00 0HMCVIG43TFHK:00000010 [INF] Brukeren eksisterer ikke (924f49ef)
+2021-11-04T14:10:03.4038580+01:00 0HMCVIG43TFHP:0000001C [INF] Reisen ble ikke opprett (21e5f2d5)
+2021-11-04T14:10:20.7651060+01:00 0HMCVIG43TFHP:00000023 [INF] Reisen ble ikke opprett (21e5f2d5)
+2021-11-04T14:11:43.7833530+01:00 0HMCVIG43TFHK:0000003D [ERR] Failed executing DbCommand ("10"ms) [Parameters=["@p0='?'"], CommandType='Text', CommandTimeout='30']"
+""DELETE FROM \"Ruter\"
+WHERE \"ruteId\" = @p0;
+SELECT changes();" (627a98df)
+2021-11-04T14:11:43.8354450+01:00 0HMCVIG43TFHK:0000003D [ERR] An exception occurred in the database while saving changes for context type '"WebApp_Oblig2.DAL.DB"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'FOREIGN KEY constraint failed'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)" (170f029e)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'FOREIGN KEY constraint failed'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at ReactApplication.DAL.ReiseRepository.SlettRute(Int32 ruteId) in /Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication/DAL/ReiseRepository.cs:line 67
+2021-11-04T14:11:43.8367090+01:00 0HMCVIG43TFHK:0000003D [INF] Ruten eksisterer ikke (eca656df)
+2021-11-04T14:12:09.6552160+01:00 0HMCVIG43TFHS:00000020 [INF] Ruten eksisterer allerede (0905d908)
+2021-11-04T14:13:00.6958330+01:00 0HMCVIG43TFHK:00000050 [INF] Reisen ble ikke opprett (21e5f2d5)
+2021-11-04T14:15:22.9302280+01:00 0HMCVIG43TFI3:00000009 [INF] Reisen ble ikke opprett (21e5f2d5)

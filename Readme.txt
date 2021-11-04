@@ -1,0 +1,1 @@
+Brukernavn for innlogging er "admin" og passord er "admin".

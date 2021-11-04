@@ -58,7 +58,7 @@ export const TripRow = ({ row, id, isRemoved, setIsRemoved }) => {
   } else
     return (
       <tr>
-        <td>{row.reiseDatoTid}</td>
+        <td>{formaterDatoTid(row.reiseDatoTid)}</td>
         <td>Kr.{row.prisBarn},-</td>
         <td>Kr.{row.prisVoksen},-</td>
         <td></td>
