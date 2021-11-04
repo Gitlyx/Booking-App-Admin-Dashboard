@@ -43,9 +43,11 @@ export const TripRow = ({ row, id, isRemoved, setIsRemoved }) => {
             className={"btn btn-danger mx-1"}
             style={{ width: "70px" }}
             onClick={() => {
-              deleteTrip(row.id);
-              setIsRemoved(!isRemoved);
-              console.log(isRemoved);
+              deleteTrip(row.id).then((resp) => {
+                if (resp !== false) {
+                  setIsRemoved(!isRemoved);
+                }
+              });
             }}
           >
             Slett
@@ -78,8 +80,11 @@ export const TripRow = ({ row, id, isRemoved, setIsRemoved }) => {
             className={"btn btn-danger mx-1"}
             style={{ width: "70px" }}
             onClick={() => {
-              deleteTrip(row.id);
-              setIsRemoved(!isRemoved);
+              deleteTrip(row.id).then((resp) => {
+                if (resp !== false) {
+                  setIsRemoved(!isRemoved);
+                }
+              });
             }}
           >
             Slett
