@@ -92,31 +92,39 @@ export const Trip = () => {
     } else {
       return (
         <>
-          <Alert variant="warning" className="p-5">
-            <h3 className={"text-danger "}>Ingen reiser registert</h3>
-            <hr />
-            <h4>
-              {" "}
-              Det er ingen reiser registert mellom {location.state.fra} og{" "}
-              {location.state.til}. Hvis reisen ble nylig opprettet må det
-              opprettes nye reiser.
-            </h4>
-            <br />
-            <Link
-              className="btn btn-cta"
-              to={{
-                pathname: "/newtrip",
-                state: {
-                  ruteId: id,
-                },
-              }}
-            >
-              Opprett ny reise
-            </Link>{" "}
-            <Link className="btn btn-outline-cta" to="/">
-              Tilbake
-            </Link>
-          </Alert>
+          <Container className="single-component">
+            <Alert variant="warning" className="p-5">
+              <h3 className={"text-danger "}>Ruten har ingen reiser.</h3>
+              <hr />
+              <h4>
+                {" "}
+                Det er ingen reiser registert mellom{" "}
+                <span className="text-muted">
+                  {location.state.ruteFra}
+                </span> og{" "}
+                <span className="text-muted">{location.state.ruteTil}</span>.
+              </h4>
+              <h4>
+                Hvis ruten ble nylig opprettet må det opprettes nye reiser til
+                denne ruten.
+              </h4>
+              <br />
+              <Link
+                className="btn btn-cta"
+                to={{
+                  pathname: "/newtrip",
+                  state: {
+                    ruteId: id,
+                  },
+                }}
+              >
+                Opprett ny reise
+              </Link>{" "}
+              <Link className="btn btn-outline-cta" to="/">
+                Tilbake
+              </Link>
+            </Alert>
+          </Container>
         </>
       );
     }

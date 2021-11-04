@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Alert, Container } from "react-bootstrap";
 import { useLocation, useHistory, Link } from "react-router-dom";
+import { validerTrip } from "./Validering";
 
 export const EditTrip = (params) => {
   const history = useHistory();
+  let gyldigDateTime = false;
+
 
   // ----- Hent id -----
   let location = useLocation();
@@ -19,8 +22,8 @@ export const EditTrip = (params) => {
   const [prisVoksen, setPrisVoksen] = useState(0);
   const [prisLugarStandard, setprisLugarStandard] = useState(0);
   const [prisLugarPremium, setprisLugarPremium] = useState(0);
-  const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [variant, setVariant] = useState("");
 
   // ------ GET REQUEST ------
   const url = "https://localhost:5001/api/enreise?id=" + id;
@@ -57,25 +60,37 @@ export const EditTrip = (params) => {
       prisLugarStandard,
       prisLugarPremium,
     };
-
-    fetch("https://localhost:5001/api/oppdaterreise", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedTrip),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data === false) {
-          setErrorMessage("Noe gikk galt, prøv igjen");
-        } else {
-          history.goBack();
-        }
+    if (
+      validerTrip({
+        dagsreise,
+        prisBarn,
+        prisVoksen,
+        prisLugarStandard,
+        prisLugarPremium,
+        setErrorMessage,
+        setVariant,
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    ) {
+      fetch("https://localhost:5001/api/oppdaterreise", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedTrip),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data === false) {
+            setErrorMessage("Noe gikk galt, prøv igjen");
+            setVariant("danger");
+          } else {
+            history.goBack();
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   return (
@@ -153,10 +168,11 @@ export const EditTrip = (params) => {
             </Link>
           </Form>
         </Col>
-        {isErrorShown && (
+        {errorMessage && (
           <Alert
-            variant="warning"
-            onClose={() => setIsErrorShown(false)}
+            variant={variant}
+            className="pop-up"
+            onClose={() => setErrorMessage("")}
             dismissible
           >
             {errorMessage}

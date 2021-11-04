@@ -6,7 +6,7 @@ export const Route = ({
   deleteData,
   setErrorMessage,
   isRemoved,
-  setIsRemoved
+  setIsRemoved,
 }) => {
   return (
     <>
@@ -23,6 +23,8 @@ export const Route = ({
               pathname: "/trip",
               state: {
                 ruteId: row.id,
+                ruteFra: row.ruteFra,
+                ruteTil: row.ruteTil,
               },
             }}
           >
@@ -46,7 +48,7 @@ export const Route = ({
                       "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
                   );
                 } else {
-                  setIsRemoved(!isRemoved)
+                  setIsRemoved(!isRemoved);
                 }
               });
             }}

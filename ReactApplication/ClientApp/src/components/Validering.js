@@ -21,14 +21,11 @@ export const validerDato = (tid) => {
 
   let dagsDato = år + "-" + mnd + "-" + dato + "T" + timer + ":" + minutter;
 
-  console.log(tid);
   if (Date.parse(dagsDato) > Date.parse(tid)) {
-    console.log(tid);
     return false;
-  } else {
-    console.log(tid);
-    return true;
   }
+  
+  return true;
 };
 
 export const validerLogin = (props) => {
@@ -41,7 +38,7 @@ export const validerLogin = (props) => {
   return true;
 };
 
-export const validerNewTrip = (props) => {
+export const validerTrip = (props) => {
   if (props.dagsreise) {
     console.log(props.dagsreise);
     if (!props.prisBarn || !props.prisVoksen) {
