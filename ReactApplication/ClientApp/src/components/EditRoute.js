@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { Form, Container, Alert, Col } from "react-bootstrap";
 import { Loading } from "./Loading";
+import { fetchOne } from "../Hooks/useRouteData";
+import { updateRoute } from "../Hooks/useRouteData";
+import { validateFromTo, validerNoNumber } from "./Validering";
 
 export const EditRoute = (params) => {
   const history = useHistory();
   // Hent rute ID
   let location = useLocation();
   let id = location.state.ruteId;
-  console.log(id);
-  const url = "https://localhost:5001/api/enrute?ruteId=" + id;
 
   // ----- States ------
   const [ruteFra, setRuteFra] = useState("");
@@ -20,51 +21,54 @@ export const EditRoute = (params) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Hent en rute (API)
-  useEffect(() => {
-    async function fetchRoute() {
-      const response = await fetch(url);
-      const resp = await response.json();
-      console.log("API result :", resp);
+  const fetchOneRoute = (id) => {
+    fetchOne(id).then((resp) => {
       setRuteFra(resp.ruteFra);
       setRuteTil(resp.ruteTil);
       setDagsreise(resp.dagsreise);
       setIsLoading(false);
-    }
-    fetchRoute();
-  }, [url]);
+    });
+  };
+
+  // Oppdater rute
+  const editRoute = (data) => {
+    updateRoute(data).then((r) => {
+      if (r === true) {
+        history.push("/");
+      } else {
+        console.log("ERROR : EditRoute");
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchOneRoute(id);
+  }, [id]);
 
   // ----- Function / PUT ------
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (ruteFra && ruteTil) {
+
+    const fraTil = validateFromTo(ruteFra, ruteTil)
+    const noNumberFra = validerNoNumber(ruteFra);
+    const noNumberTil =  validerNoNumber(ruteTil)
+
+    if (ruteFra && ruteTil && fraTil && noNumberFra && noNumberTil) {
       const updatedRoute = {
         id,
         ruteFra,
         ruteTil,
         dagsreise,
       };
-
-      console.log(updatedRoute);
-      fetch("https://localhost:5001/api/oppdaterrute", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedRoute),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.ok === false) {
-            console.log(data.message);
-          } else {
-            history.push("/");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
+      editRoute(updatedRoute)
+    } else if(!ruteFra || !ruteTil) {
       setErrorMessage("Mangler avreise eller destinasjon.");
+      setIsErrorShown(true);
+    } else if (!fraTil){
+      setErrorMessage("Avreisested og destinasjon kan ikke være lik");
+      setIsErrorShown(true);
+    } else if(!noNumberFra || !noNumberTil){
+      setErrorMessage("Avreisested og destinasjon kan ikke innehold tall eller symboler");
       setIsErrorShown(true);
     }
   };

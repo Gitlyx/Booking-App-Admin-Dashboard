@@ -8,7 +8,7 @@ Fix what, what behaviour, behaviour expected.
 /newRoute
     Fix validation. Entering numbers is not handled and will pass though fetch call and redirection. Handle this before fetch call. to stop propagation.
 
-/trip
+/trip (FIXED)
     Fix render. Delete does not re render but still empties entry internally. Neds re-render component on delete call to reflect changes.
 
 /editTrip

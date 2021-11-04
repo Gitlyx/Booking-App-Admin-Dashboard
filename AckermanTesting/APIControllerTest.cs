@@ -916,10 +916,10 @@ namespace AckermanTesting
             apiController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // ACT
-            var resultat = await apiController.LoggInn(It.IsAny<Bruker>()) as OkObjectResult;
+            var resultat = await apiController.LoggInn(It.IsAny<Bruker>()) as BadRequestObjectResult;
 
             // ASSERT
-            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
             Assert.False((bool)resultat.Value);
         }
 

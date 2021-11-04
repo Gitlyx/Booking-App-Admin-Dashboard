@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Form, Col, Row, Container, Alert } from "react-bootstrap";
+import { addNewRoute } from "../Hooks/useRouteData";
+import { validateFromTo, validerNoNumber } from "./Validering";
 
 export const NewRoute = () => {
   const history = useHistory();
@@ -12,33 +14,40 @@ export const NewRoute = () => {
   const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // POST
+  const newRoute = (inndata) => {
+    addNewRoute(inndata).then((data) => {
+      if (data.ok === false) {
+        errorMessage(data.response);
+        setIsErrorShown(true);
+      } else {
+        let path = "/";
+        history.push(path);
+      }
+    });
+  };
+
   // ----- Function ------
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (ruteFra && ruteTil) {
+
+    const fraTil = validateFromTo(ruteFra, ruteTil);
+    const noNumberFra = validerNoNumber(ruteFra);
+    const noNumberTil = validerNoNumber(ruteTil);
+
+    if (ruteFra && ruteTil && fraTil && noNumberFra && noNumberTil) {
       const route = { ruteFra, ruteTil, dagsreise };
-      fetch("https://localhost:5001/api/nyrute", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(route),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.ok === false) {
-            errorMessage(data.response);
-            setIsErrorShown(true);
-          } else {
-            let path = "/";
-            history.push(path);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
+      newRoute(route);
+    } else if (!ruteFra || !ruteTil) {
       setErrorMessage("Mangler avreise eller destinasjon.");
+      setIsErrorShown(true);
+    } else if (!fraTil) {
+      setErrorMessage("Avreisested og destinasjon kan ikke være lik");
+      setIsErrorShown(true);
+    } else if (!noNumberFra || !noNumberTil) {
+      setErrorMessage(
+        "Avreisested og destinasjon kan ikke innehold tall eller symboler"
+      );
       setIsErrorShown(true);
     }
   };
@@ -84,6 +93,7 @@ export const NewRoute = () => {
               <p>Lugarer vil kun tilbys på flerdagsreiser.</p>
               {isErrorShown && (
                 <Alert
+                  className="pop-up"
                   variant="warning"
                   onClose={() => setIsErrorShown(false)}
                   dismissible
