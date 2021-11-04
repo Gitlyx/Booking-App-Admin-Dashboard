@@ -30,12 +30,12 @@ export const validerDato = (tid) => {
   
     let dagsDato = år + "-" + mnd + "-" + dato + "T" + timer + ":" + minutter;
 
-    console.log(tid)
+  
     if (Date.parse(dagsDato) > Date.parse(tid)) {
-        console.log(tid)
+        
       return false
     } else {
-        console.log(tid)
+        
       return true
     }
   };

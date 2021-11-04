@@ -1,20 +1,5 @@
 import { useState, useEffect } from "react";
 
-// API DELETE
-export const DeleteTrip = (id) => {
-  const url = "https://localhost:5001/api/reise?reiseId=" + id;
-  fetch(url, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then(() => {
-      console.log(url);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
-
 // API GET REQUEST - one trip
 export const GetOneTrip = (id) => {
   const [data, setData] = useState({});
@@ -36,4 +21,16 @@ export async function fetchAll(id) {
   const data = await response.json();
   console.log("GET request : ", data)
   return data;
+}
+
+export async function deleteTrip(id){
+  if(window.confirm("Er du sikker på å slette denne reisen?")){
+    let url = "https://localhost:5001/api/reise?reiseId=" + id;
+    const response = await fetch(url, {method: "DELETE"});
+    const data = await response.json();
+    console.log("DELETE request : ", data);
+    return data;
+  } else {
+    console.log("DELETE request : Declined")
+  }
 }

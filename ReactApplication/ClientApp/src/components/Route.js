@@ -23,8 +23,6 @@ export const Route = ({
               pathname: "/trip",
               state: {
                 ruteId: row.id,
-                fra: row.ruteFra,
-                til: row.ruteTil,
               },
             }}
           >

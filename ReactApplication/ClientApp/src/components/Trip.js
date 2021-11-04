@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { DeleteTrip } from "../Hooks/useTripData";
 import { Alert, Breadcrumb, Container } from "react-bootstrap";
 import { Loading } from "./Loading";
 import { fetchAll } from "../Hooks/useTripData";
+import { TripRow } from "./TripRow";
 
 export const Trip = () => {
   // Get route ID
@@ -12,38 +12,20 @@ export const Trip = () => {
   let id = location.state.ruteId;
 
   // Component State
-  const [data, setData] = useState([{}]);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRemoved, setIsRemoved] = useState(false);
 
   // GET - request all trips
   const fetchTrips = (id) => {
-    fetchAll(id).then((r) => {
-      setData(r);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 750);
-    });
+    fetchAll(id).then((r) => setData(r));
+    setIsLoading(false);
   };
 
   // On-page-load
   useEffect(() => {
     fetchTrips(id);
   }, [id, isRemoved]);
-
-  const formaterDatoTid = (data) => {
-    let dato = new Date(data);
-
-    let dag_index = dato.getDate();
-    let mnd_index = dato.getMonth() + 1;
-    let year = dato.getFullYear();
-    let timer = dato.getHours();
-    let min = dato.getMinutes();
-
-    return (
-      dag_index + "." + mnd_index + "." + year + " - Kl. " + timer + ":" + min
-    );
-  };
 
   if (!isLoading) {
     if (data.length > 0) {
@@ -84,75 +66,15 @@ export const Trip = () => {
                 )}
               </thead>
               <tbody>
-                {data[0].dagsreise === false &&
-                  data.map((reise, index) => (
-                    <tr key={index}>
-                      <td>{formaterDatoTid(reise.reiseDatoTid)}</td>
-                      <td>Kr.{reise.prisBarn},-</td>
-                      <td>Kr.{reise.prisVoksen},-</td>
-                      <td>Kr.{reise.prisLugarStandard},-</td>
-                      <td>Kr.{reise.prisLugarPremium},-</td>
-                      <td>
-                        <Link
-                          className={"btn btn-primary mx-1"}
-                          style={{ width: "70px" }}
-                          to={{
-                            pathname: "/edittrip",
-                            state: {
-                              reiseId: reise.id,
-                              ruteId: id,
-                            },
-                          }}
-                        >
-                          Endre
-                        </Link>
-                        <button
-                          className={"btn btn-danger mx-1"}
-                          style={{ width: "70px" }}
-                          onClick={() => {
-                            DeleteTrip(reise.id);
-                          }}
-                        >
-                          Slett
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-
-                {data[0].dagsreise === true &&
-                  data.map((reise, index) => (
-                    <tr key={index}>
-                      <td>{reise.reiseDatoTid}</td>
-                      <td>Kr.{reise.prisBarn},-</td>
-                      <td>Kr.{reise.prisVoksen},-</td>
-                      <td></td>
-                      <td>
-                        <Link
-                          className={"btn btn-primary mx-1"}
-                          style={{ width: "70px" }}
-                          to={{
-                            pathname: "/edittrip",
-                            state: {
-                              reiseId: reise.id,
-                              ruteId: id,
-                            },
-                          }}
-                        >
-                          Endre
-                        </Link>
-                        <button
-                          className={"btn btn-danger mx-1"}
-                          style={{ width: "70px" }}
-                          onClick={() => {
-                            DeleteTrip(reise.id);
-                            console.log(reise.id);
-                          }}
-                        >
-                          Slett
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                {data.map((trip) => (
+                  <TripRow
+                    row={trip}
+                    key={trip.id}
+                    id={id}
+                    setIsRemoved={setIsRemoved}
+                    isRemoved={isRemoved}
+                  />
+                ))}
               </tbody>
             </table>
             <Link
