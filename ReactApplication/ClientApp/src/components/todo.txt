@@ -1,12 +1,6 @@
 TODO Format:
 Fix what, what behaviour, behaviour expected.
 
-/login
-    Fix href on logout. logout button does not redirect. Logout should redirect to Hero.
-    Fix Login call. Login does not handle input error such as empty field. Onclick should post errormessage beneath/ inputfield.
-    Fix Login call. Button doesnt execute login error: use not found. Onclick should display error on missing user from db.
-    Fix Login call. Entering numbers will bypass the fetch call and redirects back to Hero. Should display error, wrong login information.
-
 /editRoute
     Fix validation. Numbers will not invoke any error message, and is accepted as an input variable in client but not on backend. Implement error handling and stop redirection. 
         - db should accept number input for this field.
