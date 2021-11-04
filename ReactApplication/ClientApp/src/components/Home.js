@@ -1,44 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container, Breadcrumb } from "react-bootstrap";
+import { Container, Breadcrumb, Alert } from "react-bootstrap";
 import { Hero } from "./Hero";
-import {
-  checkSession,
-  deleteRoute,
-  fetchAll,
-} from "../Hooks/useRouteData";
+import { checkSession, deleteRoute, fetchAll } from "../Hooks/useRouteData";
+import { Route } from "./Route";
 
 export const Home = () => {
   const [session, setSession] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [routeData, setRouteData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [isRemoved, setIsRemoved] = useState(false);
 
-  
-
+  // GET - Rute data
   const getRouteData = () => {
     fetchAll("https://localhost:5001/api/alleruter").then((r) =>
       setRouteData(r)
     );
   };
 
+  // On-page-load
   useEffect(() => {
-    checkSession().then(r=>{
-      setSession(r)
-      setIsLoading(!isLoading);
-    })
+    checkSession().then((r) => {
+      setSession(r);
+      setIsLoading(false);
+    });
     getRouteData();
-  }, []);
+  }, [isRemoved]);
 
   return (
     <>
       {session && !isLoading ? (
-        <Container className="pt-5 fade-this">
+        <Container className="fade-this">
           <div className={"flex d-flex "}>
             <h1 style={{ color: "#FF6600" }}>Ruter</h1>
           </div>
           <Breadcrumb>
             <Breadcrumb.Item active>Ruter</Breadcrumb.Item>
           </Breadcrumb>
+
+          {errorMessage && (
+            <Alert
+              variant="warning"
+              className="pop-up"
+              dismissible
+              onClose={() => setErrorMessage("")}
+            >
+              <i className={"bi bi-exclamation-triangle-fill"}></i>
+              {"  "}
+              {errorMessage}
+            </Alert>
+          )}
 
           <table className={"table content-table text-justify"}>
             <thead>
@@ -53,50 +65,14 @@ export const Home = () => {
             </thead>
             <tbody>
               {routeData.map((r) => (
-                <tr key={r.id}>
-                  <td>{r.ruteFra}</td>
-                  <td>{r.ruteTil}</td>
-                  <td>
-                    {r.dagsreise === true ? <>Dagsreise</> : <>Flerdagsreise</>}
-                  </td>
-                  <td>
-                    <Link
-                      className={"btn btn-warning mx-1"}
-                      style={{ width: "70px" }}
-                      to={{
-                        pathname: "/trip",
-                        state: {
-                          ruteId: r.id,
-                          fra: r.ruteFra,
-                          til: r.ruteTil,
-                        },
-                      }}
-                    >
-                      Mer
-                    </Link>
-                    <Link
-                      className={"btn btn-primary mx-1"}
-                      style={{ width: "70px" }}
-                      to={{
-                        pathname: "/editroute",
-                        state: { ruteId: r.id },
-                      }}
-                    >
-                      Endre
-                    </Link>
-                    <button
-                      className={"btn btn-danger mx-1"}
-                      style={{ width: "70px" }}
-                      onClick={() => {
-                        deleteRoute(r.id);
-                        getRouteData();
-                        console.log(routeData);
-                      }}
-                    >
-                      Slett
-                    </button>
-                  </td>
-                </tr>
+                <Route
+                  key={r.id}
+                  row={r}
+                  deleteData={deleteRoute}
+                  setErrorMessage={setErrorMessage}
+                  setIsRemoved={setIsRemoved}
+                  isRemoved={isRemoved}
+                />
               ))}
             </tbody>
           </table>

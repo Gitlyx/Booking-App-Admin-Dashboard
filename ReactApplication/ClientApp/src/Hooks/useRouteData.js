@@ -1,53 +1,3 @@
-import { useState, useEffect } from "react";
-
-// API GET ALL
-export const GetAllRoutes = () => {
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  // On page load perform this
-  useEffect(() => {
-    fetch("https://localhost:5001/api/alleruter")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setData(result);
-          setIsLoading(false);
-          console.log(result);
-        },
-        (error) => {
-          setIsError(true);
-          setIsLoading(false);
-        }
-      );
-  }, []);
-
-  return {
-    isError,
-    isLoading,
-    data,
-  };
-};
-
-// API DELETE
-export const DeleteRoute = (id) => {
-  const [data, setData] = useState();
-  const url = "https://localhost:5001/reise/rute?ruteId=" + id;
-  fetch(url, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then((resp) => {
-      setData(resp);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-
-  return data;
-};
-
 export async function fetchAll(url) {
   const response = await fetch(url);
   const data = await response.json();
@@ -56,16 +6,20 @@ export async function fetchAll(url) {
 }
 
 export async function deleteRoute(id) {
-  let url = 'https://localhost:5001/api/slettrute?ruteId=' + id;
-  const response = await fetch(url, { method: "DELETE" });
-  const data = await response.json();
-  console.log("DELETE request : ", data);
-  return data;
+  if (window.confirm("Er du sikker på å slette denne ruten?")) {
+    let url = "https://localhost:5001/api/slettrute?ruteId=" + id;
+    const response = await fetch(url, { method: "DELETE" });
+    const data = await response.json();
+    console.log("DELETE request : ", data);
+    return data;
+  } else {
+    console.log("DELETE request : Declined");
+  }
 }
 
-export async function checkSession(){
+export async function checkSession() {
   const response = await fetch("https://localhost:5001/api/session");
   const data = await response.json();
-  console.log("GET request (CheckSession) : ", data)
+  console.log("GET request (CheckSession) : ", data);
   return data;
 }

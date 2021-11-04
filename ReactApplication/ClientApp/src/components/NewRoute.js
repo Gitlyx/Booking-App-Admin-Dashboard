@@ -30,8 +30,6 @@ export const NewRoute = () => {
             errorMessage(data.response);
             setIsErrorShown(true);
           } else {
-            console.log(route);
-            console.log(data);
             let path = "/";
             history.push(path);
           }

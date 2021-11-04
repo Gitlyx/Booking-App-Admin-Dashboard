@@ -4,7 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 import { DeleteTrip } from "../Hooks/useTripData";
 import { Alert, Breadcrumb, Container } from "react-bootstrap";
 import { Loading } from "./Loading";
-export const Trip = (params) => {
+import { fetchAll } from "../Hooks/useTripData";
+
+export const Trip = () => {
   const history = useHistory();
   // Hent rute ID
   let location = useLocation();
@@ -22,24 +24,22 @@ export const Trip = (params) => {
   const url = "https://localhost:5001/api/reiser?id=" + id;
 
   useEffect(() => {
-    async function fetchRoute() {
-      const response = await fetch(url);
-      const resp = await response.json();
-      setData(resp);
-      if (resp.length > 0) {
-        setRuteFra(resp[0].ruteFra);
-        setRuteTil(resp[0].ruteTil);
-        setDagsreise(resp[0].dagsreise);
+    const fetchAll = fetchAll().then(
+      (data) => {
+        setData(data);
+      if (data.length > 0) {
+        setRuteFra(data[0].ruteFra);
+        setRuteTil(data[0].ruteTil);
+        setDagsreise(data[0].dagsreise);
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
-      } else if (resp.length === 0) {
+      } else if (data.length === 0) {
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
       }
-    }
-    fetchRoute();
+    })
   }, [url]);
 
   const reload = () => {
@@ -65,7 +65,7 @@ export const Trip = (params) => {
           {" "}
           <Container className="fade-this">
             <h1 style={{ color: "#FF6600" }}>
-              Reiser for {ruteFra} - {ruteTil}
+              Reiser for {data[0].rute}} - {ruteTil}
             </h1>
             <Breadcrumb>
               <Breadcrumb.Item disabled>Reiser</Breadcrumb.Item>
