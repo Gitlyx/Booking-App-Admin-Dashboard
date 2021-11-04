@@ -1,95 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { GetAllRoutes } from "../Hooks/useRouteData";
-import { Alert } from "react-bootstrap";
 
+export const Route = ({
+  row,
+  deleteData,
+  setErrorMessage,
+  isRemoved,
+  setIsRemoved
+}) => {
+  return (
+    <>
+      <tr>
+        <td>{row.ruteFra}</td>
+        <td>{row.ruteTil}</td>
+        <td>{row.dagsreise ? <>Dagsreise</> : <>Flerdagsreise</>}</td>
 
-export const Route = (params) => {
- 
-useEffect(() => {
-  console.log(fetchRoutes())
-}, [])
-
-  // ----- State -----
-  const [errorMessage, setErrorMessage] = useState("");
-  
-
-  // ----- DELETE Request ------
-  const Delete = (id) => {
-    const url = "https://localhost:5001/api/slettrute?ruteId=" + id;
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((resp) => {
-        if (resp === false) {
-          setErrorMessage(
-            "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
-          );
-        } else {
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  return <></>
-
-  // return (
-  //   <>
-  //     {errorMessage && (
-  //       <Alert
-  //         variant="warning"
-  //         className="pop-up"
-  //         dismissible
-  //         onClose={() => setErrorMessage("")}
-  //       >
-  //         <i class="bi bi-exclamation-triangle-fill"></i>
-  //         {"  "}
-  //         {errorMessage}
-  //       </Alert>
-  //     )}
-
-  //     {routeData.data.map((rute) => (
-  //       <tr key={rute.ruteId}>
-  //         <td>{rute.ruteFra}</td>
-  //         <td>{rute.ruteTil}</td>
-  //         <td>{rute.dagsreise ? "Dagsreise" : "Flerdagsreise"}</td>
-  //         <td>
-  //           <Link
-  //             className={"btn btn-warning mx-1"}
-  //             style={{ width: "70px" }}
-  //             to={{
-  //               pathname: "/trip",
-  //               state: {
-  //                 ruteId: rute.id,
-  //                 fra: rute.ruteFra,
-  //                 til: rute.ruteTil,
-  //               },
-  //             }}
-  //           >
-  //             Mer
-  //           </Link>
-  //           <Link
-  //             className={"btn btn-primary mx-1"}
-  //             style={{ width: "70px" }}
-  //             to={{ pathname: "/editroute", state: { ruteId: rute.id } }}
-  //           >
-  //             Endre
-  //           </Link>
-  //           <button
-  //             className={"btn btn-danger mx-1"}
-  //             style={{ width: "70px" }}
-  //             onClick={() => {
-  //               Delete(rute.id);
-  //             }}
-  //           >
-  //             Slett
-  //           </button>
-  //         </td>
-  //       </tr>
-  //     ))}
-  //   </>
-  // );
+        <td>
+          <Link
+            className={"btn btn-warning mx-1"}
+            style={{ width: "70px" }}
+            to={{
+              pathname: "/trip",
+              state: {
+                ruteId: row.id,
+                fra: row.ruteFra,
+                til: row.ruteTil,
+              },
+            }}
+          >
+            Mer
+          </Link>
+          <Link
+            className={"btn btn-primary mx-1"}
+            style={{ width: "70px" }}
+            to={{ pathname: "/editroute", state: { ruteId: row.id } }}
+          >
+            Endre
+          </Link>
+          <button
+            className={"btn btn-danger mx-1"}
+            style={{ width: "70px" }}
+            onClick={(e) => {
+              deleteData(row.id).then((resp) => {
+                if (resp === false) {
+                  setErrorMessage(
+                    (state) =>
+                      "Du er i ferd med å slette en rute som inneholder reiser! Tøm ruten for reiser før du går videre."
+                  );
+                } else {
+                  setIsRemoved(!isRemoved)
+                }
+              });
+            }}
+          >
+            Slett
+          </button>
+        </td>
+      </tr>
+    </>
+  );
 };

@@ -27,8 +27,13 @@ export const GetOneTrip = (id) => {
     }
     fetchTrip();
   }, [url]);
-
-
-
   return data;
 };
+
+export async function fetchAll(id) {
+  const url = "https://localhost:5001/api/reiser?id=" + id;
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("GET request : ", data)
+  return data;
+}
