@@ -452,3 +452,8 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updatin
 2021-11-04T11:50:40.8190253+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2021-11-04T11:50:40.8214266+01:00  [INF] Hosting environment: "Development" (c3307c92)
 2021-11-04T11:50:40.8235855+01:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)
+2021-11-04T11:59:39.1220812+01:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-11-04T11:59:39.1380751+01:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-11-04T11:59:39.1416932+01:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-11-04T11:59:39.1446529+01:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-11-04T11:59:39.1476709+01:00  [INF] Content root path: "C:\Users\charl\Documents\GitHub\Ackerman-Sailing\ReactApplication" (b5d60022)

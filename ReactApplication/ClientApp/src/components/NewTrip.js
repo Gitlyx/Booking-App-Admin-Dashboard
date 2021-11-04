@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Form, Container, Col, Row, Alert } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
-import "./NewTrip.css";
-import { validerDato, validerNewTrip } from "./Validering";
+import { Form, Container, Col, Row, Alert } from "react-bootstrap";
+import { validerDato, validerTrip } from "./Validering";
 
-export const NewTrip = (params) => {
+export const NewTrip = () => {
   const history = useHistory();
   const location = useLocation();
   const id = location.state.ruteId;
   const ruteId = location.state.ruteId;
   const url = "https://localhost:5001/api/enrute?ruteId=" + id;
   let tid;
+  let gyldigDateTime = false;
   const idag = new Date();
   const år = idag.getFullYear();
   let mnd = idag.getMonth() + 1;
@@ -64,9 +64,10 @@ export const NewTrip = (params) => {
   // handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // Valider
     if (
-      validerNewTrip({
+      validerTrip({
         dagsreise,
         prisBarn,
         prisVoksen,
@@ -74,7 +75,8 @@ export const NewTrip = (params) => {
         prisLugarPremium,
         setErrorMessage,
         setVariant,
-      })
+      }) &&
+      gyldigDateTime
     ) {
       // Opprett ny reise
       setAvreiseDatoTid(tid);
@@ -129,8 +131,10 @@ export const NewTrip = (params) => {
                   setAvreiseDatoTid(e.target.value);
                   if (!validerDato(e.target.value)) {
                     setFeilmelding("Ugyldig dat");
+                    gyldigDateTime = false;
                   } else {
                     setFeilmelding("");
+                    gyldigDateTime = true;
                   }
                 }}
               />

@@ -5,6 +5,8 @@ import { fetchTrip, updateTrip } from "../Hooks/useTripData";
 
 export const EditTrip = (params) => {
   const history = useHistory();
+  let gyldigDateTime = false;
+
 
   // ----- Hent id -----
   let location = useLocation();
@@ -20,8 +22,8 @@ export const EditTrip = (params) => {
   const [prisVoksen, setPrisVoksen] = useState(0);
   const [prisLugarStandard, setprisLugarStandard] = useState(0);
   const [prisLugarPremium, setprisLugarPremium] = useState(0);
-  const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [variant, setVariant] = useState("");
 
   // ------ GET REQUEST ------
   const getOneTrip = (id) => {
@@ -142,10 +144,11 @@ export const EditTrip = (params) => {
             </Link>
           </Form>
         </Col>
-        {isErrorShown && (
+        {errorMessage && (
           <Alert
-            variant="warning"
-            onClose={() => setIsErrorShown(false)}
+            variant={variant}
+            className="pop-up"
+            onClose={() => setErrorMessage("")}
             dismissible
           >
             {errorMessage}
