@@ -57,3 +57,41 @@ export const validerDato = (tid) => {
     return true;
   }
 };
+
+export const validerLogin = (props) => {
+  if (!props.brukernavn || !props.passord) {
+    props.setErrorMessage("Et eller flere felt er tomme.");
+    props.setVariant("warning");
+    console.log("Et eller flere felt er tomme.");
+    return false;
+  }
+  return true;
+};
+
+export const validerNewTrip = (props) => {
+  if (props.dagsreise) {
+    console.log(props.dagsreise);
+    if (!props.prisBarn || !props.prisVoksen) {
+      props.setErrorMessage("Et eller flere felt er tomme.");
+      props.setVariant("warning");
+      return false;
+    }
+  }
+
+  if (!props.dagsreise) {
+    console.log(props.dagsreise);
+
+    if (
+      !props.prisBarn ||
+      !props.prisVoksen ||
+      !props.prisLugarStandard ||
+      !props.prisLugarPremium
+    ) {
+      props.setErrorMessage("Et eller flere felt er tomme.");
+      props.setVariant("warning");
+      return false;
+    }
+  }
+
+  return true;
+};

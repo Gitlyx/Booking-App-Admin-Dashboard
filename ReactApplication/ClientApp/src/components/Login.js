@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Col, Container, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Loading } from "./Loading";
+import { validerLogin } from "./Validering";
 
 export const Login = (props) => {
   // ---- Ref ----
@@ -10,7 +11,6 @@ export const Login = (props) => {
   // ----- State -----
   const [brukernavn, setBrukernavn] = useState("");
   const [passord, setPassord] = useState("");
-  const [isErrorShown, setIsErrorShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [variant, setVariant] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ export const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (brukernavn && passord) {
+    if (validerLogin({ brukernavn, passord, setErrorMessage, setVariant })) {
       fetch("https://localhost:5001/api/logginn", {
         method: "post",
         headers: {
@@ -30,9 +30,9 @@ export const Login = (props) => {
         }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          if (data === false) {
-            setErrorMessage(data.message);
+        .then((resp) => {
+          if (resp === false) {
+            setErrorMessage("Feil brukernavn/passord.");
             setVariant("danger");
           } else {
             setIsLoading(true);
@@ -43,9 +43,6 @@ export const Login = (props) => {
           }
         })
         .catch((error) => console.error("Feil i innlogging: ", error));
-    } else {
-      setErrorMessage("Mangler brukernavn eller passord.");
-      setVariant("warning");
     }
   };
 
@@ -86,11 +83,11 @@ export const Login = (props) => {
                   }}
                 />
               </Form.Group>
-              {isErrorShown && (
+              {errorMessage && (
                 <Alert
                   variant={variant}
                   className="pop-up"
-                  onClose={() => setIsErrorShown(false)}
+                  onClose={() => setErrorMessage("")}
                   dismissible
                 >
                   {errorMessage}
