@@ -268,7 +268,7 @@ namespace ReactApplication.Controllers
                 {
                     HttpContext.Session.SetString(_loggetInn, "");
                     _log.LogInformation("Brukeren eksisterer ikke");
-                    return Ok(false);
+                    return BadRequest(false);
                 }
                 else
                 {

@@ -1,11 +1,11 @@
 export const validerPris = (pris) => {
-    if(pris === ""){
-        return false
-    } else if (pris < parseInt(0)){
-        return false;
-    }
-    return true;
-}
+  if (pris === "") {
+    return false;
+  } else if (pris < parseInt(0)) {
+    return false;
+  }
+  return true;
+};
 
 export const validerDato = (tid) => {
   const idag = new Date();
@@ -38,4 +38,14 @@ export const validerDato = (tid) => {
     console.log(tid);
     return true;
   }
+};
+
+export const validerLogin = (props) => {
+  if (!props.brukernavn || !props.passord) {
+    props.setErrorMessage("Et eller flere felt er tomme.");
+    props.setVariant("warning")
+    console.log("Et eller flere felt er tomme.");
+    return false;
+  }
+  return true;
 };

@@ -45,7 +45,7 @@ export const TripRow = ({ row, id, isRemoved, setIsRemoved }) => {
             onClick={() => {
               deleteTrip(row.id);
               setIsRemoved(!isRemoved);
-              
+              console.log(isRemoved);
             }}
           >
             Slett
