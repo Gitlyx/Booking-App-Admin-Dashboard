@@ -11,7 +11,6 @@ export const NewTrip = () => {
   const ruteId = location.state.ruteId;
   const url = "https://localhost:5001/api/enrute?ruteId=" + id;
   let tid;
-  let gyldigDateTime = false;
   const idag = new Date();
   const år = idag.getFullYear();
   let mnd = idag.getMonth() + 1;
@@ -46,6 +45,7 @@ export const NewTrip = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [feilmelding, setFeilmelding] = useState("");
   const [variant, setVariant] = useState("");
+  const [gyldigTid, setGyldigTid] = useState(true);
 
   // GET request
   useEffect(() => {
@@ -76,7 +76,7 @@ export const NewTrip = () => {
         setErrorMessage,
         setVariant,
       }) &&
-      gyldigDateTime
+      gyldigTid
     ) {
       // Opprett ny reise
       setReiseDatoTid(tid);
@@ -131,10 +131,10 @@ export const NewTrip = () => {
                   setReiseDatoTid(e.target.value);
                   if (!validerDato(e.target.value)) {
                     setFeilmelding("Ugyldig dat");
-                    gyldigDateTime = false;
+                    setGyldigTid(false);
                   } else {
                     setFeilmelding("");
-                    gyldigDateTime = true;
+                    setGyldigTid(true);
                   }
                 }}
               />

@@ -26,19 +26,19 @@ namespace WebApp_Oblig2.Model
         [Required]
         public bool dagsreise { get; set; }
 
-        [RegularExpression(@"[0-9]{2,20}")]
+        [RegularExpression(@"[0-9]{1,20}")]
         [Required]
         public int prisBarn { get; set; }
 
-        [RegularExpression(@"[0-9]{2,20}")]
+        [RegularExpression(@"[0-9]{1,20}")]
         [Required]
         public int prisVoksen { get; set; }
 
-        [RegularExpression(@"[0-9]{2,20}")]
+        [RegularExpression(@"[0-9]{1,20}")]
         [Required]
         public int prisLugarStandard { get; set; }
 
-        [RegularExpression(@"[0-9]{2,20}")]
+        [RegularExpression(@"[0-9]{1,20}")]
         [Required]
         public int prisLugarPremium { get; set; }
     }

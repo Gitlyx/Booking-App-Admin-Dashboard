@@ -4,6 +4,7 @@ import { Container, Breadcrumb, Alert } from "react-bootstrap";
 import { Hero } from "./Hero";
 import { checkSession, deleteRoute, fetchAll } from "../Hooks/useRouteData";
 import { Route } from "./Route";
+import { Loading } from "./Loading";
 
 export const Home = () => {
   const [session, setSession] = useState(false);
@@ -23,14 +24,16 @@ export const Home = () => {
   useEffect(() => {
     checkSession().then((r) => {
       setSession(r);
-      setIsLoading(false);
+      setTimeout(function(){
+        setIsLoading(false)
+      }, 750)
     });
     getRouteData();
   }, [isRemoved]);
-
+if(!isLoading){
   return (
     <>
-      {session && !isLoading ? (
+      {session ? (
         <Container className="fade-this">
           <div className={"flex d-flex "}>
             <h1 style={{ color: "#FF6600" }}>Ruter</h1>
@@ -84,5 +87,10 @@ export const Home = () => {
         <Hero />
       )}
     </>
-  );
+  );} else {
+    return <>
+    <Loading/>
+    </>
+  }
+  
 };

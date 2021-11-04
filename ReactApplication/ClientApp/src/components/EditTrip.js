@@ -6,7 +6,6 @@ import { validerDato, validerTrip } from "./Validering";
 
 export const EditTrip = (params) => {
   const history = useHistory();
-  let gyldigDateTime = false;
 
   // ----- Hent id -----
   let location = useLocation();
@@ -24,6 +23,7 @@ export const EditTrip = (params) => {
   const [prisLugarPremium, setprisLugarPremium] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [feilmelding, setFeilmelding] = useState("");
+  const [gyldigTid, setGyldigTid] = useState(true);
 
   const [variant, setVariant] = useState("");
 
@@ -45,11 +45,21 @@ export const EditTrip = (params) => {
     getOneTrip(id);
   }, [id]);
 
-  console.log(ruteId);
-
   // ----- Handle submit -----
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(
+      validerTrip({
+        dagsreise,
+        prisBarn,
+        prisVoksen,
+        prisLugarStandard,
+        prisLugarPremium,
+        setErrorMessage,
+        setVariant,
+      })
+    );
 
     if (
       validerTrip({
@@ -61,24 +71,22 @@ export const EditTrip = (params) => {
         setErrorMessage,
         setVariant,
       }) &&
-      gyldigDateTime
+      gyldigTid
     ) {
-      if (true) {
-        const updatedTrip = {
-          id: id,
-          ruteFra,
-          ruteTil,
-          ReiseDatoTid,
-          dagsreise,
-          prisBarn,
-          prisVoksen,
-          prisLugarStandard,
-          prisLugarPremium,
-        };
-        updateTrip(updatedTrip).then((r) => {
-          history.goBack();
-        });
-      }
+      const updatedTrip = {
+        id: id,
+        ruteFra,
+        ruteTil,
+        ReiseDatoTid,
+        dagsreise,
+        prisBarn,
+        prisVoksen,
+        prisLugarStandard,
+        prisLugarPremium,
+      };
+      updateTrip(updatedTrip).then((r) => {
+         history.goBack()
+      });
     }
   };
 
@@ -99,10 +107,10 @@ export const EditTrip = (params) => {
                   setReiseDatoTid(e.target.value);
                   if (!validerDato(e.target.value)) {
                     setFeilmelding("Ugyldig dat");
-                    gyldigDateTime = false;
+                    setGyldigTid(false);
                   } else {
                     setFeilmelding("");
-                    gyldigDateTime = true;
+                    setGyldigTid(true);
                   }
                 }}
               />
@@ -123,6 +131,7 @@ export const EditTrip = (params) => {
                 <Col md="6">
                   <Form.Label>Voksenbillett</Form.Label>
                   <Form.Control
+                    min={0}
                     type="number"
                     value={prisVoksen}
                     onChange={(e) => setPrisVoksen(e.target.value)}

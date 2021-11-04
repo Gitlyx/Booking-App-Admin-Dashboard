@@ -1,39 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../images/ship.svg";
 
 import { Navbar, Nav, Form, Container, Button } from "react-bootstrap";
+import { sessionStatus, userLoggout } from "../Hooks/useUserData";
 
 export const NavbarTop = (props) => {
   // ---- Ref ----
   const history = useHistory();
+  const location = useLocation();
 
   // ----- state -----
   const [session, setSession] = useState(false);
+  
 
   const checkSession = () => {
-    fetch("https://localhost:5001/api/session")
-      .then((resp) => resp.json())
-      .then((resp) => setSession(resp));
+    sessionStatus().then((resp) => setSession(resp));
   };
 
   // ----- Session status -----
   useEffect(() => {
     checkSession();
-  });
+  },);
 
   // ----- Logg ut -----
   const loggut = () => {
-    fetch("https://localhost:5001/api/loggut")
-      .then((resp) => {
-        if (resp) {
-          checkSession();
-          history.push("/");
-        } else {
-          console.log("Loggut Feilet.");
-        }
-      })
-      .catch((error) => console.log(error));
+   userLoggout();
+
+   if(location.pathname === "/"){
+    history.go(0)
+   } else {
+     history.push("/")
+   }
+   
   };
 
   return (
@@ -69,9 +68,9 @@ export const NavbarTop = (props) => {
             </Form>
             <Form className="d-flex">
               {session ? (
-                <Link to="/" className="btn btn-cta" onClick={loggut}>
+                <button  className="btn btn-cta" onClick={() => loggut()}>
                   Logg Ut
-                </Link>
+                </button>
               ) : (
                 <Link to="/login" className="btn btn-cta">
                   Logg Inn

@@ -71,7 +71,6 @@ export const validerTrip = (props) => {
   }
 
   if (!props.dagsreise) {
-
     if (
       !props.prisBarn ||
       !props.prisVoksen ||
@@ -79,6 +78,17 @@ export const validerTrip = (props) => {
       !props.prisLugarPremium
     ) {
       props.setErrorMessage("Et eller flere felt er tomme.");
+      props.setVariant("warning");
+      return false;
+    }
+
+    if (
+      parseInt(props.prisBarn) < 0 ||
+      parseInt(props.prisVoksen) < 0 ||
+      parseInt(props.prisLugarStandard) < 0 ||
+      parseInt(props.prisLugarPremium) < 0
+    ) {
+      props.setErrorMessage("Prisen kan ikke bestå av negative tall!");
       props.setVariant("warning");
       return false;
     }
