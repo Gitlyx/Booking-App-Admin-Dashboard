@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = AckermanTesting
-build_property.ProjectDir = /Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/
+build_property.ProjectDir = C:\Users\charl\Documents\GitHub\Ackerman-Sailing\AckermanTesting\

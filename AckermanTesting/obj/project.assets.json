@@ -7820,19 +7820,20 @@
     ]
   },
   "packageFolders": {
-    "/Users/minh/.nuget/packages/": {}
+    "C:\\Users\\charl\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/AckermanTesting.csproj",
+      "projectUniqueName": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\AckermanTesting.csproj",
       "projectName": "AckermanTesting",
-      "projectPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/AckermanTesting.csproj",
-      "packagesPath": "/Users/minh/.nuget/packages/",
-      "outputPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/obj/",
+      "projectPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\AckermanTesting.csproj",
+      "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/minh/.config/NuGet/NuGet.Config"
+        "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -7844,8 +7845,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication/ReactApplication.csproj": {
-              "projectPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication/ReactApplication.csproj"
+            "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\ReactApplication\\ReactApplication.csproj": {
+              "projectPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\ReactApplication\\ReactApplication.csproj"
             }
           }
         }
@@ -7900,7 +7901,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

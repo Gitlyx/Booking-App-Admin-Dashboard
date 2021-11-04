@@ -42,7 +42,8 @@ export const validerLogin = (props) => {
 };
 
 export const validerNewTrip = (props) => {
-  if (!props.dagsreise) {
+  if (props.dagsreise) {
+    console.log(props.dagsreise);
     if (!props.prisBarn || !props.prisVoksen) {
       props.setErrorMessage("Et eller flere felt er tomme.");
       props.setVariant("warning");
@@ -50,7 +51,9 @@ export const validerNewTrip = (props) => {
     }
   }
 
-  if (props.dagsreise) {
+  if (!props.dagsreise) {
+    console.log(props.dagsreise);
+
     if (
       !props.prisBarn ||
       !props.prisVoksen ||
