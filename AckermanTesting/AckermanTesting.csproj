@@ -18,10 +18,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Moq.EntityFrameworkCore" Version="5.0.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="5.0.11" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Moq.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Analyzers" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReactApplication\ReactApplication.csproj" />

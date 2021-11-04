@@ -7811,6 +7811,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.11",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "Moq.EntityFrameworkCore >= 5.0.0.2",
       "ReactApplication >= 1.0.0",
@@ -7820,20 +7821,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\charl\\.nuget\\packages\\": {}
+    "/Users/minh/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\AckermanTesting.csproj",
+      "projectUniqueName": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/AckermanTesting.csproj",
       "projectName": "AckermanTesting",
-      "projectPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\AckermanTesting.csproj",
-      "packagesPath": "C:\\Users\\charl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\AckermanTesting\\obj\\",
+      "projectPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/AckermanTesting.csproj",
+      "packagesPath": "/Users/minh/.nuget/packages/",
+      "outputPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/AckermanTesting/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\charl\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/minh/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -7845,8 +7845,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\ReactApplication\\ReactApplication.csproj": {
-              "projectPath": "C:\\Users\\charl\\Documents\\GitHub\\Ackerman-Sailing\\ReactApplication\\ReactApplication.csproj"
+            "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication/ReactApplication.csproj": {
+              "projectPath": "/Users/minh/Desktop/GitHub/Ackerman-Sailing/ReactApplication/ReactApplication.csproj"
             }
           }
         }
@@ -7861,6 +7861,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.11, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.9.4, )"
@@ -7901,7 +7905,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
       }
     }
   }

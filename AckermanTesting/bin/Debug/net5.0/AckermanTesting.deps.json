@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "AckermanTesting/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.11",
           "Microsoft.NET.Test.Sdk": "16.9.4",
           "Moq.EntityFrameworkCore": "5.0.0.2",
           "ReactApplication": "1.0.0",
