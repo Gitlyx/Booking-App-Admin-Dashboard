@@ -113,6 +113,7 @@ export const EditRoute = (params) => {
               <p>Lugarer vil kun tilbys på flerdagsreiser.</p>
               {isErrorShown && (
                 <Alert
+                  className="pop-up"
                   variant="warning"
                   onClose={() => setIsErrorShown(false)}
                   dismissible
